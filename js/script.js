@@ -852,7 +852,7 @@ function initializeUserMenu() {
     localStorage.getItem("adminToken") && localStorage.getItem("adminRole") === "admin";
 
   if (isAdmin && adminUser) {
-    userMenuBtn.textContent = "👤 " + adminUser;
+    userMenuBtn.textContent = adminUser;
     userMenuBtn.onclick = openProfileModal;
     return;
   }
@@ -864,7 +864,7 @@ function initializeUserMenu() {
       userMenuBtn.onclick = openLoginModal;
       return;
     }
-    userMenuBtn.textContent = "👤 " + userData.name;
+    userMenuBtn.textContent = userData.name;
     userMenuBtn.onclick = openProfileModal;
     return;
   }

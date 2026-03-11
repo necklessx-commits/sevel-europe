@@ -1455,20 +1455,48 @@ button:focus-visible {
   }
 
   .nav {
-    flex-wrap: wrap;
-    row-gap: 10px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "logo lang"
+      "links links";
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+  }
+
+  .logo {
+    grid-area: logo;
+    height: 38px;
+  }
+
+  .language-selector {
+    grid-area: lang;
+  }
+
+  .lang-btn {
+    min-height: 38px;
+    padding: 8px 12px;
+    border: 1px solid #d9d1c3;
+    border-radius: 10px;
+    background: #fff;
   }
 
   nav {
-    position: static;
+    grid-area: links;
     width: 100%;
-    height: auto;
-    background: transparent;
+    height: 48px;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
-    gap: 8px;
-    padding: 0;
+    gap: 6px;
+    padding: 4px;
+    border: 1px solid #ded7c9;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 18px rgba(29, 26, 20, 0.08);
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
@@ -1483,33 +1511,61 @@ button:focus-visible {
     width: auto;
     flex: 0 0 auto;
     margin: 0 !important;
-    color: #242628;
-    border: 1px solid #ddd5c7;
-    border-radius: 999px;
-    background: #fff;
-    padding: 8px 12px;
+    color: #2a2c2f;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    padding: 9px 14px;
     white-space: nowrap;
+    font-size: 15px;
+    font-weight: 600;
   }
 
   nav a:hover,
   nav a.is-active {
-    color: #111;
+    color: #171819;
+    background: #f3eee2;
   }
 
   nav a.nav-social-link {
-    width: 34px;
-    height: 34px;
-    padding: 0;
-    justify-content: center;
+    display: none !important;
   }
 
   .user-menu-btn {
-    width: auto;
+    display: inline-flex !important;
     flex: 0 0 auto;
+    min-height: 34px;
     margin: 0 !important;
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+    border-radius: 10px !important;
+    border: 1px solid #ddd3bd !important;
+    background: #fff !important;
+    box-shadow: none !important;
   }
 
   .nav-menu-overlay {
     display: none !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .container {
+    width: min(1200px, 94%);
+  }
+
+  .logo {
+    height: 34px;
+  }
+
+  nav {
+    height: 44px;
+    border-radius: 12px;
+    padding: 3px;
+  }
+
+  nav a {
+    padding: 8px 12px;
+    font-size: 14px;
   }
 }
