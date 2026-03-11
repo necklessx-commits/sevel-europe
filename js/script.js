@@ -643,6 +643,7 @@ document.addEventListener("DOMContentLoaded", initializeImageExperience);
 document.addEventListener("DOMContentLoaded", initializeMobileNavigation);
 document.addEventListener("DOMContentLoaded", initializeRevealAnimations);
 document.addEventListener("DOMContentLoaded", initializeMediaPerformance);
+document.addEventListener("DOMContentLoaded", initializeAutoplayVideos);
 document.addEventListener("DOMContentLoaded", updateHeaderScrollState);
 window.addEventListener("scroll", updateHeaderScrollState, { passive: true });
 
@@ -726,6 +727,52 @@ function initializeMediaPerformance() {
     if (!img.hasAttribute("decoding")) {
       img.decoding = "async";
     }
+  });
+}
+
+function initializeAutoplayVideos() {
+  const videos = document.querySelectorAll("video[autoplay], .hero-video");
+  if (!videos.length) return;
+
+  const tryPlay = (video) => {
+    video.muted = true;
+    video.defaultMuted = true;
+    video.autoplay = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.setAttribute("muted", "");
+    video.setAttribute("autoplay", "");
+    video.setAttribute("loop", "");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === "function") {
+      playPromise.catch(() => {
+        // iOS/Safari may block autoplay until first interaction
+      });
+    }
+  };
+
+  videos.forEach((video) => {
+    tryPlay(video);
+    video.addEventListener("loadeddata", () => tryPlay(video), { passive: true });
+    video.addEventListener("canplay", () => tryPlay(video), { passive: true });
+  });
+
+  const resumeAll = () => videos.forEach((video) => tryPlay(video));
+  const oneShotResume = () => {
+    resumeAll();
+    document.removeEventListener("touchstart", oneShotResume);
+    document.removeEventListener("click", oneShotResume);
+    document.removeEventListener("scroll", oneShotResume);
+  };
+
+  document.addEventListener("touchstart", oneShotResume, { passive: true });
+  document.addEventListener("click", oneShotResume, { passive: true });
+  document.addEventListener("scroll", oneShotResume, { passive: true });
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) resumeAll();
   });
 }
 
