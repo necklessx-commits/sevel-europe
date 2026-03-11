@@ -592,12 +592,16 @@ if (contactForm) {
     emailjs
       .sendForm("service_o1ez14y", "template_no66nog", this)
       .then(() => {
+        const phoneEl = document.getElementById("phone");
+        const subjectEl = document.getElementById("subject");
+        const messageEl = document.getElementById("message");
+
         saveContactSubmission({
           name: nameInput ? nameInput.value.trim() : "",
           email: emailInput ? emailInput.value.trim() : "",
-          phone: document.getElementById("phone")?.value.trim() || "",
-          subject: document.getElementById("subject")?.value.trim() || "",
-          message: document.getElementById("message")?.value.trim() || "",
+          phone: phoneEl ? phoneEl.value.trim() : "",
+          subject: subjectEl ? subjectEl.value.trim() : "",
+          message: messageEl ? messageEl.value.trim() : "",
         });
 
         const msg = document.getElementById("form-message");
