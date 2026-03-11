@@ -414,10 +414,19 @@ const SEVEL_STORAGE = {
   newsletter: "sevelNewsletterSubscribers",
 };
 
+function parseJsonOrNull(raw) {
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw);
+  } catch (_) {
+    return null;
+  }
+}
+
 function getStoredArray(key) {
   try {
     const raw = localStorage.getItem(key);
-    const parsed = raw ? JSON.parse(raw) : [];
+    const parsed = raw ? parseJsonOrNull(raw) : [];
     return Array.isArray(parsed) ? parsed : [];
   } catch (_) {
     return [];
@@ -431,7 +440,7 @@ function setStoredArray(key, value) {
 function getStoredObject(key) {
   try {
     const raw = localStorage.getItem(key);
-    const parsed = raw ? JSON.parse(raw) : {};
+    const parsed = raw ? parseJsonOrNull(raw) : {};
     return parsed && typeof parsed === "object" ? parsed : {};
   } catch (_) {
     return {};
@@ -533,7 +542,7 @@ const contactForm = document.getElementById("contact-form");
 const isAdminSession =
   localStorage.getItem("adminToken") && localStorage.getItem("adminRole") === "admin";
 const publicUserRaw = localStorage.getItem("publicUser");
-const publicUser = publicUserRaw ? JSON.parse(publicUserRaw) : null;
+const publicUser = parseJsonOrNull(publicUserRaw);
 const hasAccount = Boolean(isAdminSession || publicUser);
 
 function showContactAuthMessage(text) {
@@ -849,7 +858,12 @@ function initializeUserMenu() {
   }
 
   if (user) {
-    const userData = JSON.parse(user);
+    const userData = parseJsonOrNull(user);
+    if (!userData) {
+      userMenuBtn.textContent = "Login";
+      userMenuBtn.onclick = openLoginModal;
+      return;
+    }
     userMenuBtn.textContent = "👤 " + userData.name;
     userMenuBtn.onclick = openProfileModal;
     return;
