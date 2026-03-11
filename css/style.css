@@ -941,6 +941,15 @@ vertical-align:-0.08em;
 display:inline;
 }
 
+.gallery-card p .flag-emoji{
+width:0.95em !important;
+height:0.95em !important;
+display:inline-block !important;
+object-fit:contain;
+vertical-align:-0.1em;
+margin-left:0.28em;
+}
+
 /* RIPPLE EFFECT */
 
 .ripple{
@@ -1234,7 +1243,7 @@ height:35px;
 grid-template-columns:repeat(2,1fr);
 }
 
-.gallery-card img{
+.gallery-card > img{
 height:120px;
 }
 
