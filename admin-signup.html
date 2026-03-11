@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Create your Sevel Europe customer account.">
+<meta name="theme-color" content="#d8aa2a">
+<title>Customer Signup - Sevel Europe</title>
+<meta property="og:title" content="Customer Signup - Sevel Europe">
+<meta property="og:description" content="Create your Sevel Europe customer account.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/sevel.png">
+<link rel="stylesheet" href="css/style.css">
+<style>
+body {
+background: linear-gradient(135deg, #ffd000 0%, #ffed4e 100%);
+min-height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: 'Poppins', sans-serif;
+padding: 20px;
+}
+
+.signup-container {
+background: white;
+padding: 50px;
+border-radius: 12px;
+box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+max-width: 420px;
+width: 100%;
+animation: slideInUp 0.6s ease;
+}
+
+.signup-header {
+text-align: center;
+margin-bottom: 40px;
+}
+
+.signup-header .logo {
+height: 50px;
+margin-bottom: 20px;
+}
+
+.signup-header h1 {
+font-family: 'Playfair Display', serif;
+font-size: 32px;
+color: #333;
+margin-bottom: 10px;
+}
+
+.signup-header p {
+color: #666;
+font-size: 14px;
+}
+
+.form-group {
+margin-bottom: 25px;
+}
+
+.form-group label {
+display: block;
+margin-bottom: 10px;
+font-weight: 600;
+color: #333;
+font-size: 14px;
+}
+
+.form-group input {
+width: 100%;
+padding: 14px 16px;
+border: 2px solid #e0e0e0;
+border-radius: 8px;
+font-size: 14px;
+font-family: 'Poppins', sans-serif;
+transition: all 0.3s ease;
+}
+
+.form-group input::placeholder {
+color: #999;
+}
+
+.form-group input:focus {
+outline: none;
+border-color: #ffd000;
+box-shadow: 0 0 0 4px rgba(255, 208, 0, 0.15);
+background: #fffef5;
+}
+
+.signup-button {
+width: 100%;
+background: #ffd000;
+color: black;
+border: none;
+padding: 14px 30px;
+font-weight: bold;
+cursor: pointer;
+border-radius: 8px;
+transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+font-size: 16px;
+box-shadow: 0 4px 15px rgba(255, 208, 0, 0.3);
+position: relative;
+overflow: hidden;
+}
+
+.signup-button::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: rgba(255,255,255,0.2);
+transition: left 0.4s ease;
+}
+
+.signup-button:hover::before {
+left: 100%;
+}
+
+.signup-button:hover {
+transform: translateY(-4px);
+box-shadow: 0 8px 25px rgba(255, 208, 0, 0.4);
+}
+
+.signup-button:active {
+transform: translateY(-2px);
+}
+
+.signup-button:disabled {
+opacity: 0.6;
+cursor: not-allowed;
+transform: none;
+}
+
+.error-message {
+background: #fee;
+color: #c33;
+padding: 12px;
+border-radius: 8px;
+margin-bottom: 20px;
+display: none;
+border-left: 4px solid #c33;
+animation: slideInDown 0.3s ease;
+}
+
+.error-message.show {
+display: block;
+}
+
+.success-message {
+background: #efe;
+color: #3c3;
+padding: 12px;
+border-radius: 8px;
+margin-bottom: 20px;
+display: none;
+border-left: 4px solid #3c3;
+animation: slideInDown 0.3s ease;
+}
+
+.success-message.show {
+display: block;
+}
+
+.login-link {
+text-align: center;
+margin-top: 20px;
+padding-top: 20px;
+border-top: 1px solid #e0e0e0;
+}
+
+.login-link a {
+color: #ffd000;
+font-weight: 600;
+text-decoration: none;
+}
+
+.login-link a:hover {
+text-decoration: underline;
+}
+
+.requirements {
+background: #f9f9f9;
+padding: 15px;
+border-radius: 8px;
+margin-top: 20px;
+border-left: 4px solid #ffd000;
+font-size: 12px;
+}
+
+.requirements h4 {
+color: #333;
+margin-bottom: 8px;
+}
+
+.requirement-item {
+color: #666;
+margin: 5px 0;
+display: flex;
+align-items: center;
+}
+
+.requirement-item .check {
+display: inline-block;
+width: 16px;
+height: 16px;
+background: #e0e0e0;
+border-radius: 3px;
+margin-right: 8px;
+text-align: center;
+line-height: 16px;
+font-size: 10px;
+color: white;
+}
+
+.requirement-item.valid .check {
+background: #51cf66;
+}
+
+.requirement-item.invalid .check {
+background: #e0e0e0;
+}
+
+@keyframes slideInUp {
+from {
+opacity: 0;
+transform: translateY(30px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+@keyframes slideInDown {
+from {
+opacity: 0;
+transform: translateY(-10px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+</style>
+</head>
+<body>
+
+<div class="signup-container">
+<div class="signup-header">
+<img src="images/sevel.png" class="logo" alt="Sevel Europe">
+<h1>Create Customer Account</h1>
+<p>Create your customer account</p>
+</div>
+
+<div class="error-message" id="errorMessage"></div>
+<div class="success-message" id="successMessage"></div>
+
+<form id="signupForm">
+<div class="form-group">
+<label for="fullname">Full Name</label>
+<input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+</div>
+
+<div class="form-group">
+<label for="email">Email Address</label>
+<input type="email" id="email" name="email" placeholder="Enter your email" required>
+</div>
+
+<div class="form-group">
+<label for="username">Username</label>
+<input type="text" id="username" name="username" placeholder="Choose a username" required>
+</div>
+
+<div class="form-group">
+<label for="password">Password</label>
+<input type="password" id="password" name="password" placeholder="Enter a strong password" required>
+</div>
+
+<div class="form-group">
+<label for="confirmPassword">Confirm Password</label>
+<input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+</div>
+
+<button type="submit" class="signup-button" id="signupBtn">Create Account</button>
+</form>
+
+<div class="requirements">
+<h4>✓ Password Requirements:</h4>
+<div class="requirement-item" id="req-length">
+<span class="check">✓</span>
+At least 6 characters
+</div>
+<div class="requirement-item" id="req-match">
+<span class="check">✓</span>
+Passwords match
+</div>
+</div>
+
+<div class="login-link">
+<p style="color: #666; font-size: 14px;">
+Already have an account? <a href="admin-login.html">Sign in here</a>
+</p>
+</div>
+</div>
+
+<script>
+document.querySelectorAll('img[src="images/sevel.png"]').forEach(function(logo) {
+logo.style.cursor = 'pointer';
+logo.addEventListener('click', function() {
+window.location.href = 'index.html';
+});
+});
+
+// Check if already logged in
+window.addEventListener('load', function() {
+const token = localStorage.getItem('adminToken');
+const role = localStorage.getItem('adminRole');
+const user = localStorage.getItem('publicUser');
+if (token && role === 'admin') {
+window.location.href = 'admin-dashboard.html';
+} else if (user) {
+window.location.href = 'public-profile.html';
+}
+});
+
+// Real-time password validation
+document.getElementById('password').addEventListener('input', function() {
+updateRequirements();
+});
+
+document.getElementById('confirmPassword').addEventListener('input', function() {
+updateRequirements();
+});
+
+function updateRequirements() {
+const password = document.getElementById('password').value;
+const confirmPassword = document.getElementById('confirmPassword').value;
+
+// Check length
+const lengthReq = document.getElementById('req-length');
+if (password.length >= 6) {
+lengthReq.classList.add('valid');
+} else {
+lengthReq.classList.remove('valid');
+}
+
+// Check match
+const matchReq = document.getElementById('req-match');
+if (password === confirmPassword && password.length > 0) {
+matchReq.classList.add('valid');
+} else {
+matchReq.classList.remove('valid');
+}
+}
+
+// Handle signup
+document.getElementById('signupForm').addEventListener('submit', function(e) {
+e.preventDefault();
+
+const fullname = document.getElementById('fullname').value.trim();
+const email = document.getElementById('email').value.trim().toLowerCase();
+const username = document.getElementById('username').value.trim().toLowerCase();
+const password = document.getElementById('password').value;
+const confirmPassword = document.getElementById('confirmPassword').value;
+
+const signupBtn = document.getElementById('signupBtn');
+const errorMsg = document.getElementById('errorMessage');
+const successMsg = document.getElementById('successMessage');
+
+// Clear messages
+errorMsg.classList.remove('show');
+successMsg.classList.remove('show');
+
+if (username === 'admin') {
+errorMsg.textContent = 'This username is reserved';
+errorMsg.classList.add('show');
+return;
+}
+
+// Validation
+if (!fullname || !email || !username || !password || !confirmPassword) {
+errorMsg.textContent = '✗ Please fill in all fields';
+errorMsg.classList.add('show');
+return;
+}
+
+if (password.length < 6) {
+errorMsg.textContent = '✗ Password must be at least 6 characters';
+errorMsg.classList.add('show');
+return;
+}
+
+if (password !== confirmPassword) {
+errorMsg.textContent = '✗ Passwords do not match';
+errorMsg.classList.add('show');
+return;
+}
+
+// Check if username or email already exists
+const users = JSON.parse(localStorage.getItem('sevelUsers') || '[]');
+if (users.some(u => u.username === username)) {
+errorMsg.textContent = '✗ Username already taken';
+errorMsg.classList.add('show');
+return;
+}
+
+if (users.some(u => u.email === email)) {
+errorMsg.textContent = '✗ Email already registered';
+errorMsg.classList.add('show');
+return;
+}
+
+// Disable button
+signupBtn.disabled = true;
+signupBtn.textContent = 'Creating Account...';
+
+// Simulate network delay
+setTimeout(() => {
+// Create new user
+const newUser = {
+fullname: fullname,
+email: email,
+username: username,
+password: password,
+createdAt: new Date().toISOString(),
+role: 'user'
+};
+
+// Add to users array
+users.push(newUser);
+localStorage.setItem('sevelUsers', JSON.stringify(users));
+
+// Show success and redirect
+successMsg.textContent = '✓ Account created successfully! Redirecting to login...';
+successMsg.classList.add('show');
+
+setTimeout(() => {
+window.location.href = 'admin-login.html';
+}, 2000);
+}, 500);
+});
+</script>
+
+</body>
+</html>

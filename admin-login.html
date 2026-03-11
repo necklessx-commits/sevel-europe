@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Sign in to Sevel Europe administration and customer access portal.">
+<meta name="theme-color" content="#d8aa2a">
+<title>Login - Sevel Europe</title>
+<meta property="og:title" content="Login - Sevel Europe">
+<meta property="og:description" content="Sign in to Sevel Europe administration and customer access portal.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/sevel.png">
+<link rel="stylesheet" href="css/style.css">
+<style>
+body {
+background: linear-gradient(135deg, #ffd000 0%, #ffed4e 100%);
+min-height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: 'Poppins', sans-serif;
+}
+
+.login-container {
+background: white;
+padding: 50px;
+border-radius: 12px;
+box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+max-width: 420px;
+width: 100%;
+animation: slideInUp 0.6s ease;
+}
+
+.login-header {
+text-align: center;
+margin-bottom: 40px;
+}
+
+.login-header .logo {
+height: 50px;
+margin-bottom: 20px;
+}
+
+.login-header h1 {
+font-family: 'Playfair Display', serif;
+font-size: 32px;
+color: #333;
+margin-bottom: 10px;
+}
+
+.login-header p {
+color: #666;
+font-size: 14px;
+}
+
+.form-group {
+margin-bottom: 25px;
+}
+
+.form-group label {
+display: block;
+margin-bottom: 10px;
+font-weight: 600;
+color: #333;
+font-size: 14px;
+}
+
+.form-group input {
+width: 100%;
+padding: 14px 16px;
+border: 2px solid #e0e0e0;
+border-radius: 8px;
+font-size: 14px;
+font-family: 'Poppins', sans-serif;
+transition: all 0.3s ease;
+}
+
+.form-group input::placeholder {
+color: #999;
+}
+
+.form-group input:focus {
+outline: none;
+border-color: #ffd000;
+box-shadow: 0 0 0 4px rgba(255, 208, 0, 0.15);
+background: #fffef5;
+}
+
+.login-button {
+width: 100%;
+background: #ffd000;
+color: black;
+border: none;
+padding: 14px 30px;
+font-weight: bold;
+cursor: pointer;
+border-radius: 8px;
+transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+font-size: 16px;
+box-shadow: 0 4px 15px rgba(255, 208, 0, 0.3);
+position: relative;
+overflow: hidden;
+}
+
+.login-button::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: rgba(255,255,255,0.2);
+transition: left 0.4s ease;
+}
+
+.login-button:hover::before {
+left: 100%;
+}
+
+.login-button:hover {
+transform: translateY(-4px);
+box-shadow: 0 8px 25px rgba(255, 208, 0, 0.4);
+}
+
+.login-button:active {
+transform: translateY(-2px);
+}
+
+.login-button:disabled {
+opacity: 0.6;
+cursor: not-allowed;
+transform: none;
+}
+
+.error-message {
+background: #fee;
+color: #c33;
+padding: 12px;
+border-radius: 8px;
+margin-bottom: 20px;
+display: none;
+border-left: 4px solid #c33;
+animation: slideInDown 0.3s ease;
+}
+
+.error-message.show {
+display: block;
+}
+
+.success-message {
+background: #efe;
+color: #3c3;
+padding: 12px;
+border-radius: 8px;
+margin-bottom: 20px;
+display: none;
+border-left: 4px solid #3c3;
+animation: slideInDown 0.3s ease;
+}
+
+.success-message.show {
+display: block;
+}
+
+@keyframes slideInUp {
+from {
+opacity: 0;
+transform: translateY(30px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+@keyframes slideInDown {
+from {
+opacity: 0;
+transform: translateY(-10px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+.loading {
+display: inline-block;
+width: 4px;
+height: 4px;
+background: currentColor;
+border-radius: 50%;
+animation: pulse 1.4s infinite;
+}
+
+.loading:nth-child(2) {
+animation-delay: 0.2s;
+}
+
+.loading:nth-child(3) {
+animation-delay: 0.4s;
+}
+
+@keyframes pulse {
+0%, 60%, 100% {
+opacity: 0.3;
+}
+30% {
+opacity: 1;
+}
+}
+</style>
+</head>
+<body>
+
+<div class="login-container">
+<div class="login-header">
+<img src="images/sevel.png" class="logo" alt="Sevel Europe">
+<h1>Login</h1>
+<p>Customer and owner sign in</p>
+</div>
+
+<div class="error-message" id="errorMessage"></div>
+<div class="success-message" id="successMessage"></div>
+
+<form id="loginForm">
+<div class="form-group">
+<label for="username">Username</label>
+<input type="text" id="username" name="username" placeholder="Enter your username" required>
+</div>
+
+<div class="form-group">
+<label for="password">Password</label>
+<input type="password" id="password" name="password" placeholder="Enter your password" required>
+</div>
+
+<button type="submit" class="login-button" id="loginBtn">Sign In</button>
+</form>
+
+<div style="text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+<p style="color: #666; font-size: 14px;">
+Don't have an account? <a href="admin-signup.html" style="color: #ffd000; font-weight: 600; text-decoration: none;">Create customer account</a>
+</p>
+</div>
+
+</div>
+
+<script>
+document.querySelectorAll('img[src="images/sevel.png"]').forEach(function(logo) {
+logo.style.cursor = 'pointer';
+logo.addEventListener('click', function() {
+window.location.href = 'index.html';
+});
+});
+
+// Simple authentication system
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+e.preventDefault();
+
+const username = document.getElementById('username').value;
+const password = document.getElementById('password').value;
+const loginBtn = document.getElementById('loginBtn');
+const errorMsg = document.getElementById('errorMessage');
+const successMsg = document.getElementById('successMessage');
+
+// Clear messages
+errorMsg.classList.remove('show');
+successMsg.classList.remove('show');
+
+// Disable button
+loginBtn.disabled = true;
+loginBtn.textContent = 'Signing In...';
+
+// Simulate network delay
+setTimeout(() => {
+// Check if admin account (your account with full access)
+if (username === 'admin' && password === 'sevel2026') {
+const token = btoa(username + ':' + Date.now());
+localStorage.removeItem('publicUser');
+localStorage.setItem('adminToken', token);
+localStorage.setItem('adminUser', username);
+localStorage.setItem('adminLoginTime', Date.now());
+localStorage.setItem('adminRole', 'admin');
+
+successMsg.textContent = '✓ Login successful! Redirecting...';
+successMsg.classList.add('show');
+
+setTimeout(() => {
+window.location.href = 'index.html';
+}, 1500);
+} else {
+// Check registered users
+const users = JSON.parse(localStorage.getItem('sevelUsers') || '[]');
+const user = users.find(u => u.username !== 'admin' && (u.username === username || u.email === username) && u.password === password);
+
+if (user) {
+localStorage.removeItem('adminToken');
+localStorage.removeItem('adminUser');
+localStorage.removeItem('adminLoginTime');
+localStorage.removeItem('adminRole');
+localStorage.setItem('publicUser', JSON.stringify({
+name: user.fullname,
+email: user.email,
+username: user.username
+}));
+
+successMsg.textContent = '✓ Login successful! Redirecting...';
+successMsg.classList.add('show');
+
+setTimeout(() => {
+window.location.href = 'public-profile.html';
+}, 1500);
+} else {
+errorMsg.textContent = '✗ Invalid username/email or password';
+errorMsg.classList.add('show');
+loginBtn.disabled = false;
+loginBtn.textContent = 'Sign In';
+document.getElementById('password').value = '';
+}
+}
+}, 500);
+});
+
+// Check if already logged in
+window.addEventListener('load', function() {
+const token = localStorage.getItem('adminToken');
+const role = localStorage.getItem('adminRole');
+const user = localStorage.getItem('publicUser');
+if (token && role === 'admin') {
+window.location.href = 'index.html';
+} else if (user) {
+window.location.href = 'public-profile.html';
+}
+});
+</script>
+
+</body>
+</html>

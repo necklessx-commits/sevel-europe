@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Contact Sevel Europe for consultations, pricing, and technical guidance.">
+<meta name="theme-color" content="#d8aa2a">
+<title>Contact - Sevel Europe</title>
+<meta property="og:title" content="Contact - Sevel Europe">
+<meta property="og:description" content="Contact Sevel Europe for consultations, pricing, and technical guidance.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/sevel.png">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<style>
+.contact-hero {
+  background: linear-gradient(135deg, #151515 0%, #2c2c2c 65%, #3a3a3a 100%);
+  color: #fff;
+  padding: 80px 10%;
+  text-align: center;
+}
+
+.contact-hero h1 {
+  font-size: 46px;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 10px;
+}
+
+.contact-hero p {
+  font-size: 18px;
+  color: #d3d3d3;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.contact-wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 70px 20px 80px;
+}
+
+.office-head {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.office-head p {
+  color: #7d7d7d;
+  margin-bottom: 8px;
+}
+
+.office-head h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 46px;
+  color: #1e1e1e;
+}
+
+.office-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 46px;
+}
+
+.office-card {
+  background: #f7f7f7;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.office-flag {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.office-flag img {
+  width: 38px;
+  height: 26px;
+  object-fit: cover;
+  border-radius: 3px;
+  border: 1px solid #d8d8d8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.office-card h3 {
+  font-size: 34px;
+  line-height: 1.05;
+  margin-bottom: 8px;
+  font-family: 'Playfair Display', serif;
+}
+
+.office-card h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #2a2a2a;
+}
+
+.office-card p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.office-row {
+  border-top: 1px solid #e4e4e4;
+  padding-top: 10px;
+  margin-top: 10px;
+  color: #555;
+}
+
+.office-row strong {
+  color: #1f1f1f;
+}
+
+.contact-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.map-panel,
+.form-panel {
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.map-panel iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 540px;
+  border: 0;
+}
+
+.form-panel {
+  padding: 34px;
+}
+
+.form-panel h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  margin-bottom: 22px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 7px;
+  color: #2a2a2a;
+  font-size: 14px;
+}
+
+.form-panel input,
+.form-panel textarea {
+  width: 100%;
+  border: 2px solid #e4e4e4;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.form-panel input:focus,
+.form-panel textarea:focus {
+  outline: none;
+  border-color: #ffd000;
+  box-shadow: 0 0 0 4px rgba(255, 208, 0, 0.16);
+}
+
+.form-panel textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+.form-panel button {
+  width: 100%;
+  background: #ffd000;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.form-panel button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(255, 208, 0, 0.35);
+}
+
+@media (max-width: 1200px) {
+  .office-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .contact-bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .map-panel iframe {
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 640px) {
+  .office-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-hero h1,
+  .office-head h2 {
+    font-size: 34px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div id="form-message" class="form-message" data-i18n="contact-success">Message sent successfully!</div>
+
+<header>
+<div class="container nav">
+<img src="images/sevel.png" class="logo" alt="Sevel Europe">
+
+<nav>
+<a href="index.html" data-i18n="nav-home">Home</a>
+<a href="products.html" data-i18n="nav-showcases">Showcases</a>
+<a href="gallery.html" data-i18n="nav-gallery">Gallery</a>
+<a href="contact.html" data-i18n="nav-contact">Contact</a>
+<a href="https://www.facebook.com/profile.php?id=100063871878926" title="Facebook" target="_blank" rel="noopener noreferrer" class="nav-social-link" aria-label="Facebook">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.6 1.6-1.6h1.7V4.8c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1V11H8v3h2.4v8h3.1z"/></svg>
+</a>
+<a href="https://www.instagram.com/seveleurope/" title="Instagram" target="_blank" rel="noopener noreferrer" class="nav-social-link" aria-label="Instagram">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm0 1.8A4 4 0 0 0 3.8 7.8v8.4a4 4 0 0 0 4 4h8.4a4 4 0 0 0 4-4V7.8a4 4 0 0 0-4-4H7.8zm9.1 1.4a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4z"/></svg>
+</a>
+<button id="userMenuBtn" class="user-menu-btn" onclick="openLoginModal()" style="background:none;border:none;cursor:pointer;padding:0;color:#333;">Login</button>
+</nav>
+
+<div class="hamburger" id="hamburger">
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+<div class="language-selector">
+<button id="lang-btn" class="lang-btn">EN ▼</button>
+<div id="lang-menu" class="lang-menu">
+<a href="#" data-lang="en">English</a>
+<a href="#" data-lang="sk">Slovenčina</a>
+<a href="#" data-lang="tr">Türkçe</a>
+</div>
+</div>
+</div>
+</header>
+
+<section class="contact-hero">
+<h1 data-i18n="contact-hero">Get in Touch</h1>
+<p data-i18n="contact-hero-desc">Have questions about our showcases? Our team is here to help with model selection, technical details, and business fit.</p>
+</section>
+
+<main class="contact-wrap">
+<div class="office-head">
+<p>Contact Information</p>
+<h2>Reach Out to Us</h2>
+</div>
+
+<section class="office-grid">
+<article class="office-card">
+<span class="office-flag"><img src="https://flagcdn.com/w40/sk.png" alt="Slovakia flag"></span>
+<h3>SEVEL EUROPE</h3>
+<h4>Slovakia</h4>
+<p>Office - Showroom (Trnava, Slovakia)</p>
+<div class="office-row"><strong>Email:</strong> agim@sevel.com.tr</div>
+<div class="office-row"><strong>Phone:</strong> +421 911 098 008</div>
+<div class="office-row"><strong>Address:</strong> SEVEL Europe S.R.O Bratislavska 5236/49 Trnava 917 02 Slovakia</div>
+</article>
+
+<article class="office-card">
+<span class="office-flag"><img src="https://flagcdn.com/w40/tr.png" alt="Turkey flag"></span>
+<h3>Merkez Ofis / Fabrika</h3>
+<h4>Turkiye</h4>
+<p>Torbali - Izmir</p>
+<div class="office-row"><strong>Email:</strong> info@sevel.com.tr</div>
+<div class="office-row"><strong>Phone:</strong> +90 232 853 82 32</div>
+<div class="office-row"><strong>Address:</strong> Balkan Cad no:6 Torbali Izmir Turkiye 35875</div>
+</article>
+
+<article class="office-card">
+<span class="office-flag"><img src="https://flagcdn.com/w40/tr.png" alt="Turkey flag"></span>
+<h3>Showroom - Istanbul</h3>
+<h4>Turkiye</h4>
+<p>Office - Showroom</p>
+<div class="office-row"><strong>Email:</strong> istanbul@sevel.com.tr</div>
+<div class="office-row"><strong>Phone:</strong> +90 212 236 21 13</div>
+<div class="office-row"><strong>Address:</strong> Yenibosna Merkez Mahallesi Degirmen Bahce Caddesi Istwest Alt Meydan 17A1/3 Bahcelievler / ISTANBUL</div>
+</article>
+
+<article class="office-card">
+<span class="office-flag"><img src="https://flagcdn.com/w40/us.png" alt="USA flag"></span>
+<h3>SEVEL USA</h3>
+<h4>Office (Houston, TX)</h4>
+<p>Distribution and support office</p>
+<div class="office-row"><strong>Phone:</strong> +1 281-272-1400</div>
+<div class="office-row"><strong>Address:</strong> 25702 Aldine Westfield Suite 954 Spring, TX 77373, USA</div>
+</article>
+</section>
+
+<section class="contact-bottom">
+<div class="map-panel">
+<iframe src="https://www.google.com/maps?q=Bratislavska%205236/49%20Trnava%20Slovakia&output=embed" allowfullscreen="" loading="lazy"></iframe>
+</div>
+
+<div class="form-panel">
+<h3 data-i18n="contact-form-title">Send us a Message</h3>
+<form id="contact-form">
+<div class="form-group">
+<label for="name" data-i18n="contact-name">Name *</label>
+<input type="text" id="name" name="name" data-i18n="contact-name-placeholder" placeholder="Your Full Name" required>
+</div>
+<div class="form-group">
+<label for="email" data-i18n="contact-email-label">Email *</label>
+<input type="email" id="email" name="email" data-i18n="contact-email-placeholder" placeholder="your@email.com" required>
+</div>
+<div class="form-group">
+<label for="phone" data-i18n="contact-phone-label">Phone</label>
+<input type="tel" id="phone" name="phone" data-i18n="contact-phone-placeholder" placeholder="+421...">
+</div>
+<div class="form-group">
+<label for="subject" data-i18n="contact-subject">Subject *</label>
+<input type="text" id="subject" name="subject" data-i18n="contact-subject-placeholder" placeholder="What is this about?" required>
+</div>
+<div class="form-group">
+<label for="message" data-i18n="contact-message">Message *</label>
+<textarea id="message" name="message" data-i18n="contact-message-placeholder" placeholder="Tell us more about your inquiry..." required></textarea>
+</div>
+<button type="submit" data-i18n="contact-submit">Send Message</button>
+</form>
+</div>
+</section>
+</main>
+
+<footer class="footer">
+<div class="container">
+<div class="footer-container">
+<div class="footer-logo">
+<img src="images/sevel.png" alt="Sevel Europe">
+<p>Follow Us On Social Media</p>
+<div class="socials">
+<a href="https://www.facebook.com/seveleurope" target="_blank" rel="noopener noreferrer">Facebook</a>
+<a href="https://www.instagram.com/seveleurope" target="_blank" rel="noopener noreferrer">Instagram</a>
+</div>
+</div>
+<div class="footer-column">
+<h3>Navigations</h3>
+<a href="index.html" data-i18n="nav-home">Home</a>
+<a href="products.html" data-i18n="nav-showcases">Showcases</a>
+<a href="gallery.html" data-i18n="nav-gallery">Gallery</a>
+<a href="contact.html" data-i18n="nav-contact">Contact</a>
+</div>
+<div class="footer-column">
+<h3 data-i18n="footer-info-title">Information</h3>
+<a href="about.html" data-i18n="footer-about">About Us</a>
+<a href="products.html" data-i18n="footer-products">Our Products</a>
+<a href="why-sevel.html" data-i18n="footer-why">Why Sevel?</a>
+</div>
+<div class="footer-column">
+<h3 data-i18n="footer-contact-title">Contact</h3>
+<p>+421 911 098 008</p>
+<p data-i18n="footer-address">Bratislavská 5236/49</p>
+<p data-i18n="footer-city">917 02 Trnava</p>
+<p data-i18n="footer-country">Slovakia</p>
+</div>
+<div class="footer-column">
+<h3 data-i18n="footer-newsletter">Stay Informed</h3>
+<p data-i18n="footer-newsletter-desc">Get updates about new showcases.</p>
+<div class="newsletter">
+<input type="email" placeholder="Enter your email">
+<button>-&gt;</button>
+</div>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<p data-i18n="footer-copyright">© 2026 Sevel Europe s.r.o. All Rights Reserved</p>
+</div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

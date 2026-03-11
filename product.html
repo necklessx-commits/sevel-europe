@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Technical specifications and model details for Sevel Europe professional showcases.">
+<meta name="theme-color" content="#d8aa2a">
+<title>Product Specifications | Sevel Europe</title>
+<meta property="og:title" content="Product Specifications | Sevel Europe">
+<meta property="og:description" content="Technical specifications and model details for Sevel Europe professional showcases.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/sevel.png">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.detail-page {
+  padding: 60px 0 30px;
+}
+
+.detail-hero {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+.detail-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 44px;
+  margin-bottom: 12px;
+}
+
+.detail-subtitle {
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 22px;
+}
+
+.detail-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-outline {
+  background: white;
+  border: 2px solid #ddd;
+  color: #333;
+}
+
+.btn-outline:hover {
+  border-color: #ffd000;
+}
+
+.detail-main-image {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.detail-main-image img {
+  width: 100%;
+  height: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  display: block;
+}
+
+.detail-grid {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.spec-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+}
+
+.spec-card h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  margin-bottom: 14px;
+}
+
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.spec-table td {
+  border: none;
+  border-bottom: 1px solid #eee;
+  padding: 12px 0;
+  vertical-align: top;
+}
+
+.spec-table td:first-child {
+  width: 42%;
+  font-weight: 600;
+  color: #333;
+}
+
+.feature-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.feature-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  color: #555;
+}
+
+.feature-list li:last-child {
+  border-bottom: none;
+}
+
+.gallery-strip {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.gallery-strip img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+@media (max-width: 960px) {
+  .detail-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .detail-title {
+    font-size: 34px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container nav">
+<img src="images/sevel.png" class="logo" alt="Sevel Europe">
+
+<nav>
+<a href="index.html">Home</a>
+<a href="products.html">Showcases</a>
+<a href="gallery.html">Gallery</a>
+<a href="contact.html">Contact</a>
+<a href="https://www.facebook.com/profile.php?id=100063871878926" title="Facebook" target="_blank" rel="noopener noreferrer" class="nav-social-link" aria-label="Facebook">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.6 1.6-1.6h1.7V4.8c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1V11H8v3h2.4v8h3.1z"/></svg>
+</a>
+<a href="https://www.instagram.com/seveleurope/" title="Instagram" target="_blank" rel="noopener noreferrer" class="nav-social-link" aria-label="Instagram">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm0 1.8A4 4 0 0 0 3.8 7.8v8.4a4 4 0 0 0 4 4h8.4a4 4 0 0 0 4-4V7.8a4 4 0 0 0-4-4H7.8zm9.1 1.4a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4z"/></svg>
+</a>
+<button id="userMenuBtn" class="user-menu-btn" onclick="openLoginModal()" style="background: none; border: none; cursor: pointer; padding: 0; color: #333;">Login</button>
+</nav>
+
+<div class="hamburger" id="hamburger">
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+<div class="language-selector">
+<button id="lang-btn" class="lang-btn">EN ▼</button>
+<div id="lang-menu" class="lang-menu">
+<a href="#" data-lang="en">English</a>
+<a href="#" data-lang="sk">Slovenčina</a>
+<a href="#" data-lang="tr">Türkçe</a>
+</div>
+</div>
+</div>
+</header>
+
+<main class="detail-page">
+<div class="container">
+<section class="detail-hero">
+<div>
+<h1 class="detail-title" id="product-title"></h1>
+<p class="detail-subtitle" id="product-subtitle"></p>
+<div class="detail-actions">
+<a href="contact.html" class="btn">Get Offer</a>
+<a href="products.html" class="btn btn-outline">Back to Showcases</a>
+</div>
+</div>
+<div class="detail-main-image">
+<img id="product-main-image" src="" alt="Product">
+</div>
+</section>
+
+<section class="detail-grid">
+<article class="spec-card">
+<h2>Technical Specifications</h2>
+<table class="spec-table" id="spec-table"></table>
+</article>
+
+<article class="spec-card">
+<h2>Model Notes</h2>
+<ul class="feature-list" id="feature-list"></ul>
+</article>
+</section>
+
+<section class="gallery-strip" id="gallery-strip"></section>
+</div>
+</main>
+
+<footer class="footer">
+<div class="container">
+<div class="footer-container">
+<div class="footer-logo">
+<img src="images/sevel.png" alt="Sevel Europe">
+<p>Follow Us On Social Media</p>
+<div class="socials">
+<a href="https://www.facebook.com/seveleurope" target="_blank" rel="noopener noreferrer">Facebook</a>
+<a href="https://www.instagram.com/seveleurope" target="_blank" rel="noopener noreferrer">Instagram</a>
+</div>
+</div>
+<div class="footer-column">
+<h3>Navigations</h3>
+<a href="index.html" data-i18n="nav-home">Home</a>
+<a href="products.html" data-i18n="nav-showcases">Showcases</a>
+<a href="gallery.html" data-i18n="nav-gallery">Gallery</a>
+<a href="contact.html" data-i18n="nav-contact">Contact</a>
+</div>
+<div class="footer-column">
+<h3>Information</h3>
+<a href="about.html">About Us</a>
+<a href="products.html">Our Products</a>
+<a href="why-sevel.html">Why Sevel?</a>
+</div>
+<div class="footer-column">
+<h3>Contact</h3>
+<p>+421 911 098 008</p>
+<p>Bratislavska 5236/49</p>
+<p>917 02 Trnava</p>
+<p>Slovakia</p>
+</div>
+<div class="footer-column">
+<h3>Stay Informed</h3>
+<p>Get updates about new showcases.</p>
+<div class="newsletter">
+<input type="email" placeholder="Enter your email">
+<button>-&gt;</button>
+</div>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<p>(c) 2026 Sevel Europe s.r.o. All Rights Reserved</p>
+</div>
+</footer>
+
+<script>
+const models = {
+  "aspen-new": {
+    name: "ASPEN NEW",
+    subtitle:
+      "Aspen New is a modern gelato display showcase focused on strong insulation, ventilated cooling, and stable performance for professional ice cream service.",
+    image: "images/aspen1.webp",
+    specs: [
+      ["Height", "1285 mm"],
+      ["Depth", "1190 mm"],
+      ["Length Options", "1492 / 1664 / 1839 / 2014 / 2364 mm"],
+      ["Cooling Type", "Ventilated cooling"],
+      ["Defrost", "Automatic defrost and evaporation system"],
+      ["Insulation", "Injected polyurethane with cyclopentane"],
+    ],
+    notes: [
+      "Built for continuous gelato and ice cream presentation.",
+      "Insulation supports efficient daily operation.",
+      "Ventilated airflow helps maintain even cabinet temperature.",
+      "Multiple body lengths support different shop sizes.",
+      "Clean curved-glass front matches modern shop interiors.",
+    ],
+    gallery: [
+      "images/aspen1.webp",
+      "images/aspen2.webp",
+      "images/aspen3.webp",
+      "images/aspen4.webp",
+      "images/aspen5.webp",
+      "images/aspen6.webp",
+    ],
+  },
+  "baroque-slm": {
+    name: "BAROQUE SLM NEW",
+    subtitle:
+      "Baroque SLM New is designed for small areas while preserving strong presentation, insulation quality, and stable cooling performance.",
+    image: "images/baroqueslm1.webp",
+    specs: [
+      ["Height", "1300 mm"],
+      ["Depth", "685 mm"],
+      ["Length Options", "1225 / 1405 / 1585 / 1980 mm"],
+      ["Cooling Temperature", "-18°C / -22°C"],
+      ["Tub Capacity", "6G / 7G / 8G / 10G"],
+      ["Insulation", "Monolithic polyurethane"],
+    ],
+    notes: [
+      "Designed for compact shops and narrow service areas.",
+      "High insulation body helps reduce thermal loss.",
+      "Heating and evaporation system improves glass visibility.",
+      "Tempered double glass for durability and safer operation.",
+      "Multiple compact lengths available for layout flexibility.",
+    ],
+    gallery: [
+      "images/baroqueslm1.webp",
+      "images/baroqueslm2.webp",
+      "images/baroqueslm3.webp",
+      "images/baroqueslm4.webp",
+    ],
+  },
+  "baroque-slm-vision": {
+    name: "BAROQUE SLM VISION",
+    subtitle:
+      "Baroque SLM Vision is a compact display cabinet focused on clear product visibility and efficient operation in limited-space layouts.",
+    image: "images/baroqueslmvision1.webp",
+    specs: [
+      ["Height", "1300 mm"],
+      ["Depth", "685 mm"],
+      ["Length Options", "1225 / 1405 / 1585 / 1980 mm"],
+      ["Cooling Temperature", "-18°C / -22°C"],
+      ["Tub Capacity", "6G / 7G / 8G / 10G"],
+      ["Insulation", "Monolithic polyurethane"],
+    ],
+    notes: [
+      "Vision-front design improves displayed product visibility.",
+      "Suitable for narrow or compact service areas.",
+      "Tempered double glass supports long-term daily use.",
+      "Heating and evaporation helps keep glass clear.",
+      "Same compact body family as Baroque SLM line.",
+    ],
+    gallery: [
+      "images/baroqueslmvision1.webp",
+      "images/baroqueslmvision2.webp",
+      "images/baroqueslmvision3.webp",
+      "images/baroqueslmvision4.webp",
+    ],
+  },
+  "conic-baroque-slmc": {
+    name: "CONIC BAROQUE SLMC",
+    subtitle:
+      "Conic Baroque SLMC combines the compact Baroque footprint with a conic front presentation for premium visual impact.",
+    image: "images/conicbaroqueslm1.webp",
+    specs: [
+      ["Height", "1300 mm"],
+      ["Depth", "685 mm"],
+      ["Length Options", "1225 / 1405 / 1585 / 1980 mm"],
+      ["Cooling Temperature", "-18°C / -22°C"],
+      ["Tub Capacity", "6G / 7G / 8G / 10G"],
+      ["Insulation", "Monolithic polyurethane"],
+    ],
+    notes: [
+      "Conic front line improves product visibility from customer side.",
+      "Compact body suitable for smaller service areas.",
+      "Tempered glass and insulated body for daily commercial use.",
+      "Built for gelato and ice cream display operation.",
+      "Shares dimensional family with other Baroque SLM variants.",
+    ],
+    gallery: [
+      "images/conicbaroqueslm1.webp",
+      "images/conicbaroqueslm2.webp",
+      "images/conicbaroqueslm3.webp",
+    ],
+  },
+  "ephesus-w90": {
+    name: "EPHESUS W90",
+    subtitle:
+      "Ephesus W90 is a wider presentation line designed for premium product visibility and high-capacity service areas.",
+    image: "images/ephesusw901.webp",
+    specs: [
+      ["Category", "Ice cream display showcase"],
+      ["Body Type", "W90 wide-body line"],
+      ["Cooling", "Professional ventilated cooling"],
+      ["Defrost", "Automatic system"],
+      ["Temperature Range", "-18°C / -22°C"],
+      ["Insulation", "High-density polyurethane"],
+    ],
+    notes: [
+      "Wide front display helps premium product presentation.",
+      "Designed for higher volume service points.",
+      "Balanced airflow for stable cabinet operation.",
+      "Built for continuous commercial daily use.",
+      "Multiple dimensions available by model option.",
+    ],
+    gallery: [
+      "images/ephesusw901.webp",
+      "images/ephesusw902.webp",
+      "images/ephesusw903.webp",
+      "images/ephesusw904.webp",
+    ],
+  },
+  "karia-premium": {
+    name: "KARIA PREMIUM",
+    subtitle:
+      "Karia Premium focuses on upscale front presentation, robust insulation, and efficient operation for modern gelato spaces.",
+    image: "images/kariaprem1.webp",
+    specs: [
+      ["Category", "Premium ice cream showcase"],
+      ["Cooling", "Ventilated professional cooling"],
+      ["Defrost", "Automatic system"],
+      ["Temperature Range", "-18°C / -22°C"],
+      ["Front Design", "Premium curved display profile"],
+      ["Insulation", "High-density polyurethane"],
+    ],
+    notes: [
+      "Premium visual profile for modern store concepts.",
+      "Strong insulation for operational efficiency.",
+      "Stable refrigeration for gelato display service.",
+      "Durable commercial-ready body and glass set.",
+      "Suitable for boutique and high-end interiors.",
+    ],
+    gallery: [
+      "images/kariaprem1.webp",
+      "images/kariaprem2.webp",
+      "images/kariaprem3.webp",
+    ],
+  },
+  mx: {
+    name: "MX",
+    subtitle:
+      "MX is a compact professional showcase line designed for clean presentation and reliable everyday cooling performance.",
+    image: "images/mx1.webp",
+    specs: [
+      ["Category", "Ice cream display showcase"],
+      ["Cooling", "Professional ventilated cooling"],
+      ["Defrost", "Automatic system"],
+      ["Temperature Range", "-18C / -22C"],
+      ["Body", "Compact commercial cabinet structure"],
+      ["Insulation", "High-density polyurethane"],
+    ],
+    notes: [
+      "Compact footprint suitable for many shop layouts.",
+      "Clear front presentation for product visibility.",
+      "Ventilated airflow supports stable operation.",
+      "Commercial-grade body built for daily service.",
+      "Efficient cooling and insulation balance.",
+    ],
+    gallery: ["images/mx1.webp", "images/mx2.webp"],
+  },
+  "mx-flat": {
+    name: "MX FLAT",
+    subtitle:
+      "MX Flat is the flat-front version of the MX family, focused on a clean facade and strong daily display performance.",
+    image: "images/mxflat1.webp",
+    specs: [
+      ["Category", "Ice cream display showcase"],
+      ["Front Profile", "Flat-front design"],
+      ["Cooling", "Professional ventilated cooling"],
+      ["Defrost", "Automatic system"],
+      ["Temperature Range", "-18C / -22C"],
+      ["Insulation", "High-density polyurethane"],
+    ],
+    notes: [
+      "Flat front line supports modern minimalist interiors.",
+      "Built for compact to medium service layouts.",
+      "Balanced cooling airflow for stable cabinet operation.",
+      "Commercial-grade structure for daily use.",
+      "Part of the MX product family architecture.",
+    ],
+    gallery: [
+      "images/mxflat1.webp",
+      "images/mxflat2.webp",
+      "images/mxflat3.webp",
+      "images/mxflat4.webp",
+      "images/mxflat5.webp",
+    ],
+  },
+  prisma: {
+    name: "PRISMA",
+    subtitle:
+      "Prisma is a premium display model featuring a distinctive angular profile and professional cooling reliability.",
+    image: "images/prism1.webp",
+    specs: [
+      ["Category", "Premium ice cream showcase"],
+      ["Body Profile", "Prisma angular front design"],
+      ["Cooling", "Professional ventilated cooling"],
+      ["Defrost", "Automatic system"],
+      ["Temperature Range", "-18C / -22C"],
+      ["Insulation", "High-density polyurethane"],
+    ],
+    notes: [
+      "Distinctive front geometry for strong visual identity.",
+      "Designed for premium retail presentation.",
+      "Supports stable gelato and ice cream service operation.",
+      "Durable cabinet materials for commercial environments.",
+      "Optimized for both aesthetics and performance.",
+    ],
+    gallery: [
+      "images/prism1.webp",
+      "images/prism2.webp",
+      "images/prism3.webp",
+      "images/prism4.webp",
+      "images/prism5.webp",
+    ],
+  },
+  "prisma-vision": {
+    name: "PRISMA VISION",
+    subtitle:
+      "Prisma Vision extends the Prisma family with a visibility-focused front design and premium visual presentation.",
+    image: "images/prismav1.webp",
+    specs: [
+      ["Category", "Premium ice cream showcase"],
+      ["Body Profile", "Prisma Vision front design"],
+      ["Cooling", "Professional ventilated cooling"],
+      ["Defrost", "Automatic system"],
+      ["Temperature Range", "-18C / -22C"],
+      ["Insulation", "High-density polyurethane"],
+    ],
+    notes: [
+      "Vision-focused profile improves displayed product perception.",
+      "Premium cabinet language for modern interiors.",
+      "Balanced airflow for stable product temperature.",
+      "Built for continuous commercial showcase operation.",
+      "Designed as a premium variant of the Prisma line.",
+    ],
+    gallery: [
+      "images/prismav1.webp",
+      "images/prismav2.webp",
+      "images/prismav3.webp",
+      "images/prismav4.webp",
+    ],
+  },
+  slm: {
+    name: "SLM",
+    subtitle:
+      "SLM is a compact showcase model designed for efficient product display and reliable day-to-day operation.",
+    image: "images/slm1.webp",
+    specs: [
+      ["Category", "Ice cream display showcase"],
+      ["Cooling", "Professional ventilated cooling"],
+      ["Defrost", "Automatic system"],
+      ["Temperature Range", "-18C / -22C"],
+      ["Body", "Compact commercial cabinet structure"],
+      ["Insulation", "High-density polyurethane"],
+    ],
+    notes: [
+      "Compact dimensions for flexible shop placement.",
+      "Stable airflow for consistent product temperature.",
+      "Commercial body suitable for daily service use.",
+      "Clean front presentation for product visibility.",
+      "Efficient cooling and insulation balance.",
+    ],
+    gallery: ["images/slm1.webp", "images/slm2.webp"],
+  },
+  "smyrna-new": {
+    name: "SMYRNA NEW",
+    subtitle:
+      "Smyrna New is a modern professional showcase line built for strong presentation quality and dependable cooling performance.",
+    image: "images/smyrnanew1.webp",
+    specs: [
+      ["Category", "Ice cream display showcase"],
+      ["Cooling", "Professional ventilated cooling"],
+      ["Defrost", "Automatic system"],
+      ["Temperature Range", "-18C / -22C"],
+      ["Body Profile", "Modern curved front presentation"],
+      ["Insulation", "High-density polyurethane"],
+    ],
+    notes: [
+      "Modern exterior styling for premium retail environments.",
+      "Balanced airflow supports stable cabinet operation.",
+      "Designed for continuous commercial usage.",
+      "Strong insulation to support efficiency.",
+      "Suitable for medium to high-traffic service points.",
+    ],
+    gallery: [
+      "images/smyrnanew1.webp",
+      "images/smyrnanew2.webp",
+      "images/smyrnanew3.webp",
+      "images/smyrnanew4.webp",
+      "images/smyrnanew5.webp",
+      "images/smyrnanew6.webp",
+    ],
+  },
+  "smyrna-new-low": {
+    name: "SMYRNA NEW LOW",
+    subtitle:
+      "Smyrna New Low is the low-profile version of Smyrna New, created for cleaner sightlines and compact presentation.",
+    image: "images/smyrnanewlow1.webp",
+    specs: [
+      ["Category", "Ice cream display showcase"],
+      ["Cooling", "Professional ventilated cooling"],
+      ["Defrost", "Automatic system"],
+      ["Temperature Range", "-18C / -22C"],
+      ["Body Profile", "Low-profile front design"],
+      ["Insulation", "High-density polyurethane"],
+    ],
+    notes: [
+      "Lower cabinet profile for open interior visibility.",
+      "Modern appearance for minimalist shop concepts.",
+      "Stable airflow supports reliable daily operation.",
+      "Durable commercial cabinet structure.",
+      "Built for professional gelato and ice cream display.",
+    ],
+    gallery: [
+      "images/smyrnanewlow1.webp",
+      "images/smyrnanewlow2.webp",
+      "images/smyrnanewlow3.webp",
+      "images/smyrnanewlow4.webp",
+      "images/smyrnanewlow5.webp",
+    ],
+  },
+  "pole-25": {
+    name: "POLE 25",
+    subtitle:
+      "Pole 25 is a compact showcase model built for tight service footprints without sacrificing presentation quality.",
+    image: "images/role251.webp",
+    specs: [
+      ["Category", "Ice cream display showcase"],
+      ["Cooling", "Professional ventilated cooling"],
+      ["Defrost", "Automatic system"],
+      ["Temperature Range", "-18C / -22C"],
+      ["Body", "Compact Pole series cabinet"],
+      ["Insulation", "High-density polyurethane"],
+    ],
+    notes: [
+      "Compact cabinet suitable for smaller stores.",
+      "Clear front display for product visibility.",
+      "Built for daily commercial service environments.",
+      "Efficient refrigeration and insulation balance.",
+      "Part of the Pole family product architecture.",
+    ],
+    gallery: ["images/role251.webp", "images/role252.webp"],
+  },
+  "pole-40": {
+    name: "POLE 40",
+    subtitle:
+      "Pole 40 offers a larger Pole-series format for stronger display capacity and broader service operation.",
+    image: "images/pole401.webp",
+    specs: [
+      ["Category", "Ice cream display showcase"],
+      ["Cooling", "Professional ventilated cooling"],
+      ["Defrost", "Automatic system"],
+      ["Temperature Range", "-18C / -22C"],
+      ["Body", "Pole series expanded cabinet"],
+      ["Insulation", "High-density polyurethane"],
+    ],
+    notes: [
+      "Larger format compared to compact Pole variants.",
+      "Supports wider product presentation area.",
+      "Stable cooling performance for commercial usage.",
+      "Durable cabinet components for daily operation.",
+      "Suitable for medium to high-volume counters.",
+    ],
+    gallery: ["images/pole401.webp", "images/pole402.webp"],
+  },
+  "baroque-vision-new": {
+    name: "BAROQUE VISION NEW",
+    subtitle:
+      "Baroque Vision New is a cake showcase line focused on premium front visibility and elegant presentation for pastry products.",
+    image: "images/baroquevisionnew1.webp",
+    specs: [
+      ["Category", "Cake display showcase"],
+      ["Cooling", "Professional ventilated cooling"],
+      ["Defrost", "Automatic system"],
+      ["Temperature Range", "+2C / +8C"],
+      ["Body Profile", "Vision-front premium design"],
+      ["Insulation", "High-density polyurethane"],
+    ],
+    notes: [
+      "Optimized for pastry and cake presentation.",
+      "Vision-focused front profile improves display perception.",
+      "Stable airflow for daily commercial operation.",
+      "Premium cabinet aesthetics for boutique interiors.",
+      "Built for reliable refrigeration and service continuity.",
+    ],
+    gallery: [
+      "images/baroquevisionnew1.webp",
+      "images/baroquevisionnew2.webp",
+      "images/baroquevisionnew3.webp",
+      "images/baroquevisionnew4.webp",
+    ],
+  },
+  "baroque-vision-vertical-wall": {
+    name: "BAROQUE VISION VERTICAL WALL",
+    subtitle:
+      "Baroque Vision Vertical Wall is a cake display solution designed for strong vertical visibility and compact wall-oriented placement.",
+    image: "images/baroquevisionvertic1.webp",
+    specs: [
+      ["Category", "Cake display showcase"],
+      ["Cabinet Type", "Vertical wall showcase"],
+      ["Cooling", "Professional ventilated cooling"],
+      ["Defrost", "Automatic system"],
+      ["Temperature Range", "+2C / +8C"],
+      ["Insulation", "High-density polyurethane"],
+    ],
+    notes: [
+      "Vertical presentation increases product visibility per footprint.",
+      "Designed for cake and pastry refrigeration display.",
+      "Suitable for wall-side placement in boutique spaces.",
+      "Balanced airflow for stable daily operation.",
+      "Premium front design aligned with Baroque Vision family.",
+    ],
+    gallery: [
+      "images/baroquevisionvertic1.webp",
+      "images/baroquevisionvertic2.webp",
+      "images/baroquevisionvertic3.webp",
+    ],
+  },
+  loft: {
+    name: "LOFT",
+    subtitle:
+      "Loft is a cake showcase model featuring a modern loft-inspired visual profile and professional refrigerated presentation.",
+    image: "images/loft1.webp",
+    specs: [
+      ["Category", "Cake display showcase"],
+      ["Cooling", "Professional ventilated cooling"],
+      ["Defrost", "Automatic system"],
+      ["Temperature Range", "+2C / +8C"],
+      ["Body Profile", "Loft-style premium front design"],
+      ["Insulation", "High-density polyurethane"],
+    ],
+    notes: [
+      "Designed for pastry and cake display environments.",
+      "Modern aesthetic suitable for premium interior concepts.",
+      "Balanced airflow for stable product temperature.",
+      "Commercial-grade cabinet for everyday operation.",
+      "Built to combine presentation with refrigeration performance.",
+    ],
+    gallery: [
+      "images/loft1.webp",
+      "images/loft2.webp",
+      "images/loft3.webp",
+      "images/loft4.webp",
+    ],
+  },
+  "troy-sport": {
+    name: "TROY SPORT",
+    subtitle:
+      "Troy Sport is an ice cream showcase model designed with a dynamic profile and reliable commercial cooling performance.",
+    image: "images/troysport1.webp",
+    specs: [
+      ["Category", "Ice cream display showcase"],
+      ["Cooling", "Professional ventilated cooling"],
+      ["Defrost", "Automatic system"],
+      ["Temperature Range", "-18C / -22C"],
+      ["Body Profile", "Sport-style front design"],
+      ["Insulation", "High-density polyurethane"],
+    ],
+    notes: [
+      "Built for gelato and ice cream service operation.",
+      "Sport profile provides a modern visual identity.",
+      "Balanced airflow for stable temperature performance.",
+      "Suitable for commercial daily usage.",
+      "Designed for strong product presentation.",
+    ],
+    gallery: [
+      "images/troysport1.webp",
+      "images/troysport2.webp",
+      "images/troysport3.webp",
+    ],
+  },
+  "troy-sport-vision": {
+    name: "TROY SPORT VISION",
+    subtitle:
+      "Troy Sport Vision is the visibility-focused variant of Troy Sport, built for premium ice cream presentation.",
+    image: "images/troysportv1.webp",
+    specs: [
+      ["Category", "Ice cream display showcase"],
+      ["Cooling", "Professional ventilated cooling"],
+      ["Defrost", "Automatic system"],
+      ["Temperature Range", "-18C / -22C"],
+      ["Body Profile", "Sport Vision front design"],
+      ["Insulation", "High-density polyurethane"],
+    ],
+    notes: [
+      "Vision profile improves product visibility from customer side.",
+      "Built for gelato and ice cream service operation.",
+      "Stable airflow for daily commercial performance.",
+      "Modern sporty cabinet language for premium interiors.",
+      "Durable structure for continuous professional usage.",
+    ],
+    gallery: [
+      "images/troysportv1.webp",
+      "images/troyposrtv2.webp",
+      "images/troyposrtv3.webp",
+      "images/troyposrtv4.webp",
+    ],
+  },
+  "troy-new": {
+    name: "TROY NEW",
+    subtitle:
+      "Troy New is an ice cream showcase line combining modern styling with reliable professional cooling performance.",
+    image: "images/troynew1.webp",
+    specs: [
+      ["Category", "Ice cream display showcase"],
+      ["Cooling", "Professional ventilated cooling"],
+      ["Defrost", "Automatic system"],
+      ["Temperature Range", "-18C / -22C"],
+      ["Body Profile", "Updated Troy front design"],
+      ["Insulation", "High-density polyurethane"],
+    ],
+    notes: [
+      "Designed for gelato and ice cream retail service.",
+      "Modernized Troy profile for premium shop appearance.",
+      "Balanced airflow for stable cabinet operation.",
+      "Commercial body suitable for daily heavy use.",
+      "Strong presentation and reliable refrigeration balance.",
+    ],
+    gallery: [
+      "images/troynew1.webp",
+      "images/troynew2.webp",
+      "images/troynew3.webp",
+      "images/troynew4.webp",
+    ],
+  },
+  "teos-flat": {
+    name: "TEOS FLAT",
+    subtitle:
+      "Teos Flat is a cake showcase model with flat-front visual language and clean premium display presentation.",
+    image: "images/teosflat1.webp",
+    specs: [
+      ["Category", "Cake display showcase"],
+      ["Cooling", "Professional ventilated cooling"],
+      ["Defrost", "Automatic system"],
+      ["Temperature Range", "+2C / +8C"],
+      ["Body Profile", "Flat-front Teos design"],
+      ["Insulation", "High-density polyurethane"],
+    ],
+    notes: [
+      "Built for pastry and cake refrigerated presentation.",
+      "Flat front profile for modern interior concepts.",
+      "Stable airflow for daily operation continuity.",
+      "Commercial-ready cabinet for professional usage.",
+      "Premium display quality for boutique locations.",
+    ],
+    gallery: [
+      "images/teosflat1.webp",
+      "images/teosflat2.webp",
+      "images/teosflat3.webp",
+      "images/teosflat4.webp",
+    ],
+  },
+  "teos-high": {
+    name: "TEOS HIGH",
+    subtitle:
+      "Teos High is a cake showcase variant with elevated visual profile for stronger vertical product visibility.",
+    image: "images/teoshigh1.webp",
+    specs: [
+      ["Category", "Cake display showcase"],
+      ["Cooling", "Professional ventilated cooling"],
+      ["Defrost", "Automatic system"],
+      ["Temperature Range", "+2C / +8C"],
+      ["Body Profile", "High-front Teos variant"],
+      ["Insulation", "High-density polyurethane"],
+    ],
+    notes: [
+      "Higher front profile increases display impact.",
+      "Suitable for pastry and cake merchandising.",
+      "Balanced cooling airflow for stable service.",
+      "Commercial-grade structure for daily operation.",
+      "Designed as an extended Teos family option.",
+    ],
+    gallery: ["images/teoshigh1.webp", "images/teoshigh2.webp"],
+  },
+  "teos-t-form": {
+    name: "TEOS T FORM",
+    subtitle:
+      "Teos T Form provides a distinctive showcase geometry for cake presentation in premium pastry environments.",
+    image: "images/teost1.webp",
+    specs: [
+      ["Category", "Cake display showcase"],
+      ["Cooling", "Professional ventilated cooling"],
+      ["Defrost", "Automatic system"],
+      ["Temperature Range", "+2C / +8C"],
+      ["Body Profile", "Teos T-Form design"],
+      ["Insulation", "High-density polyurethane"],
+    ],
+    notes: [
+      "Distinctive T-form profile for standout presentation.",
+      "Developed for cake and pastry refrigeration display.",
+      "Stable commercial airflow and daily operation.",
+      "Durable cabinet suitable for professional usage.",
+      "Premium aesthetic for modern confectionery interiors.",
+    ],
+    gallery: [
+      "images/teost1.webp",
+      "images/teost2.webp",
+      "images/teost3.webp",
+      "images/teost4.webp",
+    ],
+  },
+};
+
+const query = new URLSearchParams(window.location.search);
+const modelKey = query.get("model") || "aspen-new";
+const model = models[modelKey] || models["aspen-new"];
+
+document.getElementById("product-title").textContent = model.name;
+document.getElementById("product-subtitle").textContent = model.subtitle;
+document.getElementById("product-main-image").src = model.image;
+document.getElementById("product-main-image").alt = model.name;
+
+const specTable = document.getElementById("spec-table");
+model.specs.forEach(([label, value]) => {
+  const row = document.createElement("tr");
+  row.innerHTML = "<td>" + label + "</td><td>" + value + "</td>";
+  specTable.appendChild(row);
+});
+
+const featureList = document.getElementById("feature-list");
+model.notes.forEach((note) => {
+  const li = document.createElement("li");
+  li.textContent = note;
+  featureList.appendChild(li);
+});
+
+const gallery = document.getElementById("gallery-strip");
+model.gallery.forEach((src) => {
+  const img = document.createElement("img");
+  img.src = src;
+  img.alt = model.name + " gallery image";
+  gallery.appendChild(img);
+});
+</script>
+<script src="js/script.js"></script>
+</body>
+</html>

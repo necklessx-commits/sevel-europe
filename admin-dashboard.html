@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Manage Sevel Europe website content, submissions, and customer data.">
+<meta name="theme-color" content="#d8aa2a">
+<title>Admin Dashboard - Sevel Europe</title>
+<meta property="og:title" content="Admin Dashboard - Sevel Europe">
+<meta property="og:description" content="Manage Sevel Europe website content, submissions, and customer data.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/sevel.png">
+<link rel="stylesheet" href="css/style.css">
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Poppins', sans-serif;
+background: #f5f7fa;
+}
+
+.admin-wrapper {
+display: flex;
+min-height: 100vh;
+}
+
+/* SIDEBAR */
+.admin-sidebar {
+width: 260px;
+background: #2c3e50;
+color: white;
+padding: 30px 0;
+position: fixed;
+height: 100vh;
+overflow-y: auto;
+box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.admin-logo {
+padding: 0 20px;
+margin-bottom: 40px;
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+.admin-logo img {
+height: 35px;
+}
+
+.admin-logo span {
+font-weight: 700;
+font-size: 16px;
+}
+
+.admin-nav {
+list-style: none;
+}
+
+.admin-nav li a {
+display: block;
+padding: 12px 20px;
+color: #b0bec5;
+text-decoration: none;
+transition: all 0.3s ease;
+border-left: 3px solid transparent;
+}
+
+.admin-nav li a:hover,
+.admin-nav li a.active {
+background: rgba(255,208,0,0.1);
+color: #ffd000;
+border-left-color: #ffd000;
+}
+
+.admin-nav-divider {
+height: 1px;
+background: rgba(255,255,255,0.1);
+margin: 20px 0;
+}
+
+.logout-btn {
+display: block;
+padding: 12px 20px;
+color: #ff6b6b;
+text-decoration: none;
+transition: all 0.3s ease;
+border-left: 3px solid transparent;
+margin-top: pure;
+}
+
+.logout-btn:hover {
+background: rgba(255,107,107,0.1);
+border-left-color: #ff6b6b;
+}
+
+/* MAIN CONTENT */
+.admin-main {
+margin-left: 260px;
+flex: 1;
+}
+
+.admin-header {
+background: white;
+padding: 30px;
+box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-bottom: 2px solid #f0f0f0;
+}
+
+.admin-header h1 {
+font-family: 'Playfair Display', serif;
+font-size: 28px;
+color: #333;
+}
+
+.user-info {
+display: flex;
+align-items: center;
+gap: 15px;
+}
+
+.user-avatar {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+background: linear-gradient(135deg, #ffd000, #ffed4e);
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: bold;
+color: #333;
+}
+
+.user-name {
+color: #333;
+font-weight: 600;
+font-size: 14px;
+}
+
+.user-role {
+color: #999;
+font-size: 12px;
+}
+
+/* CONTENT */
+.admin-content {
+padding: 30px;
+}
+
+.section {
+display: none;
+}
+
+.section.active {
+display: block;
+animation: fadeInUp 0.3s ease;
+}
+
+/* DASHBOARD CARDS */
+.dashboard-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 20px;
+margin-bottom: 40px;
+}
+
+.stat-card {
+background: white;
+padding: 25px;
+border-radius: 12px;
+box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+border-top: 4px solid #ffd000;
+transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+transform: translateY(-4px);
+box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.stat-value {
+font-size: 32px;
+font-weight: 700;
+color: #ffd000;
+margin-bottom: 5px;
+}
+
+.stat-label {
+color: #666;
+font-size: 14px;
+}
+
+/* TABLES */
+.table-container {
+background: white;
+border-radius: 12px;
+overflow: hidden;
+box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+margin-bottom: 30px;
+}
+
+table {
+width: 100%;
+border-collapse: collapse;
+}
+
+th {
+background: #f5f7fa;
+padding: 16px;
+text-align: left;
+font-weight: 600;
+color: #333;
+border-bottom: 2px solid #e0e0e0;
+}
+
+td {
+padding: 16px;
+border-bottom: 1px solid #f0f0f0;
+}
+
+tr:hover {
+background: #f9f9f9;
+}
+
+.badge {
+display: inline-block;
+padding: 4px 12px;
+border-radius: 20px;
+font-size: 12px;
+font-weight: 600;
+}
+
+.badge-success {
+background: #d4edda;
+color: #155724;
+}
+
+.badge-pending {
+background: #fff3cd;
+color: #856404;
+}
+
+.badge-danger {
+background: #f8d7da;
+color: #721c24;
+}
+
+/* FORMS */
+.form-card {
+background: white;
+padding: 30px;
+border-radius: 12px;
+box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+margin-bottom: 30px;
+}
+
+.form-card h3 {
+font-family: 'Playfair Display', serif;
+font-size: 22px;
+margin-bottom: 25px;
+color: #333;
+}
+
+.form-group {
+margin-bottom: 20px;
+}
+
+.form-group label {
+display: block;
+margin-bottom: 8px;
+font-weight: 600;
+color: #333;
+font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+width: 100%;
+padding: 12px;
+border: 2px solid #e0e0e0;
+border-radius: 8px;
+font-family: 'Poppins', sans-serif;
+font-size: 14px;
+transition: all 0.3s ease;
+}
+
+.form-group textarea {
+resize: vertical;
+min-height: 120px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+outline: none;
+border-color: #ffd000;
+box-shadow: 0 0 0 4px rgba(255, 208, 0, 0.15);
+}
+
+.form-buttons {
+display: flex;
+gap: 10px;
+margin-top: 25px;
+}
+
+.btn-primary {
+background: #ffd000;
+color: black;
+padding: 12px 30px;
+border: none;
+border-radius: 8px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+transform: translateY(-2px);
+box-shadow: 0 4px 15px rgba(255, 208, 0, 0.3);
+}
+
+.btn-secondary {
+background: #e0e0e0;
+color: #333;
+padding: 12px 30px;
+border: none;
+border-radius: 8px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+background: #d0d0d0;
+}
+
+.btn-danger {
+background: #ff6b6b;
+color: white;
+padding: 8px 16px;
+border: none;
+border-radius: 6px;
+cursor: pointer;
+font-size: 12px;
+transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+background: #ff5252;
+}
+
+.btn-edit {
+background: #4dabf7;
+color: white;
+padding: 8px 16px;
+border: none;
+border-radius: 6px;
+cursor: pointer;
+font-size: 12px;
+transition: all 0.3s ease;
+}
+
+.btn-edit:hover {
+background: #339af0;
+}
+
+/* NOTIFICATIONS */
+.notification {
+background: white;
+padding: 16px;
+border-radius: 8px;
+margin-bottom: 15px;
+border-left: 4px solid #ffd000;
+box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.notification-title {
+font-weight: 600;
+color: #333;
+margin-bottom: 4px;
+}
+
+.notification-text {
+color: #666;
+font-size: 14px;
+}
+
+.notification-time {
+color: #999;
+font-size: 12px;
+margin-top: 8px;
+}
+
+/* EMPTY STATE */
+.empty-state {
+text-align: center;
+padding: 60px 30px;
+color: #999;
+}
+
+.empty-state-icon {
+font-size: 48px;
+margin-bottom: 16px;
+}
+
+.empty-state-title {
+font-size: 18px;
+color: #666;
+margin-bottom: 8px;
+font-weight: 600;
+}
+
+.empty-state-text {
+color: #999;
+font-size: 14px;
+}
+
+/* MODAL */
+.modal {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0,0,0,0.5);
+z-index: 1000;
+align-items: center;
+justify-content: center;
+}
+
+.modal.active {
+display: flex;
+animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+background: white;
+border-radius: 12px;
+padding: 40px;
+max-width: 500px;
+width: 90%;
+box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.modal-header {
+font-family: 'Playfair Display', serif;
+font-size: 24px;
+margin-bottom: 20px;
+color: #333;
+}
+
+.modal-close {
+position: absolute;
+top: 20px;
+right: 20px;
+background: none;
+border: none;
+font-size: 24px;
+color: #999;
+cursor: pointer;
+transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+color: #333;
+}
+
+@media (max-width: 1024px) {
+.admin-sidebar {
+width: 200px;
+}
+
+.admin-main {
+margin-left: 200px;
+}
+
+.dashboard-grid {
+grid-template-columns: repeat(2, 1fr);
+}
+}
+
+@media (max-width: 768px) {
+.admin-wrapper {
+flex-direction: column;
+}
+
+.admin-sidebar {
+position: fixed;
+left: -260px;
+width: 260px;
+height: 100vh;
+z-index: 999;
+transition: left 0.3s ease;
+}
+
+.admin-sidebar.active {
+left: 0;
+}
+
+.admin-main {
+margin-left: 0;
+}
+
+.dashboard-grid {
+grid-template-columns: 1fr;
+}
+
+.form-buttons {
+flex-direction: column;
+}
+}
+</style>
+</head>
+<body>
+
+<div class="admin-wrapper">
+
+<!-- SIDEBAR -->
+<aside class="admin-sidebar">
+<div class="admin-logo">
+<img src="images/sevel.png" alt="Sevel">
+<span>ADMIN</span>
+</div>
+
+<ul class="admin-nav">
+<li><a href="#dashboard" class="nav-link active" onclick="showSection(event, 'dashboard')">📊 Dashboard</a></li>
+<li><a href="#user-dashboard" class="nav-link" onclick="showSection(event, 'user-dashboard')" id="user-dash-link">👥 My Dashboard</a></li>
+<li><a href="#content" class="nav-link" onclick="showSection(event, 'content')" data-admin-nav>📝 Content Manager</a></li>
+<li><a href="#testimonials" class="nav-link" onclick="showSection(event, 'testimonials')" data-admin-nav>⭐ Testimonials</a></li>
+<li><a href="#newsletter" class="nav-link" onclick="showSection(event, 'newsletter')" data-admin-nav>📧 Newsletter</a></li>
+<li><a href="#submissions" class="nav-link" onclick="showSection(event, 'submissions')" data-admin-nav>📮 Submissions</a></li>
+<li><a href="#settings" class="nav-link" onclick="showSection(event, 'settings')">⚙️ Settings</a></li>
+</ul>
+
+<div class="admin-nav-divider"></div>
+<a href="#" class="logout-btn" onclick="logout(event)">🚪 Logout</a>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="admin-main">
+
+<header class="admin-header">
+<h1>Sevel Europe Admin</h1>
+<div class="user-info">
+<div class="user-avatar" id="userAvatar">A</div>
+<div>
+<div class="user-name" id="userName">Admin</div>
+<div class="user-role" id="userRole">System Administrator</div>
+</div>
+</div>
+</header>
+
+<div class="admin-content">
+
+<!-- DASHBOARD SECTION -->
+<section class="section active" id="dashboard">
+<h2 style="font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 30px; color: #333;">Dashboard Overview</h2>
+
+<div class="dashboard-grid">
+<div class="stat-card">
+<div class="stat-value" id="totalVisitors">0</div>
+<div class="stat-label">Total Visitors</div>
+</div>
+<div class="stat-card">
+<div class="stat-value" id="totalSubmissions">0</div>
+<div class="stat-label">Form Submissions</div>
+</div>
+<div class="stat-card">
+<div class="stat-value" id="totalNewsletter">0</div>
+<div class="stat-label">Newsletter Subscribers</div>
+</div>
+<div class="stat-card">
+<div class="stat-value" id="totalTestimonials">0</div>
+<div class="stat-label">Customer Reviews</div>
+</div>
+</div>
+
+<div class="form-card">
+<h3>Recent Activity</h3>
+<div id="recentActivity">
+<div class="notification">
+<div class="notification-title">✓ New Contact Submission</div>
+<div class="notification-text">John Smith submitted a contact form inquiry</div>
+<div class="notification-time">2 hours ago</div>
+</div>
+<div class="notification">
+<div class="notification-title">✓ Newsletter Signup</div>
+<div class="notification-text">5 new subscribers joined the newsletter</div>
+<div class="notification-time">5 hours ago</div>
+</div>
+<div class="notification">
+<div class="notification-title">✓ New Testimonial</div>
+<div class="notification-text">Marco Rossi left a 5-star review</div>
+<div class="notification-time">1 day ago</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- USER DASHBOARD SECTION (FOR NON-ADMIN USERS) -->
+<section class="section" id="user-dashboard" style="display:none;">
+<h2 style="font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 30px; color: #333;">Welcome to Your Dashboard</h2>
+
+<div class="form-card">
+<h3>📊 Quick Stats</h3>
+<p style="color: #666; margin-bottom: 20px;">You have limited viewing access to the admin dashboard. Below is information about your account and access:</p>
+
+<div style="background: #f5f7fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+<div style="margin-bottom: 15px;">
+<strong>Account Username:</strong> <span id="accountUsername" style="color: #ffd000;">User</span>
+</div>
+<div style="margin-bottom: 15px;">
+<strong>Access Level:</strong> <span style="color: #51cf66; font-weight: 600;">Dashboard User (Limited Access)</span>
+</div>
+<div style="margin-bottom: 15px;">
+<strong>Login Status:</strong> <span style="color: #4dabf7; font-weight: 600;">✓ Active</span>
+</div>
+<div>
+<strong>Last Login:</strong> <span id="lastAccessTime" style="color: #999;">Just now</span>
+</div>
+</div>
+
+<p style="color: #999; font-size: 13px; line-height: 1.6;">
+⚠️ <strong>Note:</strong> You have access to view your account settings and basic dashboard information. For full access to content management, testimonials, newsletter, and form submissions, you need administrator privileges. <br><br>
+If you need extended access, please contact the website administrator.
+</p>
+</div>
+</section>
+
+<!-- CONTENT MANAGER SECTION -->
+<section class="section" id="content" data-admin-only>
+<h2 style="font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 30px; color: #333;">Content Manager</h2>
+
+<div class="form-card">
+<h3>Edit Hero Section (Home Page)</h3>
+<form id="contentForm">
+<div class="form-group">
+<label>Main Title</label>
+<input type="text" id="heroTitle" value="Premium Ice Cream Showcases for Europe" placeholder="Enter hero title">
+</div>
+<div class="form-group">
+<label>Description</label>
+<textarea id="heroDesc" placeholder="Enter hero description">Discover the perfect display solution for your gelato, ice cream, or frozen dessert shop.</textarea>
+</div>
+<div class="form-group">
+<label>Button Text</label>
+<input type="text" id="heroBtnText" value="Explore Our Showcases" placeholder="Enter button text">
+</div>
+<div class="form-buttons">
+<button type="button" class="btn-primary" onclick="saveContent()">Save Changes</button>
+<button type="button" class="btn-secondary" onclick="resetForm()">Reset</button>
+</div>
+</form>
+</div>
+
+<div class="notification" style="background: #e3f2fd; border-left-color: #2196f3; margin-top: 20px;">
+<div class="notification-title">💡 Note:</div>
+<div class="notification-text">Changes are saved locally. To deploy to live website, contact your hosting provider.</div>
+</div>
+</section>
+
+<!-- TESTIMONIALS SECTION -->
+<section class="section" id="testimonials" data-admin-only>
+<h2 style="font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 30px; color: #333;">Manage Testimonials</h2>
+
+<div class="form-card">
+<h3>Add New Testimonial</h3>
+<form id="testimonialForm">
+<div class="form-group">
+<label>Customer Name</label>
+<input type="text" id="testimonialName" placeholder="Enter customer name" required>
+</div>
+<div class="form-group">
+<label>Customer Role</label>
+<input type="text" id="testimonialRole" placeholder="e.g., Owner, Milano Gelato" required>
+</div>
+<div class="form-group">
+<label>Rating (1-5 stars)</label>
+<select id="testimonialRating" required>
+<option value="5">⭐⭐⭐⭐⭐ 5 Stars</option>
+<option value="4">⭐⭐⭐⭐ 4 Stars</option>
+<option value="3">⭐⭐⭐ 3 Stars</option>
+</select>
+</div>
+<div class="form-group">
+<label>Testimonial Text</label>
+<textarea id="testimonialText" placeholder="Enter the testimonial message" required></textarea>
+</div>
+<div class="form-buttons">
+<button type="button" class="btn-primary" onclick="addTestimonial()">Add Testimonial</button>
+</form>
+</div>
+
+<div class="table-container" style="margin-top: 30px;">
+<table id="testimonialsList">
+<thead>
+<tr>
+<th>Customer</th>
+<th>Role</th>
+<th>Rating</th>
+<th>Message</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Marco Rossi</td>
+<td>Owner, Milano Gelato</td>
+<td><span class="badge badge-success">★★★★★</span></td>
+<td>Sevel Europe transformed our shop! The showcase is stunning...</td>
+<td>
+<button class="btn-edit" onclick="editTestimonial(this)">Edit</button>
+<button class="btn-danger" onclick="deleteTestimonial(this)">Delete</button>
+</td>
+</tr>
+<tr>
+<td>Sophie Laurent</td>
+<td>Manager, Crème Gelato Paris</td>
+<td><span class="badge badge-success">★★★★★</span></td>
+<td>Professional team, beautiful products, and excellent support...</td>
+<td>
+<button class="btn-edit" onclick="editTestimonial(this)">Edit</button>
+<button class="btn-danger" onclick="deleteTestimonial(this)">Delete</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- NEWSLETTER SECTION -->
+<section class="section" id="newsletter" data-admin-only>
+<h2 style="font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 30px; color: #333;">Newsletter Subscribers</h2>
+
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Email</th>
+<th>Date Subscribed</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="newsletterList">
+<tr>
+<td>marco@milangelato.it</td>
+<td>March 5, 2026</td>
+<td><span class="badge badge-success">Active</span></td>
+<td>
+<button class="btn-danger" onclick="deleteSubscriber(this)">Remove</button>
+</td>
+</tr>
+<tr>
+<td>sophie@creme-gelato.fr</td>
+<td>March 3, 2026</td>
+<td><span class="badge badge-success">Active</span></td>
+<td>
+<button class="btn-danger" onclick="deleteSubscriber(this)">Remove</button>
+</td>
+</tr>
+<tr>
+<td>john@vienna-ice.at</td>
+<td>February 28, 2026</td>
+<td><span class="badge badge-success">Active</span></td>
+<td>
+<button class="btn-danger" onclick="deleteSubscriber(this)">Remove</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="notification" style="margin-top: 20px;">
+<div class="notification-title">📊 Statistics:</div>
+<div class="notification-text">Total Active Subscribers: <strong>456</strong> | Last 30 days: <strong>+89</strong> | Growth Rate: <strong>24%</strong></div>
+</div>
+</section>
+
+<!-- FORM SUBMISSIONS SECTION -->
+<section class="section" id="submissions" data-admin-only>
+<h2 style="font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 30px; color: #333;">Contact Form Submissions</h2>
+
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Subject</th>
+<th>Date</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="submissionsList">
+<tr>
+<td>John Smith</td>
+<td>john@example.com</td>
+<td>Showcase Inquiry</td>
+<td>March 9, 2026</td>
+<td><span class="badge badge-pending">Pending</span></td>
+<td>
+<button class="btn-edit" onclick="viewSubmission(this)">View</button>
+<button class="btn-danger" onclick="deleteSubmission(this)">Delete</button>
+</td>
+</tr>
+<tr>
+<td>Maria Garcia</td>
+<td>maria@restaurante.es</td>
+<td>Installation Schedule</td>
+<td>March 8, 2026</td>
+<td><span class="badge badge-success">Replied</span></td>
+<td>
+<button class="btn-edit" onclick="viewSubmission(this)">View</button>
+<button class="btn-danger" onclick="deleteSubmission(this)">Delete</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- SETTINGS SECTION -->
+<section class="section" id="settings">
+<h2 style="font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 30px; color: #333;">Account Settings</h2>
+
+<div class="form-card">
+<h3>Profile Information</h3>
+<form>
+<div class="form-group">
+<label>Username</label>
+<input type="text" value="admin" disabled>
+</div>
+<div class="form-group">
+<label>Email</label>
+<input type="email" id="adminEmail" placeholder="admin@seveleurope.com">
+</div>
+<div class="form-group">
+<label>Current Password</label>
+<input type="password" placeholder="Enter current password">
+</div>
+<div class="form-group">
+<label>New Password</label>
+<input type="password" placeholder="Leave empty to keep current password">
+</div>
+<div class="form-buttons">
+<button type="button" class="btn-primary" onclick="updateProfile()">Update Profile</button>
+</form>
+</div>
+</div>
+
+<div class="form-card">
+<h3>Security</h3>
+<div class="notification" style="background: #fff3cd; border-left-color: #ffc107;">
+<div class="notification-title">⚠️ Last Login:</div>
+<div class="notification-text" id="lastLogin">March 10, 2026 at 10:30 AM</div>
+</div>
+<button class="btn-danger" style="margin-top: 15px;" onclick="logout(event)">Logout from All Devices</button>
+</div>
+
+<div class="form-card">
+<h3>Backup & Export</h3>
+<button class="btn-primary" onclick="exportData()">📥 Export Data</button>
+<button class="btn-secondary" style="margin-left: 10px;">📤 Import Data</button>
+</div>
+</section>
+
+</div>
+
+</main>
+
+</div>
+
+<script>
+document.querySelectorAll('img[src="images/sevel.png"]').forEach(function(logo) {
+logo.style.cursor = 'pointer';
+logo.addEventListener('click', function() {
+window.location.href = 'index.html';
+});
+});
+
+// Check authentication
+window.addEventListener('load', function() {
+const token = localStorage.getItem('adminToken');
+const user = localStorage.getItem('adminUser');
+const role = localStorage.getItem('adminRole');
+const publicUser = localStorage.getItem('publicUser');
+
+if (!token || !user || role !== 'admin') {
+if (publicUser) {
+window.location.href = 'public-profile.html';
+} else {
+window.location.href = 'admin-login.html';
+}
+return;
+}
+
+document.getElementById('userName').textContent = user.charAt(0).toUpperCase() + user.slice(1);
+document.getElementById('userAvatar').textContent = user.charAt(0).toUpperCase();
+document.getElementById('userRole').textContent = 'System Administrator';
+
+// Populate user dashboard
+document.getElementById('accountUsername').textContent = user;
+const loginTime = localStorage.getItem('adminLoginTime');
+if (loginTime) {
+const date = new Date(parseInt(loginTime));
+document.getElementById('lastAccessTime').textContent = date.toLocaleString();
+}
+
+// Load saved content
+loadSavedContent();
+});
+
+// Navigation
+function showSection(e, sectionId) {
+e.preventDefault();
+
+// Hide all sections
+document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+
+// Remove active class from nav links
+document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+
+// Show selected section
+document.getElementById(sectionId).classList.add('active');
+
+// Add active class to clicked nav link
+event.target.classList.add('active');
+
+// Smooth scroll to top
+window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Save content
+function saveContent() {
+const content = {
+heroTitle: document.getElementById('heroTitle').value,
+heroDesc: document.getElementById('heroDesc').value,
+heroBtnText: document.getElementById('heroBtnText').value
+};
+
+localStorage.setItem('sevelContent', JSON.stringify(content));
+alert('✓ Content saved successfully!');
+}
+
+// Load saved content
+function loadSavedContent() {
+const saved = localStorage.getItem('sevelContent');
+if (saved) {
+const content = JSON.parse(saved);
+document.getElementById('heroTitle').value = content.heroTitle || '';
+document.getElementById('heroDesc').value = content.heroDesc || '';
+document.getElementById('heroBtnText').value = content.heroBtnText || '';
+}
+}
+
+// Add testimonial
+function addTestimonial() {
+const name = document.getElementById('testimonialName').value;
+const role = document.getElementById('testimonialRole').value;
+const rating = document.getElementById('testimonialRating').value;
+const text = document.getElementById('testimonialText').value;
+
+if (!name || !role || !text) {
+alert('Please fill in all fields');
+return;
+}
+
+const stars = '★'.repeat(rating);
+const tbody = document.querySelector('#testimonialsList tbody');
+const row = tbody.insertRow();
+
+row.innerHTML = `
+<td>${name}</td>
+<td>${role}</td>
+<td><span class="badge badge-success">${stars}</span></td>
+<td>${text.substring(0, 50)}...</td>
+<td>
+<button class="btn-edit" onclick="editTestimonial(this)">Edit</button>
+<button class="btn-danger" onclick="deleteTestimonial(this)">Delete</button>
+</td>
+`;
+
+document.getElementById('testimonialForm').reset();
+document.getElementById('totalTestimonials').textContent = parseInt(document.getElementById('totalTestimonials').textContent) + 1;
+
+alert('✓ Testimonial added successfully!');
+}
+
+// Delete testimonial
+function deleteTestimonial(btn) {
+if (confirm('Are you sure you want to delete this testimonial?')) {
+btn.closest('tr').remove();
+document.getElementById('totalTestimonials').textContent = Math.max(0, parseInt(document.getElementById('totalTestimonials').textContent) - 1);
+alert('✓ Testimonial deleted');
+}
+}
+
+// Edit testimonial
+function editTestimonial(btn) {
+alert('Edit functionality would be implemented with a modal form');
+}
+
+// Delete subscriber
+function deleteSubscriber(btn) {
+if (confirm('Remove this subscriber?')) {
+btn.closest('tr').remove();
+document.getElementById('totalNewsletter').textContent = Math.max(0, parseInt(document.getElementById('totalNewsletter').textContent) - 1);
+alert('✓ Subscriber removed');
+}
+}
+
+// Delete submission
+function deleteSubmission(btn) {
+if (confirm('Delete this submission?')) {
+btn.closest('tr').remove();
+document.getElementById('totalSubmissions').textContent = Math.max(0, parseInt(document.getElementById('totalSubmissions').textContent) - 1);
+alert('✓ Submission deleted');
+}
+}
+
+// View submission
+function viewSubmission(btn) {
+alert('View functionality would show full submission details in a modal');
+}
+
+// Reset form
+function resetForm() {
+loadSavedContent();
+alert('Form reset to last saved version');
+}
+
+// Update profile
+function updateProfile() {
+alert('✓ Profile updated successfully!');
+}
+
+// Export data
+function exportData() {
+const data = {
+content: localStorage.getItem('sevelContent'),
+exportDate: new Date().toISOString()
+};
+
+const dataStr = JSON.stringify(data, null, 2);
+const dataBlob = new Blob([dataStr], { type: 'application/json' });
+const url = URL.createObjectURL(dataBlob);
+const link = document.createElement('a');
+link.href = url;
+link.download = 'sevel-backup-' + new Date().getTime() + '.json';
+link.click();
+
+alert('✓ Data exported successfully!');
+}
+
+// Logout
+function logout(e) {
+e.preventDefault();
+
+if (confirm('Are you sure you want to logout?')) {
+localStorage.removeItem('adminToken');
+localStorage.removeItem('adminUser');
+localStorage.removeItem('adminLoginTime');
+localStorage.removeItem('adminRole');
+window.location.href = 'index.html';
+}
+}
+
+// Session timeout (24 hours)
+setInterval(function() {
+const loginTime = localStorage.getItem('adminLoginTime');
+if (loginTime && Date.now() - parseInt(loginTime) > 86400000) {
+alert('Your session has expired. Please login again.');
+logout({ preventDefault: () => {} });
+}
+}, 60000);
+</script>
+
+<script>
+const DASHBOARD_STORAGE = {
+  metrics: "sevelMetrics",
+  content: "sevelContent",
+  testimonials: "sevelTestimonials",
+  newsletter: "sevelNewsletterSubscribers",
+  submissions: "sevelContactSubmissions",
+};
+
+function dashboardGetArray(key) {
+  try {
+    const raw = localStorage.getItem(key);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (_) {
+    return [];
+  }
+}
+
+function dashboardSetArray(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
+}
+
+function dashboardGetMetrics() {
+  try {
+    const raw = localStorage.getItem(DASHBOARD_STORAGE.metrics);
+    const parsed = raw ? JSON.parse(raw) : {};
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch (_) {
+    return {};
+  }
+}
+
+function dashboardSetMetrics(metrics) {
+  localStorage.setItem(DASHBOARD_STORAGE.metrics, JSON.stringify(metrics));
+}
+
+function dashboardEscape(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function dashboardFormatDate(value) {
+  const d = new Date(value || Date.now());
+  return Number.isNaN(d.getTime()) ? "-" : d.toLocaleString();
+}
+
+function dashboardTimeAgo(value) {
+  const ts = new Date(value || Date.now()).getTime();
+  if (Number.isNaN(ts)) return "just now";
+  const sec = Math.max(0, Math.floor((Date.now() - ts) / 1000));
+  if (sec < 60) return "just now";
+  if (sec < 3600) return Math.floor(sec / 60) + " min ago";
+  if (sec < 86400) return Math.floor(sec / 3600) + " hours ago";
+  return Math.floor(sec / 86400) + " days ago";
+}
+
+function dashboardTrackVisit() {
+  const key = "sevelDashboardVisitTracked";
+  if (sessionStorage.getItem(key)) return;
+  const metrics = dashboardGetMetrics();
+  metrics.visits = Number(metrics.visits || 0) + 1;
+  dashboardSetMetrics(metrics);
+  sessionStorage.setItem(key, "1");
+}
+
+function dashboardGetTestimonials() {
+  return dashboardGetArray(DASHBOARD_STORAGE.testimonials);
+}
+
+function dashboardSetTestimonials(items) {
+  dashboardSetArray(DASHBOARD_STORAGE.testimonials, items);
+}
+
+function dashboardGetSubscribers() {
+  return dashboardGetArray(DASHBOARD_STORAGE.newsletter);
+}
+
+function dashboardSetSubscribers(items) {
+  dashboardSetArray(DASHBOARD_STORAGE.newsletter, items);
+}
+
+function dashboardGetSubmissions() {
+  return dashboardGetArray(DASHBOARD_STORAGE.submissions);
+}
+
+function dashboardSetSubmissions(items) {
+  dashboardSetArray(DASHBOARD_STORAGE.submissions, items);
+}
+
+function refreshStats() {
+  const metrics = dashboardGetMetrics();
+  document.getElementById("totalVisitors").textContent = Number(metrics.visits || 0).toLocaleString();
+  document.getElementById("totalSubmissions").textContent = String(dashboardGetSubmissions().length);
+  document.getElementById("totalNewsletter").textContent = String(dashboardGetSubscribers().length);
+  document.getElementById("totalTestimonials").textContent = String(dashboardGetTestimonials().length);
+}
+
+function renderTestimonialsTable() {
+  const tbody = document.querySelector("#testimonialsList tbody");
+  if (!tbody) return;
+  const list = [...dashboardGetTestimonials()].sort(
+    (a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0)
+  );
+  if (!list.length) {
+    tbody.innerHTML = '<tr><td colspan="5">No testimonials yet.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = list
+    .map((item) => {
+      const stars = "★".repeat(Math.max(1, Math.min(5, Number(item.rating || 5))));
+      const text = item.text || "";
+      return `<tr data-id="${dashboardEscape(item.id)}">
+        <td>${dashboardEscape(item.name)}</td>
+        <td>${dashboardEscape(item.role)}</td>
+        <td><span class="badge badge-success">${stars}</span></td>
+        <td>${dashboardEscape(text.slice(0, 70))}${text.length > 70 ? "..." : ""}</td>
+        <td><button class="btn-edit" onclick="editTestimonial(this)">Edit</button><button class="btn-danger" onclick="deleteTestimonial(this)">Delete</button></td>
+      </tr>`;
+    })
+    .join("");
+}
+
+function renderNewsletterTable() {
+  const tbody = document.getElementById("newsletterList");
+  if (!tbody) return;
+  const list = [...dashboardGetSubscribers()].sort(
+    (a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0)
+  );
+  if (!list.length) {
+    tbody.innerHTML = '<tr><td colspan="4">No subscribers yet.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = list
+    .map(
+      (item) => `<tr data-id="${dashboardEscape(item.id)}">
+        <td>${dashboardEscape(item.email)}</td>
+        <td>${dashboardFormatDate(item.createdAt)}</td>
+        <td><span class="badge badge-success">Active</span></td>
+        <td><button class="btn-danger" onclick="deleteSubscriber(this)">Remove</button></td>
+      </tr>`
+    )
+    .join("");
+}
+
+function renderSubmissionsTable() {
+  const tbody = document.getElementById("submissionsList");
+  if (!tbody) return;
+  const list = [...dashboardGetSubmissions()].sort(
+    (a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0)
+  );
+  if (!list.length) {
+    tbody.innerHTML = '<tr><td colspan="6">No submissions yet.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = list
+    .map((item) => {
+      const status = (item.status || "Pending").toLowerCase() === "replied" ? "Replied" : "Pending";
+      const statusClass = status === "Replied" ? "badge-success" : "badge-pending";
+      return `<tr data-id="${dashboardEscape(item.id)}">
+        <td>${dashboardEscape(item.name)}</td>
+        <td>${dashboardEscape(item.email)}</td>
+        <td>${dashboardEscape(item.subject || "-")}</td>
+        <td>${dashboardFormatDate(item.createdAt)}</td>
+        <td><span class="badge ${statusClass}">${status}</span></td>
+        <td><button class="btn-edit" onclick="viewSubmission(this)">View</button><button class="btn-danger" onclick="deleteSubmission(this)">Delete</button></td>
+      </tr>`;
+    })
+    .join("");
+}
+
+function renderRecentActivity() {
+  const box = document.getElementById("recentActivity");
+  if (!box) return;
+  const items = [];
+
+  dashboardGetSubmissions().forEach((s) =>
+    items.push({
+      title: "New Contact Submission",
+      text: `${s.name || "User"} sent "${s.subject || "No subject"}".`,
+      at: s.createdAt,
+    })
+  );
+  dashboardGetSubscribers().forEach((n) =>
+    items.push({
+      title: "Newsletter Signup",
+      text: `${n.email || "Unknown email"} joined newsletter.`,
+      at: n.createdAt,
+    })
+  );
+  dashboardGetTestimonials().forEach((t) =>
+    items.push({
+      title: "New Testimonial",
+      text: `${t.name || "Customer"} left ${t.rating || 5} star review.`,
+      at: t.createdAt,
+    })
+  );
+
+  items.sort((a, b) => new Date(b.at || 0) - new Date(a.at || 0));
+  if (!items.length) {
+    box.innerHTML =
+      '<div class="notification"><div class="notification-title">No activity yet</div><div class="notification-text">Real activity will appear here after visitors use your site.</div></div>';
+    return;
+  }
+
+  box.innerHTML = items
+    .slice(0, 8)
+    .map(
+      (item) => `<div class="notification">
+        <div class="notification-title">${dashboardEscape(item.title)}</div>
+        <div class="notification-text">${dashboardEscape(item.text)}</div>
+        <div class="notification-time">${dashboardTimeAgo(item.at)}</div>
+      </div>`
+    )
+    .join("");
+}
+
+function refreshDashboardData() {
+  refreshStats();
+  renderTestimonialsTable();
+  renderNewsletterTable();
+  renderSubmissionsTable();
+  renderRecentActivity();
+}
+
+function addTestimonial() {
+  const name = document.getElementById("testimonialName").value.trim();
+  const role = document.getElementById("testimonialRole").value.trim();
+  const rating = Number(document.getElementById("testimonialRating").value || 5);
+  const text = document.getElementById("testimonialText").value.trim();
+  if (!name || !role || !text) {
+    alert("Please fill in all fields.");
+    return;
+  }
+  const testimonials = dashboardGetTestimonials();
+  testimonials.push({
+    id: "t_" + Date.now() + "_" + Math.random().toString(36).slice(2, 7),
+    name,
+    role,
+    rating,
+    text,
+    createdAt: new Date().toISOString(),
+  });
+  dashboardSetTestimonials(testimonials);
+  document.getElementById("testimonialForm").reset();
+  refreshDashboardData();
+}
+
+function deleteTestimonial(btn) {
+  if (!confirm("Are you sure you want to delete this testimonial?")) return;
+  const id = btn.closest("tr")?.getAttribute("data-id");
+  if (!id) return;
+  dashboardSetTestimonials(dashboardGetTestimonials().filter((t) => t.id !== id));
+  refreshDashboardData();
+}
+
+function editTestimonial(btn) {
+  const id = btn.closest("tr")?.getAttribute("data-id");
+  if (!id) return;
+  const testimonial = dashboardGetTestimonials().find((t) => t.id === id);
+  if (!testimonial) return;
+  document.getElementById("testimonialName").value = testimonial.name || "";
+  document.getElementById("testimonialRole").value = testimonial.role || "";
+  document.getElementById("testimonialRating").value = String(testimonial.rating || 5);
+  document.getElementById("testimonialText").value = testimonial.text || "";
+  dashboardSetTestimonials(dashboardGetTestimonials().filter((t) => t.id !== id));
+  refreshDashboardData();
+}
+
+function deleteSubscriber(btn) {
+  if (!confirm("Remove this subscriber?")) return;
+  const id = btn.closest("tr")?.getAttribute("data-id");
+  if (!id) return;
+  dashboardSetSubscribers(dashboardGetSubscribers().filter((s) => s.id !== id));
+  refreshDashboardData();
+}
+
+function deleteSubmission(btn) {
+  if (!confirm("Delete this submission?")) return;
+  const id = btn.closest("tr")?.getAttribute("data-id");
+  if (!id) return;
+  dashboardSetSubmissions(dashboardGetSubmissions().filter((s) => s.id !== id));
+  refreshDashboardData();
+}
+
+function viewSubmission(btn) {
+  const id = btn.closest("tr")?.getAttribute("data-id");
+  if (!id) return;
+  const item = dashboardGetSubmissions().find((s) => s.id === id);
+  if (!item) return;
+  alert(
+    [
+      `Name: ${item.name || "-"}`,
+      `Email: ${item.email || "-"}`,
+      `Phone: ${item.phone || "-"}`,
+      `Subject: ${item.subject || "-"}`,
+      `Message: ${item.message || "-"}`,
+      `Date: ${dashboardFormatDate(item.createdAt)}`,
+    ].join("\n")
+  );
+}
+
+function saveContent() {
+  const content = {
+    heroTitle: document.getElementById("heroTitle").value,
+    heroDesc: document.getElementById("heroDesc").value,
+    heroBtnText: document.getElementById("heroBtnText").value,
+  };
+  localStorage.setItem(DASHBOARD_STORAGE.content, JSON.stringify(content));
+  alert("Content saved successfully.");
+}
+
+function loadSavedContent() {
+  const saved = localStorage.getItem(DASHBOARD_STORAGE.content);
+  if (!saved) return;
+  const content = JSON.parse(saved);
+  document.getElementById("heroTitle").value = content.heroTitle || "";
+  document.getElementById("heroDesc").value = content.heroDesc || "";
+  document.getElementById("heroBtnText").value = content.heroBtnText || "";
+}
+
+function resetForm() {
+  loadSavedContent();
+  alert("Form reset to last saved version.");
+}
+
+function updateProfile() {
+  alert("Profile updated successfully.");
+}
+
+function exportData() {
+  const data = {
+    content: localStorage.getItem(DASHBOARD_STORAGE.content),
+    metrics: localStorage.getItem(DASHBOARD_STORAGE.metrics),
+    testimonials: localStorage.getItem(DASHBOARD_STORAGE.testimonials),
+    newsletter: localStorage.getItem(DASHBOARD_STORAGE.newsletter),
+    submissions: localStorage.getItem(DASHBOARD_STORAGE.submissions),
+    exportDate: new Date().toISOString(),
+  };
+  const dataStr = JSON.stringify(data, null, 2);
+  const dataBlob = new Blob([dataStr], { type: "application/json" });
+  const url = URL.createObjectURL(dataBlob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "sevel-backup-" + Date.now() + ".json";
+  link.click();
+  alert("Data exported successfully.");
+}
+
+function showSection(e, sectionId) {
+  e.preventDefault();
+  document.querySelectorAll(".section").forEach((s) => s.classList.remove("active"));
+  document.querySelectorAll(".nav-link").forEach((link) => link.classList.remove("active"));
+  document.getElementById(sectionId)?.classList.add("active");
+  e.target.classList.add("active");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+window.addEventListener("load", function () {
+  dashboardTrackVisit();
+  refreshDashboardData();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Premium Sevel Europe ice cream and cake showcases for modern gelato and pastry businesses.">
+<meta name="theme-color" content="#d8aa2a">
+<title>Sevel Europe</title>
+<meta property="og:title" content="Sevel Europe">
+<meta property="og:description" content="Premium Sevel Europe ice cream and cake showcases for modern gelato and pastry businesses.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/sevel.png">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.home-hero {
+  padding: 60px 0 40px;
+}
+
+.home-hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.home-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+
+.home-subtitle {
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 24px;
+  max-width: 620px;
+}
+
+.home-hero-image {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.home-hero-image img {
+  width: 100%;
+  height: 100%;
+  max-height: 460px;
+  object-fit: cover;
+  display: block;
+}
+
+.section-block {
+  padding: 20px 0 60px;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.section-head h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 38px;
+}
+
+.section-head p {
+  color: #777;
+  max-width: 620px;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.category-card {
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
+}
+
+.category-card img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  display: block;
+}
+
+.category-card-body {
+  padding: 18px;
+}
+
+.category-card-body h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.category-card-body p {
+  color: #666;
+  margin-bottom: 14px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.product-card-home {
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  transition: all 0.25s ease;
+}
+
+.product-card-home:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+}
+
+.product-card-home img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.product-card-home .body {
+  padding: 14px;
+}
+
+.product-card-home h4 {
+  font-size: 20px;
+  margin-bottom: 6px;
+  font-family: 'Playfair Display', serif;
+}
+
+.product-card-home p {
+  color: #666;
+  font-size: 14px;
+  min-height: 38px;
+  margin-bottom: 10px;
+}
+
+.cta-banner {
+  background: linear-gradient(135deg, #1f1f1f 0%, #3a3a3a 100%);
+  color: #fff;
+  border-radius: 14px;
+  padding: 34px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.cta-banner h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  margin-bottom: 6px;
+}
+
+.trust-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.trust-card {
+  background: #fff;
+  border: 1px solid #ece3cf;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+}
+
+.trust-card h3 {
+  font-size: 17px;
+  margin-bottom: 6px;
+}
+
+.trust-card p {
+  color: #666;
+  font-size: 14px;
+}
+
+@media (max-width: 1080px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .home-hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-title {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 720px) {
+  .category-grid,
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .trust-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .section-head {
+    display: block;
+  }
+
+  .section-head h2 {
+    margin-bottom: 8px;
+    font-size: 30px;
+  }
+
+  .cta-banner {
+    display: block;
+  }
+
+  .cta-banner h3 {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container nav">
+<img src="images/sevel.png" class="logo" alt="Sevel Europe">
+
+<nav>
+<a href="index.html" data-i18n="nav-home">Home</a>
+<a href="products.html" data-i18n="nav-showcases">Showcases</a>
+<a href="gallery.html" data-i18n="nav-gallery">Gallery</a>
+<a href="contact.html" data-i18n="nav-contact">Contact</a>
+<a href="https://www.facebook.com/profile.php?id=100063871878926" title="Facebook" target="_blank" rel="noopener noreferrer" class="nav-social-link" aria-label="Facebook">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.6 1.6-1.6h1.7V4.8c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1V11H8v3h2.4v8h3.1z"/></svg>
+</a>
+<a href="https://www.instagram.com/seveleurope/" title="Instagram" target="_blank" rel="noopener noreferrer" class="nav-social-link" aria-label="Instagram">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm0 1.8A4 4 0 0 0 3.8 7.8v8.4a4 4 0 0 0 4 4h8.4a4 4 0 0 0 4-4V7.8a4 4 0 0 0-4-4H7.8zm9.1 1.4a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4z"/></svg>
+</a>
+<button id="userMenuBtn" class="user-menu-btn" onclick="openLoginModal()" style="background:none;border:none;cursor:pointer;padding:0;color:#333;">Login</button>
+</nav>
+
+<div class="hamburger" id="hamburger">
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+<div class="language-selector">
+<button id="lang-btn" class="lang-btn">EN ▼</button>
+<div id="lang-menu" class="lang-menu">
+<a href="#" data-lang="en">English</a>
+<a href="#" data-lang="sk">Slovenčina</a>
+<a href="#" data-lang="tr">Türkçe</a>
+</div>
+</div>
+</div>
+</header>
+
+<main>
+<section class="hero">
+<video class="hero-video" autoplay muted loop playsinline>
+<source src="videos/sevelvid.mp4" type="video/mp4">
+</video>
+<div class="hero-content">
+<h1 data-i18n="hero-title">Premium Ice Cream Showcases for Europe</h1>
+<p data-i18n="hero-desc">
+Discover the perfect display solution for your gelato, ice cream, or frozen dessert shop.
+Sevel Europe brings elegance, functionality, and cutting-edge cooling technology to your business.
+</p>
+<a href="products.html" class="btn" data-i18n="hero-btn">Explore Our Showcases</a>
+</div>
+</section>
+
+<section class="section-block">
+<div class="container">
+<div class="trust-strip">
+<article class="trust-card">
+<h3>ISO-Oriented Production</h3>
+<p>Built with strict manufacturing controls and commercial-grade quality standards.</p>
+</article>
+<article class="trust-card">
+<h3>Europe-Wide Support</h3>
+<p>Pre-sales consultation, model matching, and long-term technical assistance.</p>
+</article>
+<article class="trust-card">
+<h3>Fast Logistics</h3>
+<p>Reliable routing across EU markets with clear planning for delivery windows.</p>
+</article>
+<article class="trust-card">
+<h3>Energy Efficiency</h3>
+<p>Modern cooling architecture designed to reduce operating costs over time.</p>
+</article>
+</div>
+</div>
+</section>
+
+<section class="section-block">
+<div class="container">
+<div class="section-head">
+<h2>Shop by Category</h2>
+<p>Choose the product family that matches your business and then open each model for full technical details.</p>
+</div>
+<div class="category-grid">
+<article class="category-card">
+<img src="images/troynew1.webp" alt="Ice cream showcases">
+<div class="category-card-body">
+<h3>Ice Cream Showcases</h3>
+<p>Ventilated cabinets for gelato and ice cream service with multiple body formats.</p>
+<a href="products.html?category=ice-cream" class="btn">Open Ice Cream Range</a>
+</div>
+</article>
+<article class="category-card">
+<img src="images/baroquevisionnew1.webp" alt="Cake showcases">
+<div class="category-card-body">
+<h3>Cake Showcases</h3>
+<p>Pastry-focused display lines with premium visibility and stable positive cooling.</p>
+<a href="products.html?category=cake" class="btn">Open Cake Range</a>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<section class="section-block">
+<div class="container">
+<div class="section-head">
+<h2>Featured Ice Cream Models</h2>
+<p>Quick access to popular ice cream showcase lines currently in your catalog.</p>
+</div>
+<div class="product-grid">
+<article class="product-card-home">
+<img src="images/aspen1.webp" alt="Aspen New">
+<div class="body">
+<h4>Aspen New</h4>
+<p>Professional ventilated ice cream showcase.</p>
+<a href="product.html?model=aspen-new" class="btn">View</a>
+</div>
+</article>
+<article class="product-card-home">
+<img src="images/troysport1.webp" alt="Troy Sport">
+<div class="body">
+<h4>Troy Sport</h4>
+<p>Sport profile with strong commercial cooling.</p>
+<a href="product.html?model=troy-sport" class="btn">View</a>
+</div>
+</article>
+<article class="product-card-home">
+<img src="images/troynew1.webp" alt="Troy New">
+<div class="body">
+<h4>Troy New</h4>
+<p>Updated Troy family with modern cabinet styling.</p>
+<a href="product.html?model=troy-new" class="btn">View</a>
+</div>
+</article>
+<article class="product-card-home">
+<img src="images/prism1.webp" alt="Prisma">
+<div class="body">
+<h4>Prisma</h4>
+<p>Premium angular line for modern gelato spaces.</p>
+<a href="product.html?model=prisma" class="btn">View</a>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<section class="section-block">
+<div class="container">
+<div class="section-head">
+<h2>Featured Cake Models</h2>
+<p>Specialized showcases for pastry and cake presentation with positive cooling range.</p>
+</div>
+<div class="product-grid">
+<article class="product-card-home">
+<img src="images/baroquevisionnew1.webp" alt="Baroque Vision New">
+<div class="body">
+<h4>Baroque Vision New</h4>
+<p>Premium front visibility for pastry presentation.</p>
+<a href="product.html?model=baroque-vision-new" class="btn">View</a>
+</div>
+</article>
+<article class="product-card-home">
+<img src="images/teosflat1.webp" alt="Teos Flat">
+<div class="body">
+<h4>Teos Flat</h4>
+<p>Flat-front cake cabinet with clean design language.</p>
+<a href="product.html?model=teos-flat" class="btn">View</a>
+</div>
+</article>
+<article class="product-card-home">
+<img src="images/teoshigh1.webp" alt="Teos High">
+<div class="body">
+<h4>Teos High</h4>
+<p>High-profile variant for stronger vertical impact.</p>
+<a href="product.html?model=teos-high" class="btn">View</a>
+</div>
+</article>
+<article class="product-card-home">
+<img src="images/loft1.webp" alt="Loft">
+<div class="body">
+<h4>Loft</h4>
+<p>Modern cake showcase line with premium styling.</p>
+<a href="product.html?model=loft" class="btn">View</a>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<section class="section-block">
+<div class="container">
+<div class="cta-banner">
+<div>
+<h3>Need Help Choosing the Right Showcase?</h3>
+<p>Tell us your concept and we will recommend the ideal model and configuration.</p>
+</div>
+<a href="contact.html" class="btn">Contact Sales Team</a>
+</div>
+</div>
+</section>
+</main>
+
+<footer class="footer">
+<div class="container">
+<div class="footer-container">
+<div class="footer-logo">
+<img src="images/sevel.png" alt="Sevel Europe">
+<p>Follow Us On Social Media</p>
+<div class="socials">
+<a href="https://www.facebook.com/seveleurope" target="_blank" rel="noopener noreferrer">Facebook</a>
+<a href="https://www.instagram.com/seveleurope" target="_blank" rel="noopener noreferrer">Instagram</a>
+</div>
+</div>
+
+<div class="footer-column">
+<h3>Navigations</h3>
+<a href="index.html" data-i18n="nav-home">Home</a>
+<a href="products.html" data-i18n="nav-showcases">Showcases</a>
+<a href="gallery.html" data-i18n="nav-gallery">Gallery</a>
+<a href="contact.html" data-i18n="nav-contact">Contact</a>
+</div>
+
+<div class="footer-column">
+<h3 data-i18n="footer-info-title">Information</h3>
+<a href="about.html" data-i18n="footer-about">About Us</a>
+<a href="products.html" data-i18n="footer-products">Our Products</a>
+<a href="why-sevel.html" data-i18n="footer-why">Why Sevel?</a>
+</div>
+
+<div class="footer-column">
+<h3 data-i18n="footer-contact-title">Contact</h3>
+<p>+421 911 098 008</p>
+<p data-i18n="footer-address">Bratislavská 5236/49</p>
+<p data-i18n="footer-city">917 02 Trnava</p>
+<p data-i18n="footer-country">Slovakia</p>
+</div>
+
+<div class="footer-column">
+<h3 data-i18n="footer-newsletter">Stay Informed</h3>
+<p data-i18n="footer-newsletter-desc">Get updates about new showcases.</p>
+<div class="newsletter">
+<input type="email" placeholder="Enter your email">
+<button>-&gt;</button>
+</div>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<p data-i18n="footer-copyright">© 2026 Sevel Europe s.r.o. All Rights Reserved</p>
+</div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

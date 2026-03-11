@@ -1,0 +1,354 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Manage your Sevel Europe customer profile and account information.">
+<meta name="theme-color" content="#d8aa2a">
+<title>My Profile - Sevel Europe</title>
+<meta property="og:title" content="My Profile - Sevel Europe">
+<meta property="og:description" content="Manage your Sevel Europe customer profile and account information.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/sevel.png">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.profile-wrap {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.profile-card {
+  background: white;
+  width: 100%;
+  max-width: 640px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 36px;
+}
+
+.profile-card h1 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 20px;
+}
+
+.profile-row {
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+  color: #444;
+}
+
+.profile-row strong {
+  display: inline-block;
+  min-width: 110px;
+  color: #222;
+}
+
+.profile-actions {
+  margin-top: 24px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.profile-form {
+  margin-top: 20px;
+  display: grid;
+  gap: 14px;
+}
+
+.profile-field label {
+  display: block;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 6px;
+}
+
+.profile-field input {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 15px;
+}
+
+.profile-field small {
+  display: block;
+  margin-top: 5px;
+  color: #666;
+  font-size: 12px;
+}
+
+.subscribe-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  color: #333;
+}
+
+.profile-note {
+  color: #666;
+  font-size: 13px;
+}
+
+.profile-status {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.profile-status.success {
+  color: #2f8a43;
+}
+
+.profile-status.error {
+  color: #c63737;
+}
+
+.secondary-btn {
+  background: #f2f2f2;
+  color: #222;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.secondary-btn:hover {
+  background: #e6e6e6;
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container nav">
+
+<img src="images/sevel.png" class="logo" alt="Sevel Europe">
+
+<nav>
+<a href="index.html" data-i18n="nav-home">Home</a>
+<a href="products.html" data-i18n="nav-showcases">Showcases</a>
+<a href="gallery.html" data-i18n="nav-gallery">Gallery</a>
+<a href="contact.html" data-i18n="nav-contact">Contact</a>
+<button id="userMenuBtn" class="user-menu-btn" onclick="openLoginModal()" style="background:none;border:none;cursor:pointer;padding:0;font-size:16px;color:#333;">
+Login
+</button>
+</nav>
+
+<div class="hamburger" id="hamburger">
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+<div class="language-selector">
+<button id="lang-btn" class="lang-btn">EN в–ј</button>
+<div id="lang-menu" class="lang-menu">
+<a href="#" data-lang="en">English</a>
+<a href="#" data-lang="sk">SlovenДЌina</a>
+<a href="#" data-lang="tr">TГјrkГ§e</a>
+</div>
+</div>
+
+</div>
+</header>
+
+<div class="nav-menu-overlay" id="nav-menu-overlay"></div>
+
+<main class="profile-wrap">
+  <section class="profile-card">
+    <h1>My Profile</h1>
+    <div class="profile-row"><strong>Full Name:</strong> <span id="profileName">-</span></div>
+    <div class="profile-row"><strong>Email:</strong> <span id="profileEmail">-</span></div>
+    <div class="profile-row"><strong>Username:</strong> <span id="profileUsername">-</span></div>
+    <div class="profile-row"><strong>Role:</strong> <span>Customer</span></div>
+    <form id="profileSettingsForm" class="profile-form">
+      <div class="profile-field">
+        <label for="newUsername">Change Username</label>
+        <input id="newUsername" type="text" placeholder="Enter new username" autocomplete="username">
+        <small>Must be unique. Letters and numbers are recommended.</small>
+      </div>
+      <div class="profile-field">
+        <label for="newPassword">Change Password</label>
+        <input id="newPassword" type="password" placeholder="Enter new password" autocomplete="new-password">
+        <small>Leave blank if you do not want to change your password.</small>
+      </div>
+      <label class="subscribe-toggle" for="subscribeNews">
+        <input id="subscribeNews" type="checkbox">
+        Subscribe to Sevel newsletter updates
+      </label>
+      <p class="profile-note">Your subscription uses the same email shown above.</p>
+      <button type="submit" class="btn">Save Changes</button>
+      <div id="profileStatus" class="profile-status" aria-live="polite"></div>
+    </form>
+    <div class="profile-actions">
+      <button class="btn" onclick="logout()">Logout</button>
+      <button class="secondary-btn" onclick="window.location.href='index.html'">Back to Home</button>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+<div class="container">
+<div class="footer-container">
+<div class="footer-logo">
+<img src="images/sevel.png" alt="Sevel Europe">
+<p>Follow Us On Social Media</p>
+<div class="socials">
+<a href="https://www.facebook.com/seveleurope" target="_blank" rel="noopener noreferrer">Facebook</a>
+<a href="https://www.instagram.com/seveleurope" target="_blank" rel="noopener noreferrer">Instagram</a>
+</div>
+</div>
+<div class="footer-column">
+<h3>Navigations</h3>
+<a href="index.html" data-i18n="nav-home">Home</a>
+<a href="products.html" data-i18n="nav-showcases">Showcases</a>
+<a href="gallery.html" data-i18n="nav-gallery">Gallery</a>
+<a href="contact.html" data-i18n="nav-contact">Contact</a>
+</div>
+<div class="footer-column">
+<h3 data-i18n="footer-info-title">Information</h3>
+<a href="about.html" data-i18n="footer-about">About Us</a>
+<a href="products.html" data-i18n="footer-products">Our Products</a>
+<a href="why-sevel.html" data-i18n="footer-why">Why Sevel?</a>
+</div>
+<div class="footer-column">
+<h3 data-i18n="footer-contact-title">Contact</h3>
+<p>+421 911 098 008</p>
+<p data-i18n="footer-address">BratislavskР“РЋ 5236/49</p>
+<p data-i18n="footer-city">917 02 Trnava</p>
+<p data-i18n="footer-country">Slovakia</p>
+</div>
+<div class="footer-column">
+<h3 data-i18n="footer-newsletter">Stay Informed</h3>
+<p data-i18n="footer-newsletter-desc">Get updates about new showcases.</p>
+<div class="newsletter">
+<input type="email" placeholder="Enter your email">
+<button>-&gt;</button>
+</div>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<p data-i18n="footer-copyright">Р’В© 2026 Sevel Europe s.r.o. All Rights Reserved</p>
+</div>
+</footer>
+
+<script src="js/script.js"></script>
+<script>
+window.addEventListener('load', function () {
+  const userRaw = localStorage.getItem('publicUser');
+  const isAdmin = localStorage.getItem('adminToken') && localStorage.getItem('adminRole') === 'admin';
+
+  if (isAdmin) {
+    window.location.href = 'admin-dashboard.html';
+    return;
+  }
+
+  if (!userRaw) {
+    window.location.href = 'admin-login.html';
+    return;
+  }
+
+  const user = JSON.parse(userRaw);
+  const users = JSON.parse(localStorage.getItem('sevelUsers') || '[]');
+  const newsletter = JSON.parse(localStorage.getItem('sevelNewsletterSubscribers') || '[]');
+
+  document.getElementById('profileName').textContent = user.name || '-';
+  document.getElementById('profileEmail').textContent = user.email || '-';
+  document.getElementById('profileUsername').textContent = user.username || '-';
+
+  const usernameInput = document.getElementById('newUsername');
+  const passwordInput = document.getElementById('newPassword');
+  const subscribeCheckbox = document.getElementById('subscribeNews');
+  const statusBox = document.getElementById('profileStatus');
+  const settingsForm = document.getElementById('profileSettingsForm');
+
+  usernameInput.value = user.username || '';
+  subscribeCheckbox.checked = newsletter.some(function (entry) {
+    return String(entry.email || '').toLowerCase() === String(user.email || '').toLowerCase();
+  });
+
+  settingsForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    statusBox.className = 'profile-status';
+    statusBox.textContent = '';
+
+    const nextUsername = String(usernameInput.value || '').trim().toLowerCase();
+    const nextPassword = String(passwordInput.value || '');
+    const userEmail = String(user.email || '').trim().toLowerCase();
+
+    if (!nextUsername) {
+      statusBox.className = 'profile-status error';
+      statusBox.textContent = 'Username cannot be empty.';
+      return;
+    }
+
+    const currentIndex = users.findIndex(function (entry) {
+      return String(entry.email || '').toLowerCase() === userEmail;
+    });
+
+    if (currentIndex === -1) {
+      statusBox.className = 'profile-status error';
+      statusBox.textContent = 'Unable to update account. Please log in again.';
+      return;
+    }
+
+    const usernameTaken = users.some(function (entry, idx) {
+      return idx !== currentIndex && String(entry.username || '').toLowerCase() === nextUsername;
+    });
+
+    if (usernameTaken) {
+      statusBox.className = 'profile-status error';
+      statusBox.textContent = 'That username is already taken.';
+      return;
+    }
+
+    users[currentIndex].username = nextUsername;
+    if (nextPassword) {
+      users[currentIndex].password = nextPassword;
+    }
+    localStorage.setItem('sevelUsers', JSON.stringify(users));
+
+    const nextPublicUser = {
+      name: users[currentIndex].fullname || user.name || '',
+      email: users[currentIndex].email || user.email || '',
+      username: nextUsername,
+    };
+    localStorage.setItem('publicUser', JSON.stringify(nextPublicUser));
+    document.getElementById('profileUsername').textContent = nextUsername;
+
+    let nextNewsletter = JSON.parse(localStorage.getItem('sevelNewsletterSubscribers') || '[]');
+    const existingNewsletterIndex = nextNewsletter.findIndex(function (entry) {
+      return String(entry.email || '').toLowerCase() === userEmail;
+    });
+
+    if (subscribeCheckbox.checked) {
+      if (existingNewsletterIndex === -1) {
+        nextNewsletter.push({
+          id: 'n_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7),
+          email: userEmail,
+          createdAt: new Date().toISOString(),
+        });
+      }
+    } else if (existingNewsletterIndex !== -1) {
+      nextNewsletter.splice(existingNewsletterIndex, 1);
+    }
+    localStorage.setItem('sevelNewsletterSubscribers', JSON.stringify(nextNewsletter));
+
+    passwordInput.value = '';
+    statusBox.className = 'profile-status success';
+    statusBox.textContent = 'Profile updated successfully.';
+  });
+});
+</script>
+
+</body>
+</html>
+
