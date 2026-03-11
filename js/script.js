@@ -98,7 +98,7 @@ const translations = {
     "footer-country": "Slovakia",
     "footer-newsletter": "Stay Informed",
     "footer-newsletter-desc": "Get updates about new showcases.",
-    "footer-copyright": "© 2026 Sevel Europe s.r.o. All Rights Reserved",
+    "footer-copyright": "© 2026 Sevel Europe s.r.o. All Rights Reserved | Designed by Merd",
   },
   sk: {
     "nav-home": "Domov",
@@ -197,7 +197,7 @@ const translations = {
     "footer-country": "Slovensko",
     "footer-newsletter": "Budte informovani",
     "footer-newsletter-desc": "Ziskajte novinky o novych vitrinych.",
-    "footer-copyright": "© 2026 Sevel Europe s.r.o. Vsetky prava vyhradene",
+    "footer-copyright": "© 2026 Sevel Europe s.r.o. Vsetky prava vyhradene | Designed by Merd",
   },
   tr: {
     "nav-home": "Ana Sayfa",
@@ -296,7 +296,7 @@ const translations = {
     "footer-country": "Slovakya",
     "footer-newsletter": "Haberdar Olun",
     "footer-newsletter-desc": "Yeni vitrinler hakkinda guncellemeler alin.",
-    "footer-copyright": "© 2026 Sevel Europe s.r.o. Tum haklari saklidir",
+    "footer-copyright": "© 2026 Sevel Europe s.r.o. Tum haklari saklidir | Designed by Merd",
   },
 };
 
