@@ -1451,59 +1451,65 @@ button:focus-visible {
 
 @media (max-width: 980px) {
   .hamburger {
-    display: flex;
+    display: none !important;
+  }
+
+  .nav {
+    flex-wrap: wrap;
+    row-gap: 10px;
   }
 
   nav {
-    position: fixed;
-    top: 0;
-    right: -280px;
-    width: 260px;
-    height: 100vh;
-    background: #141516;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
-    padding: 70px 16px 22px;
-    transition: right 0.3s ease;
-    z-index: 1002;
-    overflow-y: auto;
+    position: static;
+    width: 100%;
+    height: auto;
+    background: transparent;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
 
-  nav.open {
-    right: 0;
+  nav::-webkit-scrollbar {
+    display: none;
   }
 
   nav a {
-    width: 100%;
+    width: auto;
+    flex: 0 0 auto;
     margin: 0 !important;
-    color: #f2f2f2;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 10px 2px;
+    color: #242628;
+    border: 1px solid #ddd5c7;
+    border-radius: 999px;
+    background: #fff;
+    padding: 8px 12px;
+    white-space: nowrap;
   }
 
   nav a:hover,
   nav a.is-active {
-    color: #fff;
+    color: #111;
   }
 
   nav a.nav-social-link {
-    width: auto;
-    border: 0;
-    margin-top: 10px !important;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    justify-content: center;
   }
 
   .user-menu-btn {
-    width: 100%;
-    justify-content: flex-start !important;
-    margin-top: 10px;
+    width: auto;
+    flex: 0 0 auto;
+    margin: 0 !important;
   }
 
-  .nav-menu-overlay.active {
-    display: block;
-  }
-
-  .hamburger {
-    z-index: 1003;
+  .nav-menu-overlay {
+    display: none !important;
   }
 }
