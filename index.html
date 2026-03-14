@@ -122,8 +122,6 @@
   font-weight: 700;
   line-height: 1.1;
   text-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  display: inline-block;
-  border-right: 3px solid var(--primary);
 }
 
 @keyframes blink-caret {
@@ -920,22 +918,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
-
-  // Typing Effect for Hero Title
-  const heroTitle = document.querySelector('.hero h1');
-  if (heroTitle) {
-    const text = heroTitle.textContent;
-    heroTitle.textContent = '';
-    let i = 0;
-    const typeWriter = () => {
-      if (i < text.length) {
-        heroTitle.textContent += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, 50);
-      }
-    };
-    setTimeout(typeWriter, 1000);
-  }
 
   // Particle Animation
   const particles = document.querySelectorAll('.particle');
