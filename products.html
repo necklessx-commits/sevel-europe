@@ -4,11 +4,11 @@
 <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Browse Sevel Europe showcase models with technical details for ice cream and cake display.">
+<meta name="description" content="Browse Sevel Europe showcase series with technical details for ice cream and cake display.">
 <meta name="theme-color" content="#d8aa2a">
 <title>Showcases | Sevel Europe</title>
 <meta property="og:title" content="Showcases | Sevel Europe">
-<meta property="og:description" content="Browse Sevel Europe showcase models with technical details for ice cream and cake display.">
+<meta property="og:description" content="Browse Sevel Europe showcase series with technical details for ice cream and cake display.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="images/sevel.png">
 <link rel="stylesheet" href="css/style.css?v=20260311e">
@@ -76,6 +76,48 @@
   display: block;
 }
 
+.back-to-series {
+  display: none;
+  margin-bottom: 24px;
+}
+
+.back-to-series.active {
+  display: inline-block;
+}
+
+.back-to-series-btn {
+  background: #fff;
+  border: 2px solid #ddd;
+  color: #333;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.back-to-series-btn:hover {
+  border-color: #ffd000;
+  color: #ffd000;
+}
+
+.series-view {
+  display: block;
+}
+
+.series-view.hidden {
+  display: none;
+}
+
+.products-view {
+  display: none;
+}
+
+.products-view.active {
+  display: block;
+}
+
 .catalog-card {
   background: #fff;
   border-radius: 12px;
@@ -85,7 +127,16 @@
   transition: all 0.25s ease;
 }
 
-.catalog-card:hover {
+.series-card {
+  cursor: pointer;
+}
+
+.series-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+}
+
+.product-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
 }
@@ -111,6 +162,10 @@
   color: #666;
   margin-bottom: 14px;
   min-height: 48px;
+}
+
+.catalog-card .btn {
+  display: inline-block;
 }
 
 @media (max-width: 1024px) {
@@ -174,238 +229,116 @@
 <button class="catalog-type-btn" data-target="cake-section">Cake Showcases</button>
 </div>
 
+<div class="back-to-series" id="back-container">
+<button class="back-to-series-btn" onclick="backToSeriesView()">← Back to Series</button>
+</div>
+
 <section class="catalog-section active" id="ice-cream-section">
+<div class="series-view" id="ice-cream-series">
 <section class="catalog-grid">
-<article class="catalog-card">
-<img src="images/aspen1.webp" alt="Aspen New">
+<article class="catalog-card series-card" onclick="showSeries('aspen', 'ice-cream')">
+<img src="images/aspen1.webp" alt="Aspen Series">
 <div class="catalog-card-body">
-<h3>Aspen New</h3>
-<p>Ventilated professional gelato showcase with multiple body sizes.</p>
-<a href="product.html?model=aspen-new" class="btn">View Specifications</a>
+<h3>Aspen Series</h3>
+<p>Modern professional gelato displays with ventilated cooling and excellent insulation.</p>
 </div>
 </article>
 
-<article class="catalog-card">
-<img src="images/baroqueslm1.webp" alt="Baroque SLM New">
+<article class="catalog-card series-card" onclick="showSeries('smyrna', 'ice-cream')">
+<img src="images/smyrnanew1.webp" alt="Smyrna Series">
 <div class="catalog-card-body">
-<h3>Baroque SLM New</h3>
-<p>Compact showcase for small spaces with high insulation and cooling efficiency.</p>
-<a href="product.html?model=baroque-slm" class="btn">View Specifications</a>
+<h3>Smyrna Series</h3>
+<p>Premium ice cream showcases from compact to largest 30-pan capacity models.</p>
 </div>
 </article>
 
-<article class="catalog-card">
-<img src="images/baroqueslmvision1.webp" alt="Baroque SLM Vision">
+<article class="catalog-card series-card" onclick="showSeries('prisma', 'ice-cream')">
+<img src="images/prism1.webp" alt="Prisma Series">
 <div class="catalog-card-body">
-<h3>Baroque SLM Vision</h3>
-<p>Vision line display with front visibility focus and compact professional footprint.</p>
-<a href="product.html?model=baroque-slm-vision" class="btn">View Specifications</a>
+<h3>Prisma Series</h3>
+<p>Angular premium profile designs with professional ventilated cooling.</p>
 </div>
 </article>
 
-<article class="catalog-card">
-<img src="images/conicbaroqueslm1.webp" alt="Conic Baroque SLMC">
+<article class="catalog-card series-card" onclick="showSeries('baroque-slm', 'ice-cream')">
+<img src="images/baroqueslm1.webp" alt="Baroque SLM Series">
 <div class="catalog-card-body">
-<h3>Conic Baroque SLMC</h3>
-<p>Conic front variant designed for elegant presentation and compact floor plans.</p>
-<a href="product.html?model=conic-baroque-slmc" class="btn">View Specifications</a>
+<h3>Baroque SLM Series</h3>
+<p>Compact showcases for small spaces with high insulation efficiency.</p>
 </div>
 </article>
 
-<article class="catalog-card">
-<img src="images/ephesusw901.webp" alt="Ephesus W90">
+<article class="catalog-card series-card" onclick="showSeries('troy', 'ice-cream')">
+<img src="images/troysport1.webp" alt="Troy Series">
 <div class="catalog-card-body">
-<h3>Ephesus W90</h3>
-<p>Wide-body W90 line created for high-volume professional showcase presentation.</p>
-<a href="product.html?model=ephesus-w90" class="btn">View Specifications</a>
+<h3>Troy Series</h3>
+<p>Modern and sporty ice cream showcase lines with reliable cooling.</p>
 </div>
 </article>
 
-<article class="catalog-card">
-<img src="images/kariaprem1.webp" alt="Karia Premium">
+<article class="catalog-card series-card" onclick="showSeries('mx', 'ice-cream')">
+<img src="images/mx1.webp" alt="MX Series">
 <div class="catalog-card-body">
-<h3>Karia Premium</h3>
-<p>Premium series with strong visual impact and efficient daily cooling operation.</p>
-<a href="product.html?model=karia-premium" class="btn">View Specifications</a>
+<h3>MX Series</h3>
+<p>Compact and flat-front designs balancing dimensions with display performance.</p>
 </div>
 </article>
 
-<article class="catalog-card">
-<img src="images/mx1.webp" alt="MX">
+<article class="catalog-card series-card" onclick="showSeries('pole', 'ice-cream')">
+<img src="images/role251.webp" alt="Pole Series">
 <div class="catalog-card-body">
-<h3>MX</h3>
-<p>Modern MX line balancing compact dimensions with strong day-to-day display performance.</p>
-<a href="product.html?model=mx" class="btn">View Specifications</a>
+<h3>Pole Series</h3>
+<p>Compact to medium showcase models for boutique and high-volume shops.</p>
 </div>
 </article>
 
-<article class="catalog-card">
-<img src="images/mxflat1.webp" alt="MX Flat">
+<article class="catalog-card series-card" onclick="showSeries('other-ice-cream', 'ice-cream')">
+<img src="images/ephesusw901.webp" alt="Other Ice Cream Models">
 <div class="catalog-card-body">
-<h3>MX Flat</h3>
-<p>Flat-front MX variant designed for clean lines and high product visibility.</p>
-<a href="product.html?model=mx-flat" class="btn">View Specifications</a>
+<h3>Other Models</h3>
+<p>Ephesus, Karia, SLM and additional professional showcase options.</p>
 </div>
 </article>
-
-<article class="catalog-card">
-<img src="images/prism1.webp" alt="Prisma">
-<div class="catalog-card-body">
-<h3>Prisma</h3>
-<p>Prisma line with angular premium profile and professional ventilated cooling.</p>
-<a href="product.html?model=prisma" class="btn">View Specifications</a>
-</div>
-</article>
-
-<article class="catalog-card">
-<img src="images/prismav1.webp" alt="Prisma Vision">
-<div class="catalog-card-body">
-<h3>Prisma Vision</h3>
-<p>Vision variant of Prisma with enhanced front display perception and premium look.</p>
-<a href="product.html?model=prisma-vision" class="btn">View Specifications</a>
-</div>
-</article>
-
-<article class="catalog-card">
-<img src="images/slm1.webp" alt="SLM">
-<div class="catalog-card-body">
-<h3>SLM</h3>
-<p>SLM line focused on compact professional display and stable daily cooling operation.</p>
-<a href="product.html?model=slm" class="btn">View Specifications</a>
-</div>
-</article>
-
-<article class="catalog-card">
-<img src="images/smyrnanew1.webp" alt="Smyrna New">
-<div class="catalog-card-body">
-<h3>Smyrna New</h3>
-<p>Smyrna New combines modern cabinet aesthetics with robust commercial showcase performance.</p>
-<a href="product.html?model=smyrna-new" class="btn">View Specifications</a>
-</div>
-</article>
-
-<article class="catalog-card">
-<img src="images/smyrnanewlow1.webp" alt="Smyrna New Low">
-<div class="catalog-card-body">
-<h3>Smyrna New Low</h3>
-<p>Low-profile Smyrna variant optimized for compact visual lines and easy counter integration.</p>
-<a href="product.html?model=smyrna-new-low" class="btn">View Specifications</a>
-</div>
-</article>
-
-<article class="catalog-card">
-<img src="images/smyrnavisionlong.png" alt="Smyrna Vision Long">
-<div class="catalog-card-body">
-<h3>Smyrna Vision Long</h3>
-<p>Largest ice cream showcase with 30 flavor capacity and Vision design with LED lighting.</p>
-<a href="product.html?model=smyrnavisionlong" class="btn">View Specifications</a>
-</div>
-</article>
-
-<article class="catalog-card">
-<img src="images/role251.webp" alt="Pole 25">
-<div class="catalog-card-body">
-<h3>Pole 25</h3>
-<p>Pole 25 compact line for boutique layouts with clean display and stable performance.</p>
-<a href="product.html?model=pole-25" class="btn">View Specifications</a>
-</div>
-</article>
-
-<article class="catalog-card">
-<img src="images/pole401.webp" alt="Pole 40">
-<div class="catalog-card-body">
-<h3>Pole 40</h3>
-<p>Pole 40 series for larger service footprint and stronger presentation capacity.</p>
-<a href="product.html?model=pole-40" class="btn">View Specifications</a>
-</div>
-</article>
-
-<article class="catalog-card">
-<img src="images/troysport1.webp" alt="Troy Sport">
-<div class="catalog-card-body">
-<h3>Troy Sport</h3>
-<p>Ice cream showcase line with sporty profile and professional day-to-day cooling performance.</p>
-<a href="product.html?model=troy-sport" class="btn">View Specifications</a>
-</div>
-</article>
-
-<article class="catalog-card">
-<img src="images/troysportv1.webp" alt="Troy Sport Vision">
-<div class="catalog-card-body">
-<h3>Troy Sport Vision</h3>
-<p>Vision variant of Troy Sport with stronger front visibility and premium product presentation.</p>
-<a href="product.html?model=troy-sport-vision" class="btn">View Specifications</a>
-</div>
-</article>
-
-<article class="catalog-card">
-<img src="images/troynew1.webp" alt="Troy New">
-<div class="catalog-card-body">
-<h3>Troy New</h3>
-<p>Ice cream showcase line with refined design language and stable professional cooling.</p>
-<a href="product.html?model=troy-new" class="btn">View Specifications</a>
-</div>
-</article>
-
 </section>
+</div>
+
+<div class="products-view" id="ice-cream-products">
+<section class="catalog-grid" id="ice-cream-products-grid"></section>
+</div>
 </section>
 
 <section class="catalog-section" id="cake-section">
+<div class="series-view" id="cake-series">
 <section class="catalog-grid">
-<article class="catalog-card">
-<img src="images/baroquevisionnew1.webp" alt="Baroque Vision New">
+<article class="catalog-card series-card" onclick="showSeries('baroque-vision', 'cake')">
+<img src="images/baroquevisionnew1.webp" alt="Baroque Vision Series">
 <div class="catalog-card-body">
-<h3>Baroque Vision New</h3>
-<p>Cake display showcase with premium visibility and modern front presentation profile.</p>
-<a href="product.html?model=baroque-vision-new" class="btn">View Specifications</a>
+<h3>Baroque Vision Series</h3>
+<p>Premium cake displays with enhanced visibility and elegant presentation.</p>
 </div>
 </article>
 
-<article class="catalog-card">
-<img src="images/baroquevisionvertic1.webp" alt="Baroque Vision Vertical Wall">
+<article class="catalog-card series-card" onclick="showSeries('teos', 'cake')">
+<img src="images/teosflat1.webp" alt="Teos Series">
 <div class="catalog-card-body">
-<h3>Baroque Vision Vertical Wall</h3>
-<p>Vertical wall cake showcase focused on visibility and efficient refrigerated presentation.</p>
-<a href="product.html?model=baroque-vision-vertical-wall" class="btn">View Specifications</a>
+<h3>Teos Series</h3>
+<p>Modern flat, high, and T-form cake showcase designs for premium pastry display.</p>
 </div>
 </article>
 
-<article class="catalog-card">
-<img src="images/loft1.webp" alt="Loft">
+<article class="catalog-card series-card" onclick="showSeries('other-cake', 'cake')">
+<img src="images/loft1.webp" alt="Other Cake Models">
 <div class="catalog-card-body">
-<h3>Loft</h3>
-<p>Cake showcase line with a modern loft-style front profile and premium display presentation.</p>
-<a href="product.html?model=loft" class="btn">View Specifications</a>
-</div>
-</article>
-
-<article class="catalog-card">
-<img src="images/teosflat1.webp" alt="Teos Flat">
-<div class="catalog-card-body">
-<h3>Teos Flat</h3>
-<p>Cake showcase with flat-front profile and clean contemporary presentation style.</p>
-<a href="product.html?model=teos-flat" class="btn">View Specifications</a>
-</div>
-</article>
-
-<article class="catalog-card">
-<img src="images/teoshigh1.webp" alt="Teos High">
-<div class="catalog-card-body">
-<h3>Teos High</h3>
-<p>Higher-profile Teos variant for stronger vertical cake display visibility.</p>
-<a href="product.html?model=teos-high" class="btn">View Specifications</a>
-</div>
-</article>
-
-<article class="catalog-card">
-<img src="images/teost1.webp" alt="Teos T Form">
-<div class="catalog-card-body">
-<h3>Teos T Form</h3>
-<p>Teos T Form model designed for distinctive pastry display geometry and premium presentation.</p>
-<a href="product.html?model=teos-t-form" class="btn">View Specifications</a>
+<h3>Other Models</h3>
+<p>Loft and additional cake and pastry refrigeration display options.</p>
 </div>
 </article>
 </section>
+</div>
+
+<div class="products-view" id="cake-products">
+<section class="catalog-grid" id="cake-products-grid"></section>
+</div>
 </section>
 </div>
 </main>
@@ -463,6 +396,118 @@
 
 <script src="js/script.js?v=20260311d"></script>
 <script>
+const seriesProducts = {
+  aspen: [
+    { name: "Aspen New", model: "aspen-new", desc: "Ventilated professional gelato showcase with multiple body sizes." }
+  ],
+  smyrna: [
+    { name: "Smyrna New", model: "smyrna-new", desc: "Modern cabinet aesthetics with robust commercial showcase performance." },
+    { name: "Smyrna New Low", model: "smyrna-new-low", desc: "Low-profile variant optimized for compact visual lines." },
+    { name: "Smyrna Vision Long", model: "smyrnavisionlong", desc: "Largest showcase with 30 flavor capacity and LED Vision design." }
+  ],
+  prisma: [
+    { name: "Prisma", model: "prisma", desc: "Angular premium profile with professional ventilated cooling." },
+    { name: "Prisma Vision", model: "prisma-vision", desc: "Vision variant with enhanced front display perception." }
+  ],
+  "baroque-slm": [
+    { name: "Baroque SLM New", model: "baroque-slm", desc: "Compact showcase for small spaces with high insulation." },
+    { name: "Baroque SLM Vision", model: "baroque-slm-vision", desc: "Vision line display with front visibility focus." },
+    { name: "Conic Baroque SLMC", model: "conic-baroque-slmc", desc: "Conic front variant for elegant presentation." }
+  ],
+  troy: [
+    { name: "Troy Sport", model: "troy-sport", desc: "Sporty profile with professional cooling performance." },
+    { name: "Troy Sport Vision", model: "troy-sport-vision", desc: "Vision variant with stronger front visibility." },
+    { name: "Troy New", model: "troy-new", desc: "Refined design language with stable professional cooling." }
+  ],
+  mx: [
+    { name: "MX", model: "mx", desc: "Compact dimensions with strong day-to-day display performance." },
+    { name: "MX Flat", model: "mx-flat", desc: "Flat-front variant designed for clean lines." }
+  ],
+  pole: [
+    { name: "Pole 25", model: "pole-25", desc: "Compact line for boutique layouts with clean display." },
+    { name: "Pole 40", model: "pole-40", desc: "Larger service footprint with stronger presentation capacity." }
+  ],
+  "other-ice-cream": [
+    { name: "Ephesus W90", model: "ephesus-w90", desc: "Wide-body line for high-volume professional presentation." },
+    { name: "Karia Premium", model: "karia-premium", desc: "Premium series with strong visual impact." },
+    { name: "SLM", model: "slm", desc: "Compact professional display with stable operation." }
+  ],
+  "baroque-vision": [
+    { name: "Baroque Vision New", model: "baroque-vision-new", desc: "Cake display with premium visibility and elegant presentation." },
+    { name: "Baroque Vision Vertical Wall", model: "baroque-vision-vertical-wall", desc: "Vertical wall showcase for strong visibility." }
+  ],
+  teos: [
+    { name: "Teos Flat", model: "teos-flat", desc: "Flat-front profile with clean contemporary style." },
+    { name: "Teos High", model: "teos-high", desc: "Higher-profile variant for stronger vertical visibility." },
+    { name: "Teos T Form", model: "teos-t-form", desc: "Distinctive T-form geometry for standout presentation." }
+  ],
+  "other-cake": [
+    { name: "Loft", model: "loft", desc: "Modern loft-inspired visual profile with premium aesthetics." }
+  ]
+};
+
+const seriesImages = {
+  aspen: "images/aspen1.webp",
+  smyrna: "images/smyrnanew1.webp",
+  prisma: "images/prism1.webp",
+  "baroque-slm": "images/baroqueslm1.webp",
+  troy: "images/troysport1.webp",
+  mx: "images/mx1.webp",
+  pole: "images/role251.webp",
+  "other-ice-cream": "images/ephesusw901.webp",
+  "baroque-vision": "images/baroquevisionnew1.webp",
+  teos: "images/teosflat1.webp",
+  "other-cake": "images/loft1.webp"
+};
+
+let currentSeries = null;
+let currentCategory = null;
+
+function showSeries(series, category) {
+  currentSeries = series;
+  currentCategory = category;
+  
+  const products = seriesProducts[series] || [];
+  const gridId = category === "ice-cream" ? "ice-cream-products-grid" : "cake-products-grid";
+  const grid = document.getElementById(gridId);
+  const productsView = category === "ice-cream" ? document.getElementById("ice-cream-products") : document.getElementById("cake-products");
+  const seriesView = category === "ice-cream" ? document.getElementById("ice-cream-series") : document.getElementById("cake-series");
+  
+  grid.innerHTML = "";
+  
+  products.forEach(product => {
+    const card = document.createElement("article");
+    card.className = "catalog-card product-card";
+    card.innerHTML = `
+      <img src="${seriesImages[series]}" alt="${product.name}">
+      <div class="catalog-card-body">
+        <h3>${product.name}</h3>
+        <p>${product.desc}</p>
+        <a href="product.html?model=${product.model}" class="btn">View Specifications</a>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+  
+  seriesView.classList.add("hidden");
+  productsView.classList.add("active");
+  document.getElementById("back-container").classList.add("active");
+}
+
+function backToSeriesView() {
+  if (!currentCategory) return;
+  
+  const productsView = currentCategory === "ice-cream" ? document.getElementById("ice-cream-products") : document.getElementById("cake-products");
+  const seriesView = currentCategory === "ice-cream" ? document.getElementById("ice-cream-series") : document.getElementById("cake-series");
+  
+  productsView.classList.remove("active");
+  seriesView.classList.remove("hidden");
+  document.getElementById("back-container").classList.remove("active");
+  
+  currentSeries = null;
+  currentCategory = null;
+}
+
 function switchCatalogSection(target) {
   document.querySelectorAll(".catalog-type-btn").forEach((b) => b.classList.remove("active"));
   document.querySelectorAll(".catalog-section").forEach((section) => section.classList.remove("active"));
@@ -472,6 +517,8 @@ function switchCatalogSection(target) {
 
   if (targetBtn) targetBtn.classList.add("active");
   if (targetSection) targetSection.classList.add("active");
+  
+  backToSeriesView();
 }
 
 document.querySelectorAll(".catalog-type-btn").forEach((btn) => {
