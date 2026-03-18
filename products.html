@@ -398,66 +398,52 @@
 <script>
 const seriesProducts = {
   aspen: [
-    { name: "Aspen New", model: "aspen-new", desc: "Ventilated professional gelato showcase with multiple body sizes." }
+    { name: "Aspen New", model: "aspen-new", desc: "Ventilated professional gelato showcase with multiple body sizes.", image: "images/aspen1.webp" }
   ],
   smyrna: [
-    { name: "Smyrna New", model: "smyrna-new", desc: "Modern cabinet aesthetics with robust commercial showcase performance." },
-    { name: "Smyrna New Low", model: "smyrna-new-low", desc: "Low-profile variant optimized for compact visual lines." },
-    { name: "Smyrna Vision Long", model: "smyrnavisionlong", desc: "Largest showcase with 30 flavor capacity and LED Vision design." }
+    { name: "Smyrna New", model: "smyrna-new", desc: "Modern cabinet aesthetics with robust commercial showcase performance.", image: "images/smyrnanew1.webp" },
+    { name: "Smyrna New Low", model: "smyrna-new-low", desc: "Low-profile variant optimized for compact visual lines.", image: "images/smyrnanewlow1.webp" },
+    { name: "Smyrna Vision Long", model: "smyrnavisionlong", desc: "Largest showcase with 30 flavor capacity and LED Vision design.", image: "images/smyrnavisionlong.png" }
   ],
   prisma: [
-    { name: "Prisma", model: "prisma", desc: "Angular premium profile with professional ventilated cooling." },
-    { name: "Prisma Vision", model: "prisma-vision", desc: "Vision variant with enhanced front display perception." }
+    { name: "Prisma", model: "prisma", desc: "Angular premium profile with professional ventilated cooling.", image: "images/prism1.webp" },
+    { name: "Prisma Vision", model: "prisma-vision", desc: "Vision variant with enhanced front display perception.", image: "images/prismav1.webp" }
   ],
   "baroque-slm": [
-    { name: "Baroque SLM New", model: "baroque-slm", desc: "Compact showcase for small spaces with high insulation." },
-    { name: "Baroque SLM Vision", model: "baroque-slm-vision", desc: "Vision line display with front visibility focus." },
-    { name: "Conic Baroque SLMC", model: "conic-baroque-slmc", desc: "Conic front variant for elegant presentation." }
+    { name: "Baroque SLM New", model: "baroque-slm", desc: "Compact showcase for small spaces with high insulation.", image: "images/baroqueslm1.webp" },
+    { name: "Baroque SLM Vision", model: "baroque-slm-vision", desc: "Vision line display with front visibility focus.", image: "images/baroqueslmvision1.webp" },
+    { name: "Conic Baroque SLMC", model: "conic-baroque-slmc", desc: "Conic front variant for elegant presentation.", image: "images/conicbaroqueslm1.webp" }
   ],
   troy: [
-    { name: "Troy Sport", model: "troy-sport", desc: "Sporty profile with professional cooling performance." },
-    { name: "Troy Sport Vision", model: "troy-sport-vision", desc: "Vision variant with stronger front visibility." },
-    { name: "Troy New", model: "troy-new", desc: "Refined design language with stable professional cooling." }
+    { name: "Troy Sport", model: "troy-sport", desc: "Sporty profile with professional cooling performance.", image: "images/troysport1.webp" },
+    { name: "Troy Sport Vision", model: "troy-sport-vision", desc: "Vision variant with stronger front visibility.", image: "images/troysportv1.webp" },
+    { name: "Troy New", model: "troy-new", desc: "Refined design language with stable professional cooling.", image: "images/troynew1.webp" }
   ],
   mx: [
-    { name: "MX", model: "mx", desc: "Compact dimensions with strong day-to-day display performance." },
-    { name: "MX Flat", model: "mx-flat", desc: "Flat-front variant designed for clean lines." }
+    { name: "MX", model: "mx", desc: "Compact dimensions with strong day-to-day display performance.", image: "images/mx1.webp" },
+    { name: "MX Flat", model: "mx-flat", desc: "Flat-front variant designed for clean lines.", image: "images/mxflat1.webp" }
   ],
   pole: [
-    { name: "Pole 25", model: "pole-25", desc: "Compact line for boutique layouts with clean display." },
-    { name: "Pole 40", model: "pole-40", desc: "Larger service footprint with stronger presentation capacity." }
+    { name: "Pole 25", model: "pole-25", desc: "Compact line for boutique layouts with clean display.", image: "images/role251.webp" },
+    { name: "Pole 40", model: "pole-40", desc: "Larger service footprint with stronger presentation capacity.", image: "images/pole401.webp" }
   ],
   "other-ice-cream": [
-    { name: "Ephesus W90", model: "ephesus-w90", desc: "Wide-body line for high-volume professional presentation." },
-    { name: "Karia Premium", model: "karia-premium", desc: "Premium series with strong visual impact." },
-    { name: "SLM", model: "slm", desc: "Compact professional display with stable operation." }
+    { name: "Ephesus W90", model: "ephesus-w90", desc: "Wide-body line for high-volume professional presentation.", image: "images/ephesusw901.webp" },
+    { name: "Karia Premium", model: "karia-premium", desc: "Premium series with strong visual impact.", image: "images/kariaprem1.webp" },
+    { name: "SLM", model: "slm", desc: "Compact professional display with stable operation.", image: "images/slm1.webp" }
   ],
   "baroque-vision": [
-    { name: "Baroque Vision New", model: "baroque-vision-new", desc: "Cake display with premium visibility and elegant presentation." },
-    { name: "Baroque Vision Vertical Wall", model: "baroque-vision-vertical-wall", desc: "Vertical wall showcase for strong visibility." }
+    { name: "Baroque Vision New", model: "baroque-vision-new", desc: "Cake display with premium visibility and elegant presentation.", image: "images/baroquevisionnew1.webp" },
+    { name: "Baroque Vision Vertical Wall", model: "baroque-vision-vertical-wall", desc: "Vertical wall showcase for strong visibility.", image: "images/baroquevisionvertic1.webp" }
   ],
   teos: [
-    { name: "Teos Flat", model: "teos-flat", desc: "Flat-front profile with clean contemporary style." },
-    { name: "Teos High", model: "teos-high", desc: "Higher-profile variant for stronger vertical visibility." },
-    { name: "Teos T Form", model: "teos-t-form", desc: "Distinctive T-form geometry for standout presentation." }
+    { name: "Teos Flat", model: "teos-flat", desc: "Flat-front profile with clean contemporary style.", image: "images/teosflat1.webp" },
+    { name: "Teos High", model: "teos-high", desc: "Higher-profile variant for stronger vertical visibility.", image: "images/teoshigh1.webp" },
+    { name: "Teos T Form", model: "teos-t-form", desc: "Distinctive T-form geometry for standout presentation.", image: "images/teost1.webp" }
   ],
   "other-cake": [
-    { name: "Loft", model: "loft", desc: "Modern loft-inspired visual profile with premium aesthetics." }
+    { name: "Loft", model: "loft", desc: "Modern loft-inspired visual profile with premium aesthetics.", image: "images/loft1.webp" }
   ]
-};
-
-const seriesImages = {
-  aspen: "images/aspen1.webp",
-  smyrna: "images/smyrnanew1.webp",
-  prisma: "images/prism1.webp",
-  "baroque-slm": "images/baroqueslm1.webp",
-  troy: "images/troysport1.webp",
-  mx: "images/mx1.webp",
-  pole: "images/role251.webp",
-  "other-ice-cream": "images/ephesusw901.webp",
-  "baroque-vision": "images/baroquevisionnew1.webp",
-  teos: "images/teosflat1.webp",
-  "other-cake": "images/loft1.webp"
 };
 
 let currentSeries = null;
@@ -479,7 +465,7 @@ function showSeries(series, category) {
     const card = document.createElement("article");
     card.className = "catalog-card product-card";
     card.innerHTML = `
-      <img src="${seriesImages[series]}" alt="${product.name}">
+      <img src="${product.image}" alt="${product.name}">
       <div class="catalog-card-body">
         <h3>${product.name}</h3>
         <p>${product.desc}</p>
