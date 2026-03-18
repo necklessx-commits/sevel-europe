@@ -148,6 +148,108 @@
   display: block;
 }
 
+.series-detail-hero {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 40px;
+  border-radius: 8px;
+}
+
+.series-detail-head {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.series-detail-head h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 44px;
+  margin-bottom: 20px;
+}
+
+.series-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.series-product-card {
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 20px;
+  background: #fff;
+}
+
+.series-product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-color: #ffd000;
+}
+
+.series-product-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.series-product-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.series-product-card p {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.series-product-card .review-btn {
+  display: inline-block;
+  background: #ffd000;
+  color: #333;
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.series-product-card .review-btn:hover {
+  background: #ffed4e;
+}
+
+@media (max-width: 1200px) {
+  .series-detail-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .series-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .series-detail-hero {
+    height: 200px;
+  }
+
+  .series-detail-head h2 {
+    font-size: 32px;
+  }
+}
+
 .catalog-card-body {
   padding: 18px;
 }
@@ -449,44 +551,83 @@ const seriesProducts = {
 let currentSeries = null;
 let currentCategory = null;
 
+const seriesImages = {
+  aspen: "images/aspen1.webp",
+  smyrna: "images/smyrnaslide.png",
+  prisma: "images/prism1.webp",
+  "baroque-slm": "images/baroqueslm1.webp",
+  troy: "images/troysport1.webp",
+  mx: "images/mx1.webp",
+  pole: "images/role251.webp",
+  "other-ice-cream": "images/ephesusw901.webp",
+  "baroque-vision": "images/baroquevisionnew1.webp",
+  teos: "images/teosflat1.webp",
+  "other-cake": "images/loft1.webp"
+};
+
+const seriesNames = {
+  aspen: "ASPEN NEW SERIES",
+  smyrna: "SMYRNA NEW SERIES",
+  prisma: "PRISMA SERIES",
+  "baroque-slm": "BAROQUE SLM SERIES",
+  troy: "TROY SERIES",
+  mx: "MX SERIES",
+  pole: "POLE SERIES",
+  "other-ice-cream": "OTHER ICE CREAM MODELS",
+  "baroque-vision": "BAROQUE VISION SERIES",
+  teos: "TEOS SERIES",
+  "other-cake": "OTHER CAKE MODELS"
+};
+
 function showSeries(series, category) {
   currentSeries = series;
   currentCategory = category;
   
   const products = seriesProducts[series] || [];
-  const gridId = category === "ice-cream" ? "ice-cream-products-grid" : "cake-products-grid";
-  const grid = document.getElementById(gridId);
-  const productsView = category === "ice-cream" ? document.getElementById("ice-cream-products") : document.getElementById("cake-products");
+  const containerSelector = category === "ice-cream" ? "ice-cream-products" : "cake-products";
+  const container = document.getElementById(containerSelector);
   const seriesView = category === "ice-cream" ? document.getElementById("ice-cream-series") : document.getElementById("cake-series");
   
-  grid.innerHTML = "";
+  const heroImage = seriesImages[series] || "images/aspen1.webp";
+  const seriesName = seriesNames[series] || "SERIES";
   
+  container.innerHTML = `
+    <div style="width: 100%; margin-bottom: 40px;">
+      <img src="${heroImage}" alt="${seriesName}" class="series-detail-hero">
+      <div class="series-detail-head">
+        <h2>${seriesName}</h2>
+      </div>
+      <div class="series-detail-grid" id="series-products-grid"></div>
+    </div>
+  `;
+  
+  const grid = document.getElementById("series-products-grid");
   products.forEach(product => {
-    const card = document.createElement("article");
-    card.className = "catalog-card product-card";
+    const card = document.createElement("div");
+    card.className = "series-product-card";
+    card.onclick = () => window.location.href = `product.html?model=${product.model}`;
     card.innerHTML = `
       <img src="${product.image}" alt="${product.name}">
-      <div class="catalog-card-body">
-        <h3>${product.name}</h3>
-        <p>${product.desc}</p>
-        <a href="product.html?model=${product.model}" class="btn">View Specifications</a>
-      </div>
+      <h3>${product.name}</h3>
+      <p>${product.desc}</p>
+      <button class="review-btn">REVIEW</button>
     `;
     grid.appendChild(card);
   });
   
   seriesView.classList.add("hidden");
-  productsView.classList.add("active");
+  container.classList.add("active");
   document.getElementById("back-container").classList.add("active");
 }
 
 function backToSeriesView() {
   if (!currentCategory) return;
   
-  const productsView = currentCategory === "ice-cream" ? document.getElementById("ice-cream-products") : document.getElementById("cake-products");
+  const container = currentCategory === "ice-cream" ? document.getElementById("ice-cream-products") : document.getElementById("cake-products");
   const seriesView = currentCategory === "ice-cream" ? document.getElementById("ice-cream-series") : document.getElementById("cake-series");
   
-  productsView.classList.remove("active");
+  container.classList.remove("active");
+  container.innerHTML = "";
   seriesView.classList.remove("hidden");
   document.getElementById("back-container").classList.remove("active");
   
