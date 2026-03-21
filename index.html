@@ -4,584 +4,665 @@
 <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Sevel Europe mirrors the flagship Sevel experience with premium refrigeration showcases, technology, and certificates.">
+<meta name="description" content="Sevel Europe - durable, long lasting and high quality refrigeration showcases.">
 <meta name="theme-color" content="#f0c145">
 <title>Sevel Europe</title>
 <meta property="og:title" content="Sevel Europe">
-<meta property="og:description" content="Durable, long-lasting refrigeration showcases for gelato, pastry, and chocolate concepts.">
+<meta property="og:description" content="Professional gelato, pastry and refrigeration showcases.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="images/sevel.png">
 <link rel="stylesheet" href="css/style.css?v=20260311e">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap');
 :root {
-  --bg: #fdfaf2;
-  --surface: #ffffff;
-  --ink: #11131d;
-  --muted: #6f7586;
+  --bg: #ffffff;
+  --bg-alt: #fcf7e7;
+  --ink: #15181f;
+  --muted: #6d7281;
   --accent: #f0c145;
-  --accent-dark: #c49112;
-  --border: rgba(17, 19, 29, 0.08);
-  --shadow-soft: 0 25px 60px rgba(17, 19, 29, 0.08);
-  --radius: 26px;
-  --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --accent-strong: #dca71f;
+  --border: rgba(21, 24, 31, 0.1);
+  --radius: 22px;
+  --shadow: 0 20px 50px rgba(13, 17, 25, 0.08);
 }
+
 * { box-sizing: border-box; }
+
 body {
   margin: 0;
-  font-family: 'Space Grotesk', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: var(--ink);
   background: var(--bg);
-  line-height: 1.65;
-}
-img { max-width: 100%; display: block; }
-
-.scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: rgba(240, 193, 69, 0.25);
-  transform-origin: left center;
-  transform: scaleX(0);
-  z-index: 1200;
+  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  line-height: 1.6;
 }
 
-.back-to-top {
-  position: fixed;
-  bottom: 32px;
-  right: 32px;
-  width: 50px;
-  height: 50px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--ink);
-  display: flex;
+img { display: block; max-width: 100%; }
+
+.home-main section { padding: 92px 0; }
+.container-wide { width: min(1220px, 94vw); margin: 0 auto; }
+.container-tight { width: min(1160px, 92vw); margin: 0 auto; }
+
+.section-kicker {
+  display: inline-block;
+  font-size: 0.82rem;
+  letter-spacing: 0.22rem;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.section-title {
+  margin: 14px 0 14px;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.15;
+  font-family: "Playfair Display", serif;
+}
+
+.section-desc {
+  color: var(--muted);
+  max-width: 720px;
+  margin: 0;
+}
+
+.btn-gold,
+.btn-outline {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 18px 45px rgba(17, 19, 29, 0.12);
-  z-index: 1000;
-}
-.back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(-4px); }
-
-.language-selector { position: relative; }
-.lang-btn {
-  border: 1px solid var(--border);
   border-radius: 999px;
-  padding: 8px 16px;
-  background: var(--surface);
-  cursor: pointer;
-}
-.lang-menu {
-  position: absolute;
-  top: 110%;
-  right: 0;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  box-shadow: var(--shadow-soft);
-  display: none;
-}
-.lang-menu a {
-  display: block;
-  padding: 10px 18px;
+  padding: 12px 24px;
   text-decoration: none;
-  color: var(--ink);
-}
-.lang-menu a:hover { background: rgba(240,193,69,0.15); }
-
-main { background: var(--bg); }
-section { padding: 110px 0; }
-.container { width: min(1200px, 92vw); margin: 0 auto; }
-.section-label {
+  font-weight: 700;
+  letter-spacing: 0.08rem;
   text-transform: uppercase;
-  letter-spacing: 0.3rem;
-  font-size: 0.85rem;
-  color: var(--muted);
-  display: inline-block;
+  font-size: 0.78rem;
+  transition: 0.28s ease;
 }
-.section-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.4rem, 4vw, 3.9rem);
-  margin: 14px 0 16px;
+
+.btn-gold {
+  background: var(--accent);
+  color: #15181f;
+  border: 1px solid var(--accent);
 }
-.section-lead { color: var(--muted); max-width: 640px; }
+
+.btn-gold:hover {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--border);
+}
 
 .hero {
-  padding: 140px 0 90px;
-  background: linear-gradient(130deg, #ffffff, #f7efd8 75%);
+  padding-top: 44px;
+  background: linear-gradient(180deg, #fff 0%, #fdf9ec 100%);
 }
-.hero-grid {
+
+.hero-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 30px;
+  min-height: 72vh;
+  box-shadow: var(--shadow);
+}
+
+.hero-wrap video {
+  width: 100%;
+  height: 72vh;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, rgba(10, 12, 18, 0.72) 8%, rgba(10, 12, 18, 0.2) 58%, rgba(10, 12, 18, 0.12) 100%);
+  color: #fff;
+  display: flex;
+  align-items: flex-end;
+}
+
+.hero-content {
+  padding: 56px;
+  max-width: 720px;
+}
+
+.hero-content h1 {
+  margin: 0 0 18px;
+  font-size: clamp(2rem, 5vw, 4.1rem);
+  line-height: 1.02;
+  font-family: "Playfair Display", serif;
+}
+
+.hero-content p {
+  margin: 0 0 24px;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.about1949 { background: #fff; }
+.about-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 60px;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 36px;
   align-items: center;
 }
-.hero-text p { margin-bottom: 28px; }
-.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 30px; }
-.btn {
-  border-radius: 999px;
-  padding: 14px 28px;
-  text-transform: uppercase;
-  letter-spacing: 0.2rem;
-  font-weight: 600;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  cursor: pointer;
-  transition: var(--transition);
+
+.about-card {
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 26px;
+  background: #fff;
 }
-.btn-primary { background: var(--accent); color: #11131d; }
-.btn-primary:hover { background: var(--accent-dark); }
-.btn-outline { border: 1px solid var(--border); background: transparent; color: var(--ink); }
-.hero-meta {
+
+.about-stats {
+  margin-top: 24px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
   gap: 16px;
 }
-.hero-meta article {
-  background: var(--surface);
-  border-radius: 20px;
-  padding: 18px;
-  border: 1px solid rgba(17,19,29,0.05);
+
+.about-stats article {
+  border-radius: 18px;
+  padding: 16px;
+  background: var(--bg-alt);
+  border: 1px solid #f4e4b5;
 }
-.hero-meta h4 { margin: 0 0 6px; font-size: 2rem; }
-.hero-media {
-  position: relative;
-  border-radius: 34px;
+
+.about-stats h4 {
+  margin: 0 0 6px;
+  font-size: 1.55rem;
+  line-height: 1;
+}
+
+.about-media {
+  border-radius: 24px;
   overflow: hidden;
-  box-shadow: var(--shadow-soft);
-}
-.hero-media video { width: 100%; height: 100%; object-fit: cover; }
-.hero-note {
-  position: absolute;
-  bottom: 24px;
-  left: 24px;
-  background: rgba(255,255,255,0.92);
-  border-radius: 999px;
-  padding: 12px 22px;
-  font-weight: 600;
+  box-shadow: var(--shadow);
 }
 
-.heritage { background: var(--surface); }
-.heritage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; align-items: center; }
-.stat-list { list-style: none; padding: 0; margin: 32px 0 0; }
-.stat-list li { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); font-weight: 500; }
-.heritage-media { border-radius: 26px; overflow: hidden; box-shadow: var(--shadow-soft); }
-
-.featured-products { background: var(--bg); }
-.card-grid {
-  margin-top: 50px;
+.featured { background: var(--bg-alt); }
+.cards-grid {
+  margin-top: 34px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
 }
-.product-card {
-  background: var(--surface);
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
+
+.product-tile {
+  border: 1px solid #efdca9;
+  border-radius: 20px;
+  background: #fff;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: var(--transition);
-}
-.product-card img { height: 210px; object-fit: cover; }
-.product-card div { padding: 24px; display: flex; flex-direction: column; gap: 10px; }
-.tag-list { display: flex; gap: 10px; flex-wrap: wrap; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12rem; color: var(--muted); }
-.product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-soft); }
-
-.categories { background: var(--surface); }
-.category-grid { margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-.category-card {
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 28px;
-  min-height: 210px;
-  background: linear-gradient(135deg, rgba(240,193,69,0.08), rgba(255,255,255,0.6));
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  transition: 0.24s ease;
 }
 
-.tech { background: var(--bg); }
-.tech-grid { margin-top: 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; }
-.tech-card {
-  background: var(--surface);
+.product-tile:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow);
+}
+
+.product-tile img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+}
+
+.product-body {
+  padding: 18px;
+}
+
+.product-body h3 {
+  margin: 0 0 8px;
+  font-family: "Playfair Display", serif;
+  font-size: 1.35rem;
+}
+
+.product-body p {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 0.96rem;
+}
+
+.our-products { background: #fff; }
+.category-grid {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.category-tile {
   border: 1px solid var(--border);
   border-radius: 20px;
-  padding: 24px;
-}
-.tech-card span {
-  display: inline-flex;
-  width: 48px;
-  height: 48px;
-  border-radius: 15px;
-  background: rgba(240,193,69,0.2);
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  margin-bottom: 18px;
-}
-
-.certificates { background: var(--surface); }
-.cert-grid { margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
-.cert-card { border: 1px solid var(--border); border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 12px; }
-.cert-card small { text-transform: uppercase; letter-spacing: 0.2rem; color: var(--muted); }
-
-.cta-section { background: var(--bg); padding-bottom: 140px; }
-.cta-panel {
-  background: linear-gradient(120deg, #121724, #1e2536);
-  color: #fff;
-  border-radius: 32px;
-  padding: 60px;
+  padding: 22px;
+  background: linear-gradient(170deg, #fffdf5 0%, #fff 80%);
+  min-height: 220px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 40px 90px rgba(7, 11, 20, 0.35);
 }
-.cta-panel p { color: rgba(255,255,255,0.78); max-width: 560px; }
-.cta-panel .btn-outline { border: 1px solid rgba(255,255,255,0.5); color: #fff; }
 
-footer {
-  background: #0c101b;
-  color: rgba(255,255,255,0.82);
-  padding: 70px 0 30px;
+.category-tile h3 {
+  margin: 0 0 8px;
+  font-family: "Playfair Display", serif;
+  font-size: 1.35rem;
 }
-.footer-container {
-  width: min(1200px, 92vw);
+
+.category-tile p {
+  margin: 0 0 14px;
+  color: var(--muted);
+}
+
+.technology { background: var(--bg-alt); }
+.tech-grid {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.tech-box {
+  border-radius: 18px;
+  border: 1px solid #efdca9;
+  background: #fff;
+  padding: 18px;
+  min-height: 168px;
+}
+
+.tech-box h4 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.tech-box p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.certs { background: #fff; }
+.news-grid {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.news-card {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: #fff;
+  padding: 20px;
+}
+
+.news-card .meta {
+  display: inline-block;
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.news-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.08rem;
+  font-family: "Playfair Display", serif;
+}
+
+.news-card a {
+  color: #15181f;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.detail-band {
+  background: #111521;
+  color: #fff;
+  padding: 56px 0;
+}
+
+.band-grid {
+  width: min(1220px, 94vw);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 30px;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 20px;
+  align-items: center;
 }
-.footer-column h3 { text-transform: uppercase; letter-spacing: 0.2rem; }
-.footer-column a { color: rgba(255,255,255,0.75); text-decoration: none; display: block; margin: 8px 0; }
-.footer-bottom { margin-top: 40px; text-align: center; font-size: 0.85rem; letter-spacing: 0.2rem; color: rgba(255,255,255,0.6); }
 
-[data-reveal] { opacity: 0; transform: translateY(30px); transition: 0.7s cubic-bezier(0.4,0,0.2,1); }
-[data-reveal].is-visible { opacity: 1; transform: translateY(0); }
+.band-grid h3 {
+  margin: 0 0 10px;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+}
 
-@media (max-width: 640px) {
-  section { padding: 80px 0; }
-  .hero-actions { flex-direction: column; }
-  .cta-panel { padding: 38px; }
+.band-grid p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.band-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.band-actions .btn-outline {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 1120px) {
+  .cards-grid,
+  .category-grid,
+  .news-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .tech-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .about-grid,
+  .band-grid { grid-template-columns: 1fr; }
+  .band-actions { justify-content: flex-start; }
+}
+
+@media (max-width: 700px) {
+  .hero-wrap,
+  .hero-wrap video { min-height: 62vh; height: 62vh; border-radius: 22px; }
+  .hero-content { padding: 30px 24px; }
+  .cards-grid,
+  .category-grid,
+  .news-grid,
+  .tech-grid,
+  .about-stats { grid-template-columns: 1fr; }
+  .home-main section { padding: 72px 0; }
 }
 </style>
 </head>
 <body>
-<div class="scroll-progress"></div>
-<button class="back-to-top" id="backToTop">↑</button>
 
 <header>
-  <div class="container nav">
-    <img src="images/sevel.png" class="logo" alt="Sevel Europe">
-    <nav>
-      <a href="index.html" data-i18n="nav-home">Home</a>
-      <a href="products.html" data-i18n="nav-showcases">Showcases</a>
-      <a href="gallery.html" data-i18n="nav-gallery">Gallery</a>
-      <a href="contact.html" data-i18n="nav-contact">Contact</a>
-      <a href="https://www.facebook.com/profile.php?id=100063871878926" title="Facebook" target="_blank" rel="noopener noreferrer" class="nav-social-link" aria-label="Facebook">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.6 1.6-1.6h1.7V4.8c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1V11H8v3h2.4v8h3.1z"/></svg>
-      </a>
-      <a href="https://www.instagram.com/seveleurope/" title="Instagram" target="_blank" rel="noopener noreferrer" class="nav-social-link" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm0 1.8A4 4 0 0 0 3.8 7.8v8.4a4 4 0 0 0 4 4h8.4a4 4 0 0 0 4-4V7.8a4 4 0 0 0-4-4H7.8zm9.1 1.4a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4z"/></svg>
-      </a>
-      <button id="userMenuBtn" class="user-menu-btn" onclick="openLoginModal()" style="background:none;border:none;cursor:pointer;padding:0;color:#333;">Login</button>
-    </nav>
-    <div class="language-selector">
-      <button id="lang-btn" class="lang-btn">EN ▼</button>
-      <div id="lang-menu" class="lang-menu">
-        <a href="#" data-lang="en">English</a>
-        <a href="#" data-lang="sk">Slovenčina</a>
-        <a href="#" data-lang="tr">Türkçe</a>
-      </div>
-    </div>
-  </div>
+<div class="container nav">
+<img src="images/sevel.png" class="logo" alt="Sevel Europe">
+
+<nav>
+<a href="index.html">Home</a>
+<a href="products.html">Showcases</a>
+<a href="gallery.html">Gallery</a>
+<a href="contact.html">Contact</a>
+<a href="https://www.facebook.com/profile.php?id=100063871878926" title="Facebook" target="_blank" rel="noopener noreferrer" class="nav-social-link" aria-label="Facebook">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.6 1.6-1.6h1.7V4.8c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1V11H8v3h2.4v8h3.1z"/></svg>
+</a>
+<a href="https://www.instagram.com/seveleurope/" title="Instagram" target="_blank" rel="noopener noreferrer" class="nav-social-link" aria-label="Instagram">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm0 1.8A4 4 0 0 0 3.8 7.8v8.4a4 4 0 0 0 4 4h8.4a4 4 0 0 0 4-4V7.8a4 4 0 0 0-4-4H7.8zm9.1 1.4a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4z"/></svg>
+</a>
+<button id="userMenuBtn" class="user-menu-btn" onclick="openLoginModal()" style="background: none; border: none; cursor: pointer; padding: 0; color: #333;">Login</button>
+</nav>
+
+
+<div class="language-selector">
+<button id="lang-btn" class="lang-btn">EN ▼</button>
+<div id="lang-menu" class="lang-menu">
+<a href="#" data-lang="en">English</a>
+<a href="#" data-lang="sk">Slovak</a>
+<a href="#" data-lang="tr">Turkish</a>
+</div>
+</div>
+</div>
 </header>
 
-<main>
-  <section class="hero" id="top">
-    <div class="container hero-grid">
-      <div class="hero-text" data-reveal>
-        <span class="section-label">Durable · Long lasting · High quality</span>
-        <h1 class="section-title">From 1949 to present, Sevel craftsmanship shapes premium showcases.</h1>
-        <p>Sevel is a professional gelato, pastry, and refrigeration manufacturer recognized for high performance, durable, long-lasting, and unique designs. The Izmir production campus, with satellite offices in Istanbul, Houston, and Trnava, supports more than 74 countries.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="products.html">Discover Products</a>
-          <a class="btn btn-outline" href="contact.html">Contact Sevel Europe</a>
-        </div>
-        <div class="hero-meta">
-          <article><h4>74+</h4><p>Countries supplied</p></article>
-          <article><h4>3</h4><p>Continental hubs</p></article>
-          <article><h4>1949</h4><p>Heritage roots</p></article>
-          <article><h4>72h</h4><p>Concept response</p></article>
-        </div>
-      </div>
-      <div class="hero-media" data-reveal>
+<main class="home-main">
+  <section class="hero">
+    <div class="container-wide">
+      <div class="hero-wrap reveal">
         <video autoplay muted loop playsinline poster="images/smyrnaslide.png">
           <source src="videos/sevelvid.mp4" type="video/mp4">
         </video>
-        <div class="hero-note">Average lead time · 6–8 weeks</div>
+        <div class="hero-overlay">
+          <div class="hero-content">
+            <span class="section-kicker">Durable, long lasting and high quality products</span>
+            <h1>Long-lasting and unique designs are waiting for you.</h1>
+            <p>Sevel is a professional gelato, ice cream, pastry display manufacturer and a globally recognized brand for high performance refrigeration solutions.</p>
+            <a class="btn-gold" href="contact.html">Contact</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="heritage" id="heritage">
-    <div class="container heritage-grid">
-      <div data-reveal>
-        <span class="section-label">From 1949 to present</span>
-        <h2 class="section-title">Sevel is a globally recognized brand with ISO-ready builds and audited production.</h2>
-        <p class="section-lead">Our European desk mirrors the Izmir factory’s precision, delivering serialized QC, logistics planning, and aftercare support so installations stay effortless.</p>
-        <ul class="stat-list">
-          <li><span>Izmir production</span><span>ISO + HACCP certified</span></li>
-          <li><span>European desk</span><span>Prague · Bratislava</span></li>
-          <li><span>North America</span><span>Houston, TX</span></li>
-          <li><span>Global distributors</span><span>74 countries</span></li>
-        </ul>
+  <section class="about1949">
+    <div class="container-tight about-grid">
+      <div class="about-card reveal">
+        <span class="section-kicker">From 1949 to Present</span>
+        <h2 class="section-title">Global manufacturing roots with local European support.</h2>
+        <p class="section-desc">Although its production facility and headquarters are in Izmir, Sevel has offices in Istanbul, Houston and Trnava, exporting to more than 74 countries across North America, Europe, Asia, Africa and Australia.</p>
+        <div style="margin-top:18px;">
+          <a class="btn-gold" href="about.html">Discover</a>
+        </div>
+        <div class="about-stats">
+          <article><h4>74+</h4><p>Countries</p></article>
+          <article><h4>1949</h4><p>Since</p></article>
+          <article><h4>4</h4><p>Global offices</p></article>
+          <article><h4>ISO</h4><p>Documented quality</p></article>
+        </div>
       </div>
-      <div class="heritage-media" data-reveal="right">
-        <img src="images/gallery-bg.jpg" alt="Sevel heritage">
+      <div class="about-media reveal">
+        <img src="images/gallery-bg.jpg" alt="Sevel production and craftsmanship">
       </div>
     </div>
   </section>
 
-  <section class="featured-products" id="featured">
-    <div class="container">
-      <span class="section-label">Featured products</span>
+  <section class="featured">
+    <div class="container-tight">
+      <span class="section-kicker">Featured Products</span>
       <h2 class="section-title">Your dream design and quality for the presentation of delicious products.</h2>
-      <div class="card-grid">
-        <article class="product-card" data-reveal>
+      <p class="section-desc">Selected flagship showcases from Sevel Europe collections.</p>
+      <div class="cards-grid">
+        <article class="product-tile reveal">
           <img src="images/smyrnanew.png" alt="Smyrna">
-          <div>
-            <h3>Smyrna Vision</h3>
-            <p>Premium gelato showcases from compact footprints to full 30-pan hero counters.</p>
-            <div class="tag-list"><span>Ice cream</span><span>Dual temp</span></div>
-            <a class="btn btn-outline" href="smyrna.html">Explore Smyrna</a>
+          <div class="product-body">
+            <h3>Smyrna</h3>
+            <p>Premium ice cream line with large capacity and elegant visibility.</p>
+            <a class="btn-outline" href="smyrna.html">Review</a>
           </div>
         </article>
-        <article class="product-card" data-reveal>
+        <article class="product-tile reveal">
+          <img src="images/loft1.webp" alt="Loft R7">
+          <div class="product-body">
+            <h3>Loft R7</h3>
+            <p>Cake and chocolate concept with refined geometric front.</p>
+            <a class="btn-outline" href="products.html?category=cake">Review</a>
+          </div>
+        </article>
+        <article class="product-tile reveal">
+          <img src="images/teosflat1.webp" alt="Teos">
+          <div class="product-body">
+            <h3>Teos</h3>
+            <p>Professional pastry display family with flexible shelf options.</p>
+            <a class="btn-outline" href="product.html?model=teos-flat">Review</a>
+          </div>
+        </article>
+        <article class="product-tile reveal">
           <img src="images/aspen1.webp" alt="Aspen">
-          <div>
-            <h3>Aspen Modular</h3>
-            <p>Ventilated gelato line with modular lengths and simplified service access.</p>
-            <div class="tag-list"><span>Ventilated</span><span>Modular</span></div>
-            <a class="btn btn-outline" href="aspen.html">Explore Aspen</a>
-          </div>
-        </article>
-        <article class="product-card" data-reveal>
-          <img src="images/barokslmslide.png" alt="Baroque">
-          <div>
-            <h3>Baroque SLM</h3>
-            <p>Shallow-depth pastry and chocolate counters with heated glazing.</p>
-            <div class="tag-list"><span>Pastry</span><span>685 mm</span></div>
-            <a class="btn btn-outline" href="baroque-slm.html">Explore Baroque</a>
-          </div>
-        </article>
-        <article class="product-card" data-reveal>
-          <img src="images/mxslide.png" alt="MX">
-          <div>
-            <h3>MX Urban</h3>
-            <p>Flat-front compact chassis perfect for kiosks, malls, and pop-ups.</p>
-            <div class="tag-list"><span>Compact</span><span>Plug & play</span></div>
-            <a class="btn btn-outline" href="mx.html">Explore MX</a>
+          <div class="product-body">
+            <h3>Aspen</h3>
+            <p>Ventilated professional showcase for premium gelato service.</p>
+            <a class="btn-outline" href="aspen.html">Review</a>
           </div>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="categories" id="categories">
-    <div class="container">
-      <span class="section-label">Our products</span>
-      <h2 class="section-title">Product categories engineered for every concept.</h2>
-      <p class="section-lead">Select the family that matches your operation—Sevel Europe will tailor refrigeration, cladding, and logistics to your site.</p>
+  <section class="our-products">
+    <div class="container-tight">
+      <span class="section-kicker">Our Products</span>
+      <h2 class="section-title">Our product categories.</h2>
       <div class="category-grid">
-        <article class="category-card" data-reveal>
-          <h4>Gelato / Ice Cream Showcases</h4>
-          <p>Ventilated and static solutions from 4-pan kiosks to 30-pan flagships.</p>
-          <a class="btn btn-outline" href="products.html?category=ice-cream">Open Range</a>
+        <article class="category-tile reveal">
+          <div>
+            <h3>Gelato, Ice Cream Showcases</h3>
+            <p>Static and ventilated options from compact to high-capacity counters.</p>
+          </div>
+          <a class="btn-outline" href="products.html?category=ice-cream">Explore</a>
         </article>
-        <article class="category-card" data-reveal>
-          <h4>Pastry & Chocolate</h4>
-          <p>Positive cooling decks with humidity control for praline and viennoiserie.</p>
-          <a class="btn btn-outline" href="products.html?category=cake">Open Range</a>
+        <article class="category-tile reveal">
+          <div>
+            <h3>Pastry, Chocolate Showcases</h3>
+            <p>Humidity-aware cabinets for cakes, pralines and pastries.</p>
+          </div>
+          <a class="btn-outline" href="products.html?category=cake">Explore</a>
         </article>
-        <article class="category-card" data-reveal>
-          <h4>Professional Production Machines</h4>
-          <p>Blast chillers, shock freezers, and prep equipment supporting chefs.</p>
-          <a class="btn btn-outline" href="products.html">See Machines</a>
+        <article class="category-tile reveal">
+          <div>
+            <h3>Professional Production Machines</h3>
+            <p>Preparation equipment designed for intensive daily operation.</p>
+          </div>
+          <a class="btn-outline" href="products.html">Explore</a>
         </article>
-        <article class="category-card" data-reveal>
-          <h4>Cooling & Shocking Cabinets</h4>
-          <p>High-efficiency storage for gelato bases, chocolate, or pastry mise en place.</p>
-          <a class="btn btn-outline" href="product.html?model=teos-high">See Cabinets</a>
+        <article class="category-tile reveal">
+          <div>
+            <h3>Cooling and Shocking Cabinets</h3>
+            <p>Reliable cabinets for preserving flavor and product structure.</p>
+          </div>
+          <a class="btn-outline" href="product.html?model=teos-high">Explore</a>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="tech" id="technology">
-    <div class="container">
-      <span class="section-label">R&D and technology</span>
-      <h2 class="section-title">Innovation that keeps your showcases reliable season after season.</h2>
+  <section class="technology">
+    <div class="container-tight">
+      <span class="section-kicker">R&amp;D and Technology</span>
+      <h2 class="section-title">Sevel aims to create high quality, efficient, durable and long lasting products.</h2>
       <div class="tech-grid">
-        <article class="tech-card" data-reveal><span>⚙️</span><h4>Double Compressor</h4><p>Independent circuits keep performance stable during rush hours.</p></article>
-        <article class="tech-card" data-reveal><span>🔥</span><h4>Heated Glazing</h4><p>Double-layer front and side windows stay crystal clear.</p></article>
-        <article class="tech-card" data-reveal><span>🌱</span><h4>Green Energy Production</h4><p>Renewable-powered facilities lower embodied energy.</p></article>
-        <article class="tech-card" data-reveal><span>🧊</span><h4>Polyurethane Solid Case</h4><p>Rigid insulation keeps internal temperatures consistent.</p></article>
-        <article class="tech-card" data-reveal><span>⚡</span><h4>Short Effective Defrost</h4><p>Precise defrost cycles minimize downtime.</p></article>
-        <article class="tech-card" data-reveal><span>📡</span><h4>Remote Monitoring</h4><p>Telemetry alerts teams before issues appear.</p></article>
+        <article class="tech-box reveal"><h4>Double Compressor</h4><p>Independent cooling cycles preserve stable service temperatures.</p></article>
+        <article class="tech-box reveal"><h4>Double Layer Fully Heated Front and Side Windows</h4><p>Improves visibility while reducing glass condensation.</p></article>
+        <article class="tech-box reveal"><h4>Production with Green Energy</h4><p>Manufacturing process aligned with cleaner energy usage.</p></article>
+        <article class="tech-box reveal"><h4>Polyurethane Solid Case</h4><p>Strong insulation and durability for long-term operation.</p></article>
+        <article class="tech-box reveal"><h4>Short and Effective Defrost</h4><p>Efficient cycles limit downtime and preserve consistency.</p></article>
       </div>
     </div>
   </section>
 
-  <section class="certificates" id="certificates">
-    <div class="container">
-      <span class="section-label">Certificates & news</span>
-      <h2 class="section-title">Sevel documents its quality standards and shares trade show highlights.</h2>
-      <div class="cert-grid">
-        <article class="cert-card" data-reveal>
-          <small>2024 · Event</small>
+  <section class="certs">
+    <div class="container-tight">
+      <span class="section-kicker">Certificates</span>
+      <h2 class="section-title">SEVEL has documented its proven quality standards with its certificates.</h2>
+      <div class="news-grid">
+        <article class="news-card reveal">
+          <span class="meta">Sevel - 2 years ago</span>
           <h3>SIGEP 2024</h3>
-          <p>New Smyrna Vision lighting scenes and MX kiosks showcased in Rimini.</p>
-          <a class="btn btn-outline" href="https://sevel.com.tr/en/2024/01/04/sigep-2024/" target="_blank" rel="noopener">View Recap</a>
+          <a href="https://sevel.com.tr/en/2024/01/04/sigep-2024/" target="_blank" rel="noopener noreferrer">Read more</a>
         </article>
-        <article class="cert-card" data-reveal>
-          <small>2023 · Compliance</small>
-          <h3>EU Energy Label Update</h3>
-          <p>All refrigeration lines aligned with the March 2021 eco-label implementation.</p>
-          <a class="btn btn-outline" href="https://sevel.com.tr/en/2022/06/26/ab-yeni-enerji-etiketi-uygulamasi-1-mart-2021/" target="_blank" rel="noopener">Read Release</a>
+        <article class="news-card reveal">
+          <span class="meta">Sevel - 3 years ago</span>
+          <h3>SIGEP 2023</h3>
+          <a href="https://sevel.com.tr/en/2023/01/10/sigep-2023/" target="_blank" rel="noopener noreferrer">Read more</a>
         </article>
-        <article class="cert-card" data-reveal>
-          <small>2022 · Showcase</small>
-          <h3>Gelatissimo Highlights</h3>
-          <p>Live installations proving double-compressor reliability for export fleets.</p>
-          <a class="btn btn-outline" href="https://sevel.com.tr/en/2022/06/26/gelatissimo-2020/" target="_blank" rel="noopener">See Highlights</a>
+        <article class="news-card reveal">
+          <span class="meta">Sevel - 4 years ago</span>
+          <h3>AB New Energy Label Application 1 March 2021</h3>
+          <a href="https://sevel.com.tr/en/2022/06/26/ab-yeni-enerji-etiketi-uygulamasi-1-mart-2021/" target="_blank" rel="noopener noreferrer">Read more</a>
+        </article>
+        <article class="news-card reveal">
+          <span class="meta">Sevel - 4 years ago</span>
+          <h3>Gelatissimo 2020</h3>
+          <a href="https://sevel.com.tr/en/2022/06/26/gelatissimo-2020/" target="_blank" rel="noopener noreferrer">Read more</a>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="cta-section" id="contact-cta">
-    <div class="container">
-      <div class="cta-panel" data-reveal>
-        <div>
-          <h3>Need detailed information or a concept quote?</h3>
-          <p>Send us your floor plan or inspiration board—Sevel Europe will reply with a curated lineup, pricing, and timeline within 72 hours.</p>
-        </div>
-        <div class="hero-actions" style="margin:0;">
-          <a class="btn btn-primary" href="contact.html">Get Detailed Information</a>
-          <a class="btn btn-outline" href="products.html">See All Products</a>
-        </div>
+  <section class="detail-band">
+    <div class="band-grid">
+      <div class="reveal">
+        <h3>Get Detailed Information</h3>
+        <p>Be informed of developments and request a tailored lineup for your concept in one message.</p>
+      </div>
+      <div class="band-actions reveal">
+        <a class="btn-gold" href="contact.html">Get Detailed Information</a>
+        <a class="btn-outline" href="products.html">Be Informed</a>
       </div>
     </div>
   </section>
 </main>
 
 <footer class="footer">
-  <div class="footer-container">
-    <div class="footer-column">
-      <img src="images/sevel.png" alt="Sevel Europe" style="height:48px; margin-bottom:18px;">
-      <p>Sevel is a professional gelato, pastry, and refrigeration manufacturer with global references.</p>
-      <div class="socials" style="display:flex;gap:12px;">
-        <a href="https://www.facebook.com/seveleurope" target="_blank" rel="noopener">Facebook</a>
-        <a href="https://www.instagram.com/seveleurope" target="_blank" rel="noopener">Instagram</a>
-      </div>
-    </div>
-    <div class="footer-column">
-      <h3>Navigation</h3>
-      <a href="index.html">Home</a>
-      <a href="products.html">Showcases</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="contact.html">Contact</a>
-    </div>
-    <div class="footer-column">
-      <h3>Products</h3>
-      <a href="products.html?category=ice-cream">Gelato Showcases</a>
-      <a href="products.html?category=cake">Pastry Showcases</a>
-      <a href="product.html?model=teos-high">Chocolate Cabinets</a>
-      <a href="products.html">Professional Machines</a>
-    </div>
-    <div class="footer-column">
-      <h3>Institutional</h3>
-      <a href="about.html">About Us</a>
-      <a href="why-sevel.html">Why Sevel?</a>
-      <a href="chat-developer.html">Chat with Developer</a>
-    </div>
-    <div class="footer-column">
-      <h3>Contact</h3>
-      <p>+421 911 098 008<br>Bratislavská 5236/49<br>917 02 Trnava, Slovakia</p>
-    </div>
-    <div class="footer-column">
-      <h3>Stay Informed</h3>
-      <p>Get updates about new showcases and reference installs.</p>
-      <div class="newsletter" style="display:flex;gap:10px;">
-        <input type="email" placeholder="Enter your email" style="flex:1;padding:12px;border-radius:999px;border:1px solid rgba(255,255,255,0.3);background:transparent;color:#fff;">
-        <button style="border:none;border-radius:999px;padding:12px 18px;background:#fff;color:#0c101b;cursor:pointer;">→</button>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">© 2026 Sevel Europe s.r.o. All Rights Reserved | Designed by Merd</div>
+<div class="container">
+<div class="footer-container">
+<div class="footer-logo">
+<img src="images/sevel.png" alt="Sevel Europe">
+<p>Follow Us On Social Media</p>
+<div class="socials">
+<a href="https://www.facebook.com/seveleurope" target="_blank" rel="noopener noreferrer">Facebook</a>
+<a href="https://www.instagram.com/seveleurope" target="_blank" rel="noopener noreferrer">Instagram</a>
+</div>
+</div>
+
+<div class="footer-column">
+<h3>Navigations</h3>
+<a href="index.html" data-i18n="nav-home">Home</a>
+<a href="products.html" data-i18n="nav-showcases">Showcases</a>
+<a href="gallery.html" data-i18n="nav-gallery">Gallery</a>
+<a href="contact.html" data-i18n="nav-contact">Contact</a>
+</div>
+
+<div class="footer-column">
+<h3>Information</h3>
+<a href="about.html">About Us</a>
+<a href="products.html">Our Products</a>
+<a href="why-sevel.html">Why Sevel?</a>
+<a href="chat-developer.html">Chat with Developer</a>
+</div>
+
+<div class="footer-column">
+<h3>Contact</h3>
+<p>+421 911 098 008</p>
+<p>Bratislavska 5236/49</p>
+<p>917 02 Trnava</p>
+<p>Slovakia</p>
+</div>
+
+<div class="footer-column">
+<h3>Stay Informed</h3>
+<p>Get updates about new showcases.</p>
+<div class="newsletter">
+<input type="email" placeholder="Enter your email">
+<button>-&gt;</button>
+</div>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<p>(c) 2026 Sevel Europe s.r.o. All Rights Reserved | Designed by Merd</p>
+</div>
 </footer>
 
 <script src="js/script.js?v=20260311d"></script>
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const scrollProgress = document.querySelector('.scroll-progress');
-  function updateScrollProgress() {
-    const scrollTop = window.pageYOffset;
-    const docHeight = document.body.scrollHeight - window.innerHeight;
-    const ratio = docHeight > 0 ? scrollTop / docHeight : 0;
-    if (scrollProgress) scrollProgress.style.transform = `scaleX(${ratio})`;
-  }
-  window.addEventListener('scroll', updateScrollProgress);
-  updateScrollProgress();
-
-  const backToTopBtn = document.getElementById('backToTop');
-  function toggleBackToTop() {
-    if (backToTopBtn) backToTopBtn.classList.toggle('visible', window.pageYOffset > 320);
-  }
-  window.addEventListener('scroll', toggleBackToTop);
-  toggleBackToTop();
-  if (backToTopBtn) {
-    backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-  }
-
-  const revealElements = document.querySelectorAll('[data-reveal]');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
+document.addEventListener("DOMContentLoaded", function () {
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
       if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
+        entry.target.classList.add("show");
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
-  revealElements.forEach((el) => observer.observe(el));
+  }, { threshold: 0.16, rootMargin: "0px 0px -60px 0px" });
 
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener('click', (event) => {
-      const target = document.querySelector(anchor.getAttribute('href'));
-      if (target) {
-        event.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
-
-  const hoverSelectors = ['.product-card', '.category-card', '.tech-card', '.cert-card'];
-  document.querySelectorAll(hoverSelectors.join(', ')).forEach((card) => {
-    card.addEventListener('mouseenter', () => card.style.transform = 'translateY(-6px)');
-    card.addEventListener('mouseleave', () => card.style.transform = '');
+  document.querySelectorAll(".reveal").forEach(function (el) {
+    observer.observe(el);
   });
 });
 </script>
