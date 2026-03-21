@@ -1,872 +1,980 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sevel Europe</title>
-  <link rel="stylesheet" href="css/style.css?v=20260311d">
-  <style>
-    :root {
-      --accent: #c89b3c;
-      --accent-soft: rgba(200, 155, 60, 0.2);
-      --dark: #111;
-      --darker: #050505;
-      --light: #f8f8f8;
-      --grey: rgba(255, 255, 255, 0.65);
-      --card: rgba(8, 8, 8, 0.85);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: "Playfair Display", "Inter", system-ui;
-      background: var(--darker);
-      color: var(--light);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    .scroll-progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: var(--accent-soft);
-      transform-origin: left center;
-      transform: scaleX(0);
-      pointer-events: none;
-      z-index: 10000;
-    }
-
-    header.hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      padding: 40px;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(120deg, rgba(5, 5, 5, 0.95), rgba(10, 10, 10, 0.6));
-    }
-
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0 40px;
-      position: relative;
-      z-index: 2;
-    }
-
-    nav::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 12px;
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      opacity: 0.4;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      letter-spacing: 0.4rem;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-
-    .logo span {
-      color: var(--accent);
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 30px;
-      font-family: "Inter", system-ui;
-    }
-
-    nav a {
-      color: var(--grey);
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 0.15rem;
-      font-size: 0.85rem;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: var(--accent);
-    }
-
-    .hero-content {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 50px;
-      flex: 1;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-copy h1 {
-      font-size: clamp(2.5rem, 4vw, 4.5rem);
-      text-transform: uppercase;
-      letter-spacing: 0.3rem;
-      line-height: 1.2;
-      margin-bottom: 20px;
-      animation: fadeInDown 1.2s ease forwards;
-    }
-
-    .hero-copy p {
-      font-size: 1.1rem;
-      color: var(--grey);
-      max-width: 540px;
-      animation: fadeInUp 1.2s ease forwards;
-      animation-delay: 0.2s;
-    }
-
-    .hero-cta {
-      margin-top: 40px;
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #000;
-      padding: 14px 32px;
-      border: none;
-      text-transform: uppercase;
-      letter-spacing: 0.2rem;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      font-weight: 600;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 25px rgba(200, 155, 60, 0.35);
-    }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 20px;
-      margin-top: 40px;
-    }
-
-    .stat-card {
-      padding: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(8px);
-    }
-
-    .stat-card h3 {
-      font-size: 2rem;
-      margin-bottom: 8px;
-      color: var(--accent);
-    }
-
-    .hero-media {
-      position: relative;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(5, 5, 5, 0.4);
-      padding: 20px;
-      border-radius: 24px;
-      overflow: hidden;
-    }
-
-    .hero-video {
-      width: 100%;
-      height: 400px;
-      border-radius: 16px;
-      object-fit: cover;
-      filter: saturate(1.2);
-    }
-
-    .hero-overlay-card {
-      position: absolute;
-      top: 30px;
-      left: 30px;
-      background: rgba(0, 0, 0, 0.65);
-      padding: 16px 20px;
-      border-left: 2px solid var(--accent);
-      backdrop-filter: blur(8px);
-      animation: fadeIn 1.2s ease forwards;
-    }
-
-    .hero-overlay-card h4 {
-      text-transform: uppercase;
-      letter-spacing: 0.2rem;
-      font-size: 0.85rem;
-      color: var(--grey);
-    }
-
-    section {
-      padding: 100px 8vw;
-      border-top: 1px solid rgba(255, 255, 255, 0.04);
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .section-header h2 {
-      font-size: clamp(2.5rem, 3vw, 3.5rem);
-      letter-spacing: 0.2rem;
-      text-transform: uppercase;
-    }
-
-    .section-header p {
-      color: var(--grey);
-      max-width: 640px;
-      margin: 20px auto 0;
-    }
-
-    .trust-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-    }
-
-    .trust-card {
-      padding: 40px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: var(--card);
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.4s ease;
-    }
-
-    .trust-card:hover {
-      transform: translateY(-12px);
-    }
-
-    .trust-card::after {
-      content: "";
-      position: absolute;
-      inset: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-
-    .trust-card:hover::after {
-      opacity: 1;
-    }
-
-    .category-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-    }
-
-    .category-card {
-      padding: 30px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(255, 255, 255, 0.02);
-      min-height: 240px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .products-section {
-      position: relative;
-      background: radial-gradient(circle, rgba(30, 30, 30, 0.9), rgba(5, 5, 5, 0.98));
-    }
-
-    .products-section.accent {
-      background: radial-gradient(circle, rgba(20, 12, 2, 0.95), rgba(5, 3, 1, 0.98));
-    }
-
-    .product-grid-home {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-    }
-
-    .product-card-home {
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(0, 0, 0, 0.45);
-      padding: 0;
-      overflow: hidden;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      min-height: 420px;
-    }
-
-    .product-card-home img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-    }
-
-    .product-card-home .info {
-      padding: 30px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .product-card-home h3 {
-      text-transform: uppercase;
-      letter-spacing: 0.2rem;
-      margin-bottom: 10px;
-    }
-
-    .product-card-home p {
-      color: var(--grey);
-      font-family: "Inter", system-ui;
-    }
-
-    .product-card-home .details {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 20px;
-      font-size: 0.85rem;
-      letter-spacing: 0.1rem;
-      text-transform: uppercase;
-      color: var(--grey);
-    }
-
-    .cta-banner {
-      padding: 120px 8vw;
-      background: linear-gradient(120deg, rgba(200, 155, 60, 0.12), rgba(0, 0, 0, 0.9));
-      text-align: center;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .cta-banner h2 {
-      font-size: clamp(2.5rem, 3vw, 3.5rem);
-      text-transform: uppercase;
-      letter-spacing: 0.3rem;
-      margin-bottom: 20px;
-    }
-
-    .cta-banner p {
-      max-width: 640px;
-      margin: 0 auto 30px;
-      color: var(--grey);
-    }
-
-    .cta-banner .btn-primary {
-      background: #000;
-      color: var(--light);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-    }
-
-    .marquee {
-      padding: 50px 0;
-      background: rgba(0, 0, 0, 0.25);
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .marquee-track {
-      display: flex;
-      gap: 80px;
-      animation: scroll 20s linear infinite;
-      white-space: nowrap;
-      text-transform: uppercase;
-      letter-spacing: 0.3rem;
-      font-size: 0.9rem;
-      color: var(--grey);
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 30px;
-    }
-
-    .contact-card, .contact-map {
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(255, 255, 255, 0.02);
-      padding: 40px;
-      min-height: 320px;
-    }
-
-    .contact-card h3 {
-      letter-spacing: 0.2rem;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-    }
-
-    .contact-item {
-      margin-bottom: 20px;
-      color: var(--grey);
-    }
-
-    .footer {
-      padding: 60px 8vw 30px;
-      background: #050505;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 30px;
-    }
-
-    .footer-column h3 {
-      text-transform: uppercase;
-      letter-spacing: 0.2rem;
-      margin-bottom: 20px;
-    }
-
-    .newsletter {
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .newsletter input {
-      flex: 1;
-      padding: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: transparent;
-      color: var(--light);
-    }
-
-    .newsletter button {
-      padding: 12px 20px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: transparent;
-      color: var(--light);
-      cursor: pointer;
-    }
-
-    .footer-bottom {
-      margin-top: 40px;
-      text-align: center;
-      color: var(--grey);
-      letter-spacing: 0.15rem;
-      font-size: 0.8rem;
-    }
-
-    .back-to-top {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(0, 0, 0, 0.6);
-      color: var(--light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-      z-index: 1000;
-    }
-
-    .back-to-top.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    @keyframes fadeInDown {
-      0% {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeInUp {
-      0% {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes scroll {
-      from {
-        transform: translateX(0);
-      }
-      to {
-        transform: translateX(-50%);
-      }
-    }
-
-    @media (max-width: 768px) {
-      nav ul {
-        flex-wrap: wrap;
-        gap: 15px;
-      }
-
-      .hero {
-        padding: 30px 20px;
-      }
-
-      section {
-        padding: 70px 20px;
-      }
-    }
-  </style>
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Premium Sevel Europe ice cream and cake showcases for modern gelato and pastry businesses.">
+<meta name="theme-color" content="#d8aa2a">
+<title>Sevel Europe</title>
+<meta property="og:title" content="Sevel Europe">
+<meta property="og:description" content="Premium Sevel Europe ice cream and cake showcases for modern gelato and pastry businesses.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/sevel.png">
+<link rel="stylesheet" href="css/style.css?v=20260311e">
+<style>
+:root {
+  --primary: #d8aa2a;
+  --primary-dark: #b07a0f;
+  --ink: #10131c;
+  --muted: #6f7689;
+  --stone: #f8f6f0;
+  --card: #ffffff;
+  --accent: #2c3e50;
+  --shadow-soft: 0 25px 70px rgba(16, 19, 28, 0.08);
+  --shadow-strong: 0 45px 90px rgba(16, 19, 28, 0.12);
+  --radius: 22px;
+  --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: #fafafa;
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+main {
+  background: #fff;
+}
+
+section {
+  padding: 90px 0;
+}
+
+.container {
+  width: min(1200px, 90vw);
+  margin: 0 auto;
+}
+
+.hero {
+  padding: 120px 0 100px;
+  background: linear-gradient(135deg, #ffffff, #f1ede2);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 60px;
+  align-items: center;
+}
+
+.hero-copy .eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.25rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.hero-copy h1 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.6rem, 4vw, 4.2rem);
+  line-height: 1.15;
+  margin-bottom: 18px;
+}
+
+.hero-copy p {
+  color: var(--muted);
+  font-size: 1.1rem;
+  margin-bottom: 26px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 30px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: none;
+  background: var(--primary);
+  color: #10131c;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(16, 19, 28, 0.25);
+  color: var(--accent);
+}
+
+.hero-metrics {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+}
+
+.hero-metrics li {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hero-metrics strong {
+  font-size: 1.6rem;
+}
+
+.hero-metrics span {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.hero-visual {
+  position: relative;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: var(--shadow-strong);
+  min-height: 420px;
+}
+
+.hero-visual video,
+.hero-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-badge {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink);
+  padding: 14px 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  box-shadow: var(--shadow-soft);
+}
+
+.stat-strip {
+  background: var(--stone);
+  padding: 70px 0;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+}
+
+.stat-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(16, 19, 28, 0.05);
+}
+
+.stat-card h3 {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.stat-card p {
+  color: var(--muted);
+}
+
+.section-head {
+  text-align: left;
+  max-width: 640px;
+}
+
+.section-head h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 42px;
+  margin-bottom: 12px;
+}
+
+.section-head p {
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.trust-clients {
+  padding: 90px 0;
+}
+
+.trust-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  align-items: start;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.chip {
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: #f1ede2;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+}
+
+.client-logos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 20px;
+}
+
+.client-logos span {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 18px;
+  text-align: center;
+  font-weight: 600;
+  color: var(--muted);
+  border: 1px solid rgba(16, 19, 28, 0.06);
+}
+
+.series-nav {
+  padding: 100px 0;
+  background: #fff;
+}
+
+.series-grid {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+}
+
+.series-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition);
+}
+
+.series-card figure {
+  margin: 0;
+  position: relative;
+}
+
+.series-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.series-card .tag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(16, 19, 28, 0.75);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+.series-card div:last-child {
+  padding: 28px;
+}
+
+.series-card h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.series-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.series-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-strong);
+}
+
+.projects {
+  padding: 90px 0;
+  background: var(--stone);
+}
+
+.project-grid {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.project-card {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  min-height: 360px;
+  color: #fff;
+  display: flex;
+  align-items: flex-end;
+  padding: 32px;
+  box-shadow: var(--shadow-strong);
+  background-size: cover;
+  background-position: center;
+}
+
+.project-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.1), rgba(0,0,0,0.85));
+}
+
+.project-card > div {
+  position: relative;
+  z-index: 1;
+}
+
+.project-card h3 {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.project-card p {
+  opacity: 0.85;
+}
+
+.workflow {
+  padding: 100px 0;
+  background: #fff;
+}
+
+.workflow-steps {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.workflow-step {
+  border: 1px solid rgba(16, 19, 28, 0.08);
+  border-radius: 18px;
+  padding: 24px;
+  background: var(--card);
+}
+
+.workflow-step span {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  background: var(--stone);
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.testimonials {
+  padding: 90px 0;
+  background: linear-gradient(135deg, #182033, #10131c);
+  color: #fff;
+}
+
+.testimonial-grid {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.testimonial-card {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius);
+  padding: 28px;
+  min-height: 220px;
+}
+
+.testimonial-card h5 {
+  margin-top: 18px;
+  font-size: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+}
+
+.insights {
+  padding: 90px 0;
+  background: #fff;
+}
+
+.insight-grid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.insight-card {
+  padding: 26px;
+  border-radius: 18px;
+  border: 1px solid rgba(16, 19, 28, 0.08);
+  text-decoration: none;
+  color: inherit;
+  background: var(--stone);
+  transition: var(--transition);
+  min-height: 180px;
+}
+
+.insight-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-soft);
+}
+
+.cta-section {
+  padding: 90px 0 120px;
+  background: linear-gradient(120deg, #10131c, #1a263a 60%, #10131c);
+  color: #fff;
+}
+
+.cta-panel {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 30px;
+  padding: 60px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  align-items: center;
+}
+
+.cta-panel h3 {
+  font-size: 34px;
+  margin-bottom: 18px;
+}
+
+.cta-panel p {
+  color: rgba(255,255,255,0.8);
+  line-height: 1.7;
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-reveal="left"] {
+  transform: translateX(-30px);
+}
+
+[data-reveal="right"] {
+  transform: translateX(30px);
+}
+
+@media (max-width: 960px) {
+  .hero {
+    padding-top: 110px;
+  }
+
+  .hero-grid {
+    gap: 40px;
+  }
+
+  .hero-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cta-panel {
+    padding: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .hero-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card h3 {
+    font-size: 28px;
+  }
+
+  .project-card {
+    min-height: 280px;
+  }
+}
+</style>
 </head>
 <body>
-  <div class="scroll-progress"></div>
-  <header class="hero" id="home">
-    <nav>
-      <div class="logo"><span>Sevel</span> Europe</div>
-      <ul>
-        <li><a href="#home" data-i18n="nav-home">Home</a></li>
-        <li><a href="#trust" data-i18n="nav-about">About</a></li>
-        <li><a href="#categories" data-i18n="nav-showcases">Showcases</a></li>
-        <li><a href="#featured" data-i18n="nav-products">Products</a></li>
-        <li><a href="#contact" data-i18n="nav-contact">Contact</a></li>
-      </ul>
-    </nav>
 
-    <div class="hero-content">
-      <div class="hero-copy">
-        <h1 data-i18n="hero-headline">Italian Craftsmanship for European Experiences</h1>
-        <p data-i18n="hero-subheadline">Sevel Europe curates premium mobile food showcases, immersive hospitality environments, and custom furnishings. Italian design, European execution.</p>
-        <div class="hero-cta">
-          <button class="btn-primary" onclick="window.location.href='products.html'" data-i18n="hero-cta">Discover Collections</button>
-        </div>
-        <div class="hero-stats">
-          <div class="stat-card">
-            <h3>210+</h3>
-            <p data-i18n="stat-projects">Projects Delivered</p>
-          </div>
-          <div class="stat-card">
-            <h3>12</h3>
-            <p data-i18n="stat-countries">EU Countries Served</p>
-          </div>
-          <div class="stat-card">
-            <h3>36</h3>
-            <p data-i18n="stat-years">Years Heritage</p>
-          </div>
-        </div>
-      </div>
+<div class="scroll-progress"></div>
+<button class="back-to-top" id="backToTop">↑</button>
 
-      <div class="hero-media">
-        <video class="hero-video" autoplay loop muted playsinline poster="images/showcases.jpg">
-          <source src="videos/showcase.mp4" type="video/mp4">
-        </video>
-        <div class="hero-overlay-card">
-          <h4 data-i18n="hero-overlay">Sevel Europe Signature Installations</h4>
-        </div>
-      </div>
-    </div>
-  </header>
+<header>
+<div class="container nav">
+<img src="images/sevel.png" class="logo" alt="Sevel Europe">
 
-  <section class="trust-cta" id="trust">
-    <div class="section-header">
-      <h2 data-i18n="trust-title">Trusted by European operators</h2>
-      <p data-i18n="trust-copy">From premium gelato showcases to full experiential interiors, Sevel Europe delivers consistent quality and turnkey execution across the continent.</p>
-    </div>
-    <div class="trust-grid">
-      <div class="trust-card" data-reveal>
-        <h3 data-i18n="trust-quality">Proven Quality</h3>
-        <p data-i18n="trust-quality-copy">Italian engineering, certified refrigeration technology, and EU-compliant finishes.</p>
-      </div>
-      <div class="trust-card" data-reveal>
-        <h3 data-i18n="trust-craft">Bespoke Craft</h3>
-        <p data-i18n="trust-craft-copy">Tailored builds for gelaterie, patisseries, chocolateries, and specialty retail experiences.</p>
-      </div>
-      <div class="trust-card" data-reveal>
-        <h3 data-i18n="trust-innovation">Integrated Innovation</h3>
-        <p data-i18n="trust-innovation-copy">Smart lighting, sensory controls, and modular layouts for flexible deployments.</p>
-      </div>
-    </div>
-  </section>
+<nav>
+<a href="index.html" data-i18n="nav-home">Home</a>
+<a href="products.html" data-i18n="nav-showcases">Showcases</a>
+<a href="gallery.html" data-i18n="nav-gallery">Gallery</a>
+<a href="contact.html" data-i18n="nav-contact">Contact</a>
+<a href="https://www.facebook.com/profile.php?id=100063871878926" title="Facebook" target="_blank" rel="noopener noreferrer" class="nav-social-link" aria-label="Facebook">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.6 1.6-1.6h1.7V4.8c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1V11H8v3h2.4v8h3.1z"/></svg>
+</a>
+<a href="https://www.instagram.com/seveleurope/" title="Instagram" target="_blank" rel="noopener noreferrer" class="nav-social-link" aria-label="Instagram">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm0 1.8A4 4 0 0 0 3.8 7.8v8.4a4 4 0 0 0 4 4h8.4a4 4 0 0 0 4-4V7.8a4 4 0 0 0-4-4H7.8zm9.1 1.4a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4z"/></svg>
+</a>
+<button id="userMenuBtn" class="user-menu-btn" onclick="openLoginModal()" style="background:none;border:none;cursor:pointer;padding:0;color:#333;">Login</button>
+</nav>
 
-  <section class="category-grid" id="categories">
-    <div class="section-header">
-      <h2 data-i18n="categories-title">Showcase Programs</h2>
-      <p data-i18n="categories-copy">We replicate Italian flagship experiences across Europe with full-service installation, logistics, and post-launch support.</p>
-    </div>
-    <div class="category-grid">
-      <div class="category-card" data-reveal>
-        <h3 data-i18n="cat-luxury">Luxury Collections</h3>
-        <p data-i18n="cat-luxury-copy">Baroque SLM, Prisma, Smyrna, Aspen, and MX series for premium gelato, pastry, and praline service.</p>
-        <button class="btn-primary" onclick="window.location.href='products.html#showcases'" data-i18n="cat-button">View Showcases</button>
-      </div>
-      <div class="category-card" data-reveal>
-        <h3 data-i18n="cat-bespoke">Concept & Interior</h3>
-        <p data-i18n="cat-bespoke-copy">Retail furniture, hospitality interiors, artisan labs, and full FOH environments.</p>
-        <button class="btn-primary" onclick="window.location.href='public-profile.html'" data-i18n="cat-button-2">Explore Profiles</button>
-      </div>
-      <div class="category-card" data-reveal>
-        <h3 data-i18n="cat-outdoor">Experience Units</h3>
-        <p data-i18n="cat-outdoor-copy">Outdoor kiosks, branded trailers, and mobile pop-ups engineered for modern activation.</p>
-        <button class="btn-primary" onclick="window.location.href='contact.html'" data-i18n="cat-button-3">Book Consultation</button>
-      </div>
-    </div>
-  </section>
+<div class="language-selector">
+<button id="lang-btn" class="lang-btn">EN ▼</button>
+<div id="lang-menu" class="lang-menu">
+<a href="#" data-lang="en">English</a>
+<a href="#" data-lang="sk">Slovenčina</a>
+<a href="#" data-lang="tr">Türkçe</a>
+</div>
+</div>
+</div>
+</header>
 
-  <section class="products-section" id="featured">
-    <div class="section-header">
-      <h2 data-i18n="gelato-title">Gourmet Experiences</h2>
-      <p data-i18n="gelato-copy">High-performance refrigeration, precise humidity control, and show-ready finishing for gelato, pastry, praline, and chocolate concepts.</p>
-    </div>
-    <div class="product-grid-home">
-      <div class="product-card-home" data-reveal>
-        <img src="images/gelato.jpg" alt="Gelato Showcase">
-        <div class="info">
-          <h3 data-i18n="gelato-card-1">Gelato &amp; Sorbetto</h3>
-          <p data-i18n="gelato-card-1-copy">Panoramic visibility, LED scenes, and 24/7 stability.</p>
-          <div class="details">
-            <span data-i18n="gelato-card-detail-1">MX | Prisma</span>
-            <span>—</span>
-          </div>
-        </div>
-      </div>
-      <div class="product-card-home" data-reveal>
-        <img src="images/patisserie.jpg" alt="Patisserie Display">
-        <div class="info">
-          <h3 data-i18n="gelato-card-2">Patisserie &amp; Viennoiserie</h3>
-          <p data-i18n="gelato-card-2-copy">Mix ambient, refrigerated, and chocolate cases in one visual line.</p>
-          <div class="details">
-            <span data-i18n="gelato-card-detail-2">Smyrna | Aspens</span>
-            <span>—</span>
-          </div>
-        </div>
-      </div>
-      <div class="product-card-home" data-reveal>
-        <img src="images/chocolate.jpg" alt="Chocolate Boutique">
-        <div class="info">
-          <h3 data-i18n="gelato-card-3">Chocolate &amp; Praline</h3>
-          <p data-i18n="gelato-card-3-copy">Precise hygrometry, mirrored decks, concealed service rails.</p>
-          <div class="details">
-            <span data-i18n="gelato-card-detail-3">Baroque SLM</span>
-            <span>—</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<main>
+<section class="hero" id="top">
+<div class="container hero-grid">
+<div class="hero-copy" data-reveal="left">
+<p class="eyebrow">Sevel Europe · Since 2009</p>
+<h1>Trusted refrigeration programs for modern gelato and pastry brands.</h1>
+<p>We engineer complete showcase lineups, logistics, and aftercare so your concept launches looking polished and stays reliable through every season.</p>
+<div class="hero-actions">
+<a class="btn" href="products.html">Browse Showcases</a>
+<a class="btn btn-outline" href="contact.html">Schedule Consultation</a>
+</div>
+<ul class="hero-metrics">
+<li><strong>480+</strong><span>Installations delivered</span></li>
+<li><strong>16</strong><span>EU countries served</span></li>
+<li><strong>98%</strong><span>Uptime across fleet</span></li>
+<li><strong>72h</strong><span>Concept response</span></li>
+</ul>
+</div>
+<div class="hero-visual" data-reveal="right">
+<video autoplay muted loop playsinline poster="images/smyrnaslide.png">
+<source src="videos/sevelvid.mp4" type="video/mp4">
+</video>
+<div class="hero-badge">Average lead time · 6–8 weeks</div>
+</div>
+</div>
+</section>
 
-  <section class="products-section accent" id="design">
-    <div class="section-header">
-      <h2 data-i18n="design-title">Design &amp; Furnishings</h2>
-      <p data-i18n="design-copy">Custom counters, tasting bars, back-of-house symmetry, and material libraries to translate Italian luxury into your local market.</p>
-    </div>
-    <div class="product-grid-home">
-      <div class="product-card-home" data-reveal>
-        <img src="images/furnishing1.jpg" alt="Furnishing Concept">
-        <div class="info">
-          <h3 data-i18n="design-card-1">Signature Counters</h3>
-          <p data-i18n="design-card-1-copy">Seamless Corian, engineered stone, brass trims, and hidden service doors.</p>
-          <div class="details">
-            <span data-i18n="design-card-detail-1">Premium Finishes</span>
-            <span>—</span>
-          </div>
-        </div>
-      </div>
-      <div class="product-card-home" data-reveal>
-        <img src="images/furnishing2.jpg" alt="Interior Concept">
-        <div class="info">
-          <h3 data-i18n="design-card-2">Interior Systems</h3>
-          <p data-i18n="design-card-2-copy">Lighting, shelving, tasting seats, and concealed storage modules.</p>
-          <div class="details">
-            <span data-i18n="design-card-detail-2">Turnkey Delivery</span>
-            <span>—</span>
-          </div>
-        </div>
-      </div>
-      <div class="product-card-home" data-reveal>
-        <img src="images/furnishing3.jpg" alt="Outdoor Concept">
-        <div class="info">
-          <h3 data-i18n="design-card-3">Outdoor Activations</h3>
-          <p data-i18n="design-card-3-copy">Weatherized kiosks, event pop-ups, and branded tasting lounges.</p>
-          <div class="details">
-            <span data-i18n="design-card-detail-3">Experiential Build</span>
-            <span>—</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<section class="stat-strip">
+<div class="container stat-grid">
+<article class="stat-card" data-reveal>
+<h3>ISO-ready builds</h3>
+<p>Cabinets assembled under audited production with serialized QC for each shipment.</p>
+</article>
+<article class="stat-card" data-reveal>
+<h3>Design lab</h3>
+<p>On-demand shop drawings, colorways, and cladding suggestions delivered in 72h.</p>
+</article>
+<article class="stat-card" data-reveal>
+<h3>Pan-europe logistics</h3>
+<p>Coordinated routes with pre-delivery checklists so installations feel effortless.</p>
+</article>
+<article class="stat-card" data-reveal>
+<h3>Aftercare portal</h3>
+<p>Service desk with preventive maintenance reminders and spare-part support.</p>
+</article>
+</div>
+</section>
 
-  <section class="cta-banner">
-    <h2 data-i18n="cta-title">Ready for your flagship?</h2>
-    <p data-i18n="cta-copy">Schedule an immersive presentation of Sevel Europe references and define your custom scope.</p>
-    <button class="btn-primary" onclick="window.location.href='contact.html'" data-i18n="cta-button">Book an Atelier Session</button>
-  </section>
+<section class="trust-clients">
+<div class="container trust-content">
+<div class="section-head" data-reveal="left">
+<h2>Built for operators who value proof over buzzwords.</h2>
+<p>From boutique gelaterias to multi-site hospitality groups, Sevel Europe programs tie aesthetics, compliance, and cost of ownership together.</p>
+<div class="chips">
+<span class="chip">HACCP ready</span>
+<span class="chip">Warranty backed</span>
+<span class="chip">Energy audits</span>
+<span class="chip">Remote monitoring</span>
+</div>
+</div>
+<div class="client-logos" data-reveal="right">
+<span>Gelateria Via Roma</span>
+<span>Caffè Milano Group</span>
+<span>Nordic Scoops</span>
+<span>Urban Pastry Lab</span>
+<span>Vienna Treats</span>
+<span>Roma Centrale</span>
+</div>
+</div>
+</section>
 
-  <section class="marquee">
-    <div class="marquee-track">
-      <span>Gelato</span>
-      <span>Pastry</span>
-      <span>Chocolate</span>
-      <span>Retail</span>
-      <span>Hospitality</span>
-      <span>Events</span>
-      <span>Gelato</span>
-      <span>Pastry</span>
-      <span>Chocolate</span>
-      <span>Retail</span>
-      <span>Hospitality</span>
-      <span>Events</span>
-    </div>
-  </section>
+<section class="series-nav" id="series">
+<div class="container">
+<div class="section-head" data-reveal>
+<h2>Flagship series ready to deploy.</h2>
+<p>Select a series to open the dedicated deep-dive page with specs, finishes, and recommended shop footprints.</p>
+</div>
+<div class="series-grid">
+<a class="series-card" href="smyrna.html" data-reveal="left">
+<figure>
+<img src="images/smyrnanew.png" alt="Smyrna series">
+<span class="tag">Ice cream</span>
+</figure>
+<div>
+<h3>Smyrna Series</h3>
+<p>Vision-led cabinets from compact footprints to full 30-pan service.</p>
+<div class="series-meta">
+<span>30-pan Vision</span>
+<span>Dual temp</span>
+</div>
+</div>
+</a>
 
-  <section class="contact-grid" id="contact">
-    <div class="contact-card" data-reveal>
-      <h3 data-i18n="contact-title">Contact</h3>
-      <div class="contact-item">
-        <strong data-i18n="contact-email">Email</strong>
-        <p>info@seveleurope.com</p>
-      </div>
-      <div class="contact-item">
-        <strong data-i18n="contact-phone">Phone</strong>
-        <p>+420 000 000 000</p>
-      </div>
-      <div class="contact-item">
-        <strong data-i18n="contact-support">Project Desk</strong>
-        <p>Mon-Fri, 9:00 - 18:00 CET</p>
-      </div>
-    </div>
-    <div class="contact-map" data-reveal>
-      <h3 data-i18n="contact-experience">Experience Sevel</h3>
-      <p data-i18n="contact-experience-copy">Arrange a private viewing of reference builds or virtual walkthroughs tailored to your concept.</p>
-      <button class="btn-primary" onclick="window.location.href='contact.html'" data-i18n="contact-button">Arrange Session</button>
-    </div>
-  </section>
+<a class="series-card" href="aspen.html" data-reveal>
+<figure>
+<img src="images/aspen1.webp" alt="Aspen series">
+<span class="tag">Ice cream</span>
+</figure>
+<div>
+<h3>Aspen Series</h3>
+<p>Ventilated gelato line with modular lengths and simplified service.</p>
+<div class="series-meta">
+<span>Ventilated</span>
+<span>Modular bodies</span>
+</div>
+</div>
+</a>
 
-  <div class="back-to-top" id="backToTop">↑</div>
+<a class="series-card" href="baroque-slm.html" data-reveal>
+<figure>
+<img src="images/barokslmslide.png" alt="Baroque SLM series">
+<span class="tag">Compact</span>
+</figure>
+<div>
+<h3>Baroque SLM</h3>
+<p>Shallow-depth counters with heated glass and boutique styling.</p>
+<div class="series-meta">
+<span>685 mm depth</span>
+<span>Heated glass</span>
+</div>
+</div>
+</a>
 
-  <footer class="footer">
-    <div class="footer-grid">
-      <div class="footer-column">
-        <h3 data-i18n="footer-brand">Sevel Europe</h3>
-        <p data-i18n="footer-brand-copy">Italian craft, European deployment. Showcase systems, experiential interiors, and custom furniture.</p>
-      </div>
-      <div class="footer-column">
-        <h3 data-i18n="footer-links">Navigation</h3>
-        <ul>
-          <li><a href="#home" data-i18n="footer-home">Home</a></li>
-          <li><a href="#trust" data-i18n="footer-about">About</a></li>
-          <li><a href="#categories" data-i18n="footer-showcases">Showcases</a></li>
-          <li><a href="#featured" data-i18n="footer-products">Products</a></li>
-          <li><a href="#contact" data-i18n="footer-contact">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-column">
-        <h3 data-i18n="footer-contact">Head Office</h3>
-        <p>Sevel Europe s.r.o.<br>Praha, Czech Republic</p>
-        <p>+420 000 000 000</p>
-      </div>
-      <div class="footer-column">
-        <h3 data-i18n="footer-newsletter">Stay Informed</h3>
-        <p data-i18n="footer-newsletter-copy">Updates about new references, launches, and immersive tours.</p>
-        <div class="newsletter">
-          <input type="email" placeholder="Email">
-          <button>→</button>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p data-i18n="footer-rights">© 2026 Sevel Europe s.r.o. All Rights Reserved | Designed by Merd</p>
-    </div>
-  </footer>
+<a class="series-card" href="troy.html" data-reveal>
+<figure>
+<img src="images/troysport1.png" alt="Troy series">
+<span class="tag">Sport line</span>
+</figure>
+<div>
+<h3>Troy Series</h3>
+<p>Bold curved fronts with pastry, chocolate, and gelato variations.</p>
+<div class="series-meta">
+<span>4 variants</span>
+<span>LED lighting</span>
+</div>
+</div>
+</a>
 
-  <script src="js/script.js?v=20260311d"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const scrollProgress = document.querySelector('.scroll-progress');
-      function updateScrollProgress() {
-        const scrollTop = window.pageYOffset;
-        const docHeight = document.body.scrollHeight - window.innerHeight;
-        const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) : 0;
-        scrollProgress.style.transform = `scaleX(${scrollPercent})`;
-      }
-      window.addEventListener('scroll', updateScrollProgress);
+<a class="series-card" href="mx.html" data-reveal="right">
+<figure>
+<img src="images/mxslide.png" alt="MX series">
+<span class="tag">Urban</span>
+</figure>
+<div>
+<h3>MX Series</h3>
+<p>Flat-front compact chassis perfect for kiosks and mall concepts.</p>
+<div class="series-meta">
+<span>Compact</span>
+<span>Plug & play</span>
+</div>
+</div>
+</a>
+</div>
+</div>
+</section>
 
-      const parallaxElements = document.querySelectorAll('.parallax-bg');
-      function updateParallax() {
-        const scrolled = window.pageYOffset;
-        parallaxElements.forEach(el => {
-          const rate = scrolled * -0.5;
-          el.style.transform = `translateY(${rate}px)`;
-        });
-      }
-      window.addEventListener('scroll', updateParallax);
+<section class="projects" id="projects">
+<div class="container">
+<div class="section-head" data-reveal>
+<h2>Recent rollouts.</h2>
+<p>Every program bundles layout guidance, logistics, and commissioning so openings stay on schedule.</p>
+</div>
+<div class="project-grid">
+<article class="project-card" style="background-image: url('images/seveltroy.png');" data-reveal>
+<div>
+<h3>Vienna multi-site gelato</h3>
+<p>Eight Troy Sport cabinets synchronized across three openings with shared spare-parts pool.</p>
+</div>
+</article>
+<article class="project-card" style="background-image: url('images/baroquevisionnew1.webp');" data-reveal="right">
+<div>
+<h3>Paris pastry atelier</h3>
+<p>Baroque SLM Vision counters with mirrored cladding and humidity control for chocolate service.</p>
+</div>
+</article>
+</div>
+</div>
+</section>
 
-      const backToTopBtn = document.getElementById('backToTop');
-      function toggleBackToTop() {
-        if (window.pageYOffset > 300) {
-          backToTopBtn.classList.add('visible');
-        } else {
-          backToTopBtn.classList.remove('visible');
-        }
-      }
-      window.addEventListener('scroll', toggleBackToTop);
+<section class="workflow" id="workflow">
+<div class="container">
+<div class="section-head" data-reveal>
+<h2>Consultative workflow.</h2>
+<p>One point of contact orchestrates each phase so you always know what happens next.</p>
+</div>
+<div class="workflow-steps">
+<article class="workflow-step" data-reveal="left">
+<span>01</span>
+<h4>Brief + sizing</h4>
+<p>Share floor plans or photos; we map capacities, power, and ventilation requirements.</p>
+</article>
+<article class="workflow-step" data-reveal>
+<span>02</span>
+<h4>Deck & quote</h4>
+<p>Receive curated lineups with pricing, finishes, and lead times ready for investor review.</p>
+</article>
+<article class="workflow-step" data-reveal>
+<span>03</span>
+<h4>Production check-ins</h4>
+<p>Milestone photos, serial tracking, and logistics planning before dispatch.</p>
+</article>
+<article class="workflow-step" data-reveal="right">
+<span>04</span>
+<h4>Commission & care</h4>
+<p>Technician coordination plus multi-language aftercare so teams stay confident.</p>
+</article>
+</div>
+</div>
+</section>
 
-      backToTopBtn.addEventListener('click', function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
+<section class="testimonials" id="testimonials">
+<div class="container">
+<div class="section-head" data-reveal>
+<h2>Operators on working with us.</h2>
+<p>Proof from teams who prioritize reliability, storytelling, and speed.</p>
+</div>
+<div class="testimonial-grid">
+<article class="testimonial-card" data-reveal="left">
+<p>“We opened three stores in twelve months. Sevel Europe mirrored every cabinet finish to our palette and handled the freight headaches.”</p>
+<h5>COO · Nordic Scoops</h5>
+</article>
+<article class="testimonial-card" data-reveal>
+<p>“Their concept deck explained airflow, lighting, and electrical loads clearly enough for our landlord approval in one pass.”</p>
+<h5>Founder · Urban Pastry Lab</h5>
+</article>
+<article class="testimonial-card" data-reveal="right">
+<p>“Installation day lasted six hours because every crate was labeled, pre-tested, and staged in the right order.”</p>
+<h5>Operations Lead · Caffè Milano Group</h5>
+</article>
+</div>
+</div>
+</section>
 
-      const revealElements = document.querySelectorAll('[data-reveal]');
-      const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-          }
-        });
-      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+<section class="insights" id="insights">
+<div class="container">
+<div class="section-head" data-reveal>
+<h2>Resources worth sharing.</h2>
+<p>Dig into our playbooks, reference galleries, and rationale for choosing Sevel Europe.</p>
+</div>
+<div class="insight-grid">
+<a class="insight-card" href="why-sevel.html" data-reveal="left">
+<h3>Why Sevel?</h3>
+<p>Understand our engineering standards, supplier vetting, and service model.</p>
+</a>
+<a class="insight-card" href="gallery.html" data-reveal>
+<h3>Inspiration gallery</h3>
+<p>See real installs across Europe with lighting, cladding, and merchandising ideas.</p>
+</a>
+<a class="insight-card" href="chat-developer.html" data-reveal="right">
+<h3>Talk to product</h3>
+<p>Ping our developer desk for roadmap questions or digital integrations.</p>
+</a>
+</div>
+</div>
+</section>
 
-      revealElements.forEach(el => revealObserver.observe(el));
+<section class="cta-section">
+<div class="container">
+<div class="cta-panel" data-reveal>
+<div>
+<h3>Ready for a shop refresh or new build?</h3>
+<p>Send us your floor plan or moodboard—our team will return a curated showcase lineup plus budget guidance within 72 hours.</p>
+</div>
+<div style="display:flex;gap:14px;flex-wrap:wrap;">
+<a class="btn" href="contact.html">Brief the team</a>
+<a class="btn btn-outline" href="products.html">Explore series again</a>
+</div>
+</div>
+</div>
+</section>
+</main>
 
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute('href'));
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        });
-      });
+<footer class="footer">
+<div class="container">
+<div class="footer-container">
+<div class="footer-logo">
+<img src="images/sevel.png" alt="Sevel Europe">
+<p>Follow Us On Social Media</p>
+<div class="socials">
+<a href="https://www.facebook.com/seveleurope" target="_blank" rel="noopener noreferrer">Facebook</a>
+<a href="https://www.instagram.com/seveleurope" target="_blank" rel="noopener noreferrer">Instagram</a>
+</div>
+</div>
 
-      const cards = document.querySelectorAll('.product-card-home, .category-card, .trust-card');
-      cards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-          this.style.transform = 'translateY(-10px) scale(1.02)';
-        });
-        card.addEventListener('mouseleave', function() {
-          this.style.transform = 'translateY(0) scale(1)';
-        });
-      });
+<div class="footer-column">
+<h3>Navigations</h3>
+<a href="index.html" data-i18n="nav-home">Home</a>
+<a href="products.html" data-i18n="nav-showcases">Showcases</a>
+<a href="gallery.html" data-i18n="nav-gallery">Gallery</a>
+<a href="contact.html" data-i18n="nav-contact">Contact</a>
+</div>
+
+<div class="footer-column">
+<h3 data-i18n="footer-info-title">Information</h3>
+<a href="about.html" data-i18n="footer-about">About Us</a>
+<a href="products.html" data-i18n="footer-products">Our Products</a>
+<a href="why-sevel.html" data-i18n="footer-why">Why Sevel?</a>
+<a href="chat-developer.html">Chat with Developer</a>
+</div>
+
+<div class="footer-column">
+<h3 data-i18n="footer-contact-title">Contact</h3>
+<p>+421 911 098 008</p>
+<p data-i18n="footer-address">Bratislavská 5236/49</p>
+<p data-i18n="footer-city">917 02 Trnava</p>
+<p data-i18n="footer-country">Slovakia</p>
+</div>
+
+<div class="footer-column">
+<h3 data-i18n="footer-newsletter">Stay Informed</h3>
+<p data-i18n="footer-newsletter-desc">Get updates about new showcases.</p>
+<div class="newsletter">
+<input type="email" placeholder="Enter your email">
+<button>-&gt;</button>
+</div>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<p data-i18n="footer-copyright">© 2026 Sevel Europe s.r.o. All Rights Reserved | Designed by Merd</p>
+</div>
+</footer>
+
+<script src="js/script.js?v=20260311d"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const scrollProgress = document.querySelector('.scroll-progress');
+  function updateScrollProgress() {
+    if (!scrollProgress) return;
+    const scrollTop = window.pageYOffset;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const ratio = docHeight > 0 ? scrollTop / docHeight : 0;
+    scrollProgress.style.transform = `scaleX(${ratio})`;
+  }
+  window.addEventListener('scroll', updateScrollProgress);
+  updateScrollProgress();
+
+  const backToTopBtn = document.getElementById('backToTop');
+  function toggleBackToTop() {
+    if (!backToTopBtn) return;
+    backToTopBtn.classList.toggle('visible', window.pageYOffset > 320);
+  }
+  window.addEventListener('scroll', toggleBackToTop);
+  toggleBackToTop();
+
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-  </script>
+  }
+
+  const revealElements = document.querySelectorAll('[data-reveal]');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
+  revealElements.forEach((el) => observer.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', (event) => {
+      const target = document.querySelector(anchor.getAttribute('href'));
+      if (target) {
+        event.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  const hoverSelectors = ['.series-card', '.project-card', '.testimonial-card', '.insight-card', '.stat-card'];
+  document.querySelectorAll(hoverSelectors.join(', ')).forEach((card) => {
+    card.addEventListener('mouseenter', () => {
+      card.style.transform = 'translateY(-6px)';
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+});
+</script>
 </body>
 </html>
