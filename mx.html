@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="MX Series overview with every MX showcase displayed in one scrollable story.">
+<meta name="theme-color" content="#d8aa2a">
+<title>MX Series | Sevel Europe</title>
+<meta property="og:title" content="MX Series | Sevel Europe">
+<meta property="og:description" content="Explore the MX compact showcase family with detailed highlights for each model.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/mx1.webp">
+<link rel="stylesheet" href="css/style.css?v=20260311e">
+<style>
+/* shared series styling */
+.series-banner { position: relative; width: 100%; height: clamp(240px, 50vh, 520px); overflow: hidden; background: #000; }
+.series-banner img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(1.05); }
+.series-banner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.55)); }
+.banner-caption { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.65); color: #fff; padding: 10px 24px; border-radius: 999px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; font-size: 13px; z-index: 1; }
+.series-hero { position: relative; overflow: hidden; background: #fdfbf5; padding: 120px 0 80px; }
+.series-hero::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(216,170,42,0.25), transparent 55%); pointer-events: none; }
+.hero-grid { position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 60px; align-items: center; z-index: 1; }
+.hero-copy .eyebrow { text-transform: uppercase; letter-spacing: 0.2em; font-size: 12px; color: #ba8910; margin-bottom: 16px; }
+.hero-copy h1 { font-family: 'Playfair Display', serif; font-size: 56px; line-height: 1.1; margin-bottom: 20px; }
+.hero-copy p { font-size: 18px; color: #555; max-width: 520px; line-height: 1.7; }
+.hero-actions { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 14px; }
+.hero-visual { position: relative; background: #fff; border-radius: 24px; padding: 32px; box-shadow: 0 25px 60px rgba(0,0,0,0.12); }
+.hero-visual img { width: 100%; display: block; }
+.hero-spec-chip { position: absolute; bottom: 24px; left: 24px; background: rgba(44,62,80,0.9); color: #fff; padding: 14px 20px; border-radius: 999px; font-weight: 600; font-size: 14px; box-shadow: 0 10px 30px rgba(44,62,80,0.3); }
+.model-nav { background: #fff; border-top: 1px solid rgba(0,0,0,0.05); border-bottom: 1px solid rgba(0,0,0,0.05); padding: 26px 0; }
+.model-nav .container { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; }
+.model-nav p { font-weight: 600; margin: 0; color: #555; }
+.model-nav-tags { display: flex; flex-wrap: wrap; gap: 12px; }
+.model-chip { border: 1px solid rgba(0,0,0,0.1); border-radius: 999px; padding: 8px 18px; text-decoration: none; color: #2c3e50; font-weight: 600; font-size: 14px; transition: all 0.2s ease; }
+.model-chip:hover { border-color: #d8aa2a; color: #d8aa2a; }
+.model-stack { padding: 90px 0 30px; }
+.model-panel { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 60px; align-items: center; margin-bottom: 90px; }
+.model-panel:last-of-type { margin-bottom: 0; }
+.model-panel.reverse .model-image { order: 2; }
+.model-panel.reverse .model-text { order: 1; }
+.model-image { background: #fff; border-radius: 20px; padding: 28px; box-shadow: 0 18px 50px rgba(0,0,0,0.08); }
+.model-image img { width: 100%; display: block; }
+.model-text .model-eyebrow { text-transform: uppercase; letter-spacing: 0.18em; font-size: 11px; color: #ba8910; margin-bottom: 12px; }
+.model-text h2 { font-size: 40px; margin-bottom: 16px; font-family: 'Playfair Display', serif; }
+.model-text p { color: #555; line-height: 1.7; margin-bottom: 22px; }
+.model-specs { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 20px; }
+.model-specs .stat { padding: 16px; border-radius: 14px; background: #f8f5ef; }
+.model-specs .stat-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #7f8c8d; margin-bottom: 4px; }
+.model-specs .stat-value { font-weight: 600; color: #2c3e50; }
+.model-highlights { list-style: none; padding: 0; margin: 0 0 26px; display: grid; gap: 10px; }
+.model-highlights li { position: relative; padding-left: 26px; color: #2c3e50; }
+.model-highlights li::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #d8aa2a; position: absolute; left: 8px; top: 10px; }
+.model-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.series-note { background: linear-gradient(135deg, #2c3e50, #3e4f66); color: #fff; padding: 70px 0; margin-top: 40px; }
+.series-note .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; align-items: center; }
+.series-note h2 { font-size: 36px; margin-bottom: 10px; }
+.series-note p { margin-bottom: 0; color: rgba(255,255,255,0.85); }
+.series-note .btn-outline { border-color: #fff; color: #fff; }
+.series-note .btn-outline:hover { border-color: #ffd000; color: #ffd000; }
+@media (max-width: 768px) {
+  .hero-copy h1 { font-size: 40px; }
+  .model-panel { gap: 30px; }
+  .model-text h2 { font-size: 32px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container nav">
+<img src="images/sevel.png" class="logo" alt="Sevel Europe">
+
+<nav>
+<a href="index.html">Home</a>
+<a href="products.html">Showcases</a>
+<a href="gallery.html">Gallery</a>
+<a href="contact.html">Contact</a>
+<a href="https://www.facebook.com/profile.php?id=100063871878926" title="Facebook" target="_blank" rel="noopener noreferrer" class="nav-social-link" aria-label="Facebook">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.6 1.6-1.6h1.7V4.8c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1V11H8v3h2.4v8h3.1z"/></svg>
+</a>
+<a href="https://www.instagram.com/seveleurope/" title="Instagram" target="_blank" rel="noopener noreferrer" class="nav-social-link" aria-label="Instagram">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm0 1.8A4 4 0 0 0 3.8 7.8v8.4a4 4 0 0 0 4 4h8.4a4 4 0 0 0 4-4V7.8a4 4 0 0 0-4-4H7.8zm9.1 1.4a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4z"/></svg>
+</a>
+<button id="userMenuBtn" class="user-menu-btn" onclick="openLoginModal()" style="background: none; border: none; cursor: pointer; padding: 0; color: #333;">Login</button>
+</nav>
+
+<div class="language-selector">
+<button id="lang-btn" class="lang-btn">EN ▼</button>
+<div id="lang-menu" class="lang-menu">
+<a href="#" data-lang="en">English</a>
+<a href="#" data-lang="sk">Slovenčina</a>
+<a href="#" data-lang="tr">Türkçe</a>
+</div>
+</div>
+</div>
+</header>
+
+<main>
+<section class="series-banner" aria-label="MX series showcase image">
+<img src="images/mx1.webp" alt="MX showcase slide">
+<div class="banner-caption">MX Series Lineup</div>
+</section>
+
+<section class="series-hero">
+<div class="container hero-grid">
+<div class="hero-copy">
+<p class="eyebrow">MX Series</p>
+<h1>Compact Performance Cabinets</h1>
+<p>MX showcases are built for operators who need reliable refrigeration in a smaller footprint. Compare the original MX and its flat-front sibling in one place.</p>
+<div class="hero-actions">
+<a class="btn" href="#series-models">Browse Models</a>
+<a class="btn btn-outline" href="contact.html">Plan a Project</a>
+</div>
+</div>
+<div class="hero-visual">
+<img src="images/mx2.webp" alt="MX showcase overview">
+<div class="hero-spec-chip">Minimal footprint</div>
+</div>
+</div>
+</section>
+
+<section class="model-nav">
+<div class="container">
+<p>Models in this series</p>
+<div class="model-nav-tags" id="model-nav-tags"></div>
+</div>
+</section>
+
+<section class="model-stack">
+<div class="container" id="series-models"></div>
+</section>
+
+<section class="series-note">
+<div class="container">
+<div>
+<h2>Need a quick retrofit?</h2>
+<p>MX units slide into kiosks, malls, and tight interiors. Send us site photos and we will suggest the right configuration.</p>
+</div>
+<div class="hero-actions">
+<a class="btn" href="contact.html">Request Offer</a>
+<a class="btn btn-outline" href="products.html">Back to Showcases</a>
+</div>
+</div>
+</section>
+</main>
+
+<footer class="footer">
+<div class="container">
+<div class="footer-container">
+<div class="footer-logo">
+<img src="images/sevel.png" alt="Sevel Europe">
+<p>Follow Us On Social Media</p>
+<div class="socials">
+<a href="https://www.facebook.com/seveleurope" target="_blank" rel="noopener noreferrer">Facebook</a>
+<a href="https://www.instagram.com/seveleurope" target="_blank" rel="noopener noreferrer">Instagram</a>
+</div>
+</div>
+<div class="footer-column">
+<h3>Navigations</h3>
+<a href="index.html" data-i18n="nav-home">Home</a>
+<a href="products.html" data-i18n="nav-showcases">Showcases</a>
+<a href="gallery.html" data-i18n="nav-gallery">Gallery</a>
+<a href="contact.html" data-i18n="nav-contact">Contact</a>
+</div>
+<div class="footer-column">
+<h3>Information</h3>
+<a href="about.html">About Us</a>
+<a href="products.html">Our Products</a>
+<a href="why-sevel.html">Why Sevel?</a>
+<a href="chat-developer.html">Chat with Developer</a>
+</div>
+<div class="footer-column">
+<h3>Contact</h3>
+<p>+421 911 098 008</p>
+<p>Bratislavska 5236/49</p>
+<p>917 02 Trnava</p>
+<p>Slovakia</p>
+</div>
+<div class="footer-column">
+<h3>Stay Informed</h3>
+<p>Get updates about new showcases.</p>
+<div class="newsletter">
+<input type="email" placeholder="Enter your email">
+<button>-&gt;</button>
+</div>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<p>(c) 2026 Sevel Europe s.r.o. All Rights Reserved | Designed by Merd</p>
+</div>
+</footer>
+
+<script>
+const mxModels = [
+  {
+    id: "mx",
+    eyebrow: "Compact flagship",
+    title: "MX",
+    description:
+      "The base MX cabinet combines a compact body with ventilated cooling and automatic defrost, making it ideal for kiosks and neighborhood shops.",
+    image: "images/mx1.webp",
+    specs: [
+      { label: "Body", value: "Compact commercial cabinet" },
+      { label: "Cooling", value: "Professional ventilated" },
+      { label: "Temperature", value: "-18°C to -22°C" }
+    ],
+    highlights: [
+      "High-density polyurethane insulation keeps performance steady.",
+      "Clear curved glass emphasizes displayed flavors.",
+      "Runs quietly thanks to optimized airflow path."
+    ],
+    link: "mx"
+  },
+  {
+    id: "mx-flat",
+    eyebrow: "Flat-front variant",
+    title: "MX Flat",
+    description:
+      "MX Flat takes the same refrigeration package but swaps in a minimalist flat-front glass for contemporary interiors and architectural counters.",
+    image: "images/mxflat2.webp",
+    specs: [
+      { label: "Front", value: "Flat minimal glass" },
+      { label: "Cooling", value: "Professional ventilated" },
+      { label: "Temperature", value: "-18°C to -22°C" }
+    ],
+    highlights: [
+      "Streamlined facade aligns with modern millwork.",
+      "Automatic defrost keeps service continuous.",
+      "Pairs with pastry or drink modules for hybrid programs."
+    ],
+    link: "mx-flat"
+  }
+];
+
+const tagsContainer = document.getElementById("model-nav-tags");
+const modelsContainer = document.getElementById("series-models");
+
+mxModels.forEach((model, index) => {
+  const tag = document.createElement("a");
+  tag.href = "#" + model.id;
+  tag.textContent = model.title;
+  tag.className = "model-chip";
+  tagsContainer.appendChild(tag);
+
+  const panel = document.createElement("article");
+  panel.className = "model-panel" + (index % 2 ? " reverse" : "");
+  panel.id = model.id;
+  panel.innerHTML = `
+    <div class="model-image">
+      <img src="${model.image}" alt="${model.title}">
+    </div>
+    <div class="model-text">
+      <p class="model-eyebrow">${model.eyebrow}</p>
+      <h2>${model.title}</h2>
+      <p>${model.description}</p>
+      <div class="model-specs">
+        ${model.specs
+          .map(
+            (spec) => `
+              <div class="stat">
+                <p class="stat-label">${spec.label}</p>
+                <p class="stat-value">${spec.value}</p>
+              </div>
+            `
+          )
+          .join("")}
+      </div>
+      <ul class="model-highlights">
+        ${model.highlights.map((item) => `<li>${item}</li>`).join("")}
+      </ul>
+      <div class="model-actions">
+        <a class="btn" href="product.html?model=${model.link}">View technical sheet</a>
+      </div>
+    </div>
+  `;
+  modelsContainer.appendChild(panel);
+});
+</script>
+<script src="js/script.js?v=20260311d"></script>
+</body>
+</html>
