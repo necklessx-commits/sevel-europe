@@ -14,7 +14,62 @@
 <link rel="stylesheet" href="css/style.css?v=20260311e">
 <style>
 .catalog-page {
-  padding: 60px 0 20px;
+  padding: 44px 0 40px;
+  background:
+    radial-gradient(circle at 8% 0%, rgba(255, 208, 0, 0.16), transparent 34%),
+    radial-gradient(circle at 100% 20%, rgba(255, 208, 0, 0.1), transparent 40%),
+    linear-gradient(180deg, #f8f6ee 0%, #f0ece0 100%);
+}
+
+.catalog-intro {
+  margin-bottom: 26px;
+  border: 1px solid rgba(216, 170, 42, 0.26);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(6px);
+  padding: 28px 28px 24px;
+}
+
+.catalog-intro-kicker {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.18rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #8a7a49;
+  margin-bottom: 8px;
+}
+
+.catalog-intro h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.05;
+  margin: 0;
+}
+
+.catalog-intro p {
+  margin: 12px 0 0;
+  max-width: 760px;
+  color: #606067;
+}
+
+.intro-chips {
+  margin-top: 18px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.intro-chips span {
+  border-radius: 999px;
+  border: 1px solid rgba(216, 170, 42, 0.35);
+  background: #fff;
+  color: #3a3425;
+  padding: 8px 14px;
+  font-size: 0.78rem;
+  letter-spacing: 0.06rem;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 .catalog-head {
@@ -37,7 +92,7 @@
 .catalog-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 20px;
 }
 
 .catalog-type-menu {
@@ -78,7 +133,7 @@
 
 .back-to-series {
   display: none;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .back-to-series.active {
@@ -86,20 +141,21 @@
 }
 
 .back-to-series-btn {
-  background: #fff;
-  border: 2px solid #ddd;
+  background: #ffffff;
+  border: 1px solid rgba(216, 170, 42, 0.4);
   color: #333;
-  padding: 12px 24px;
-  border-radius: 8px;
+  padding: 11px 22px;
+  border-radius: 999px;
   cursor: pointer;
   font-weight: 600;
-  transition: all 0.2s ease;
+  transition: all 0.24s ease;
   font-size: 14px;
 }
 
 .back-to-series-btn:hover {
   border-color: #ffd000;
-  color: #ffd000;
+  background: #ffd000;
+  color: #181818;
 }
 
 .series-view {
@@ -119,12 +175,13 @@
 }
 
 .catalog-card {
-  background: #fff;
-  border-radius: 12px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7f4ea 100%);
+  border-radius: 18px;
   overflow: hidden;
-  border: 1px solid #eee;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-  transition: all 0.25s ease;
+  border: 1px solid rgba(216, 170, 42, 0.28);
+  box-shadow: 0 10px 26px rgba(23, 20, 9, 0.07);
+  transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+  position: relative;
 }
 
 .series-card {
@@ -133,7 +190,8 @@
 
 .series-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 36px rgba(23, 20, 9, 0.13);
+  border-color: rgba(216, 170, 42, 0.62);
 }
 
 .product-card:hover {
@@ -143,31 +201,31 @@
 
 .catalog-card img {
   width: 100%;
-  height: 210px;
-  object-fit: cover;
+  height: 188px;
+  object-fit: contain;
+  background: linear-gradient(180deg, #fdfcf8 0%, #f7f3e7 100%);
+  padding: 12px;
   display: block;
 }
 
 .series-detail-hero {
-  width: 100vw;
-  height: 400px;
+  width: 100%;
+  height: 340px;
   object-fit: cover;
   display: block;
-  margin-bottom: 0;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
-  border-radius: 0;
+  margin: 0 0 16px;
+  border-radius: 18px;
 }
 
 .series-detail-head {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 28px;
 }
 
 .series-detail-head h2 {
   font-family: 'Playfair Display', serif;
-  font-size: 44px;
-  margin-bottom: 20px;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  margin-bottom: 0;
 }
 
 .series-detail-grid {
@@ -178,54 +236,58 @@
 }
 
 .series-product-card {
-  text-align: center;
+  text-align: left;
   cursor: pointer;
-  transition: all 0.2s ease;
-  border: 1px solid #eee;
-  border-radius: 12px;
-  padding: 20px;
-  background: #fff;
+  transition: all 0.24s ease;
+  border: 1px solid rgba(216, 170, 42, 0.26);
+  border-radius: 16px;
+  padding: 16px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8f5ec 100%);
 }
 
 .series-product-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 14px 26px rgba(0, 0, 0, 0.1);
   border-color: #ffd000;
 }
 
 .series-product-card img {
   width: 100%;
-  height: 180px;
+  height: 172px;
   object-fit: contain;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 10px;
   display: block;
 }
 
 .series-product-card h3 {
   font-family: 'Playfair Display', serif;
-  font-size: 18px;
-  margin-bottom: 12px;
+  font-size: 22px;
+  margin-bottom: 8px;
 }
 
 .series-product-card p {
-  color: #666;
+  color: #5f5f66;
   font-size: 14px;
   line-height: 1.5;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .series-product-card .review-btn {
   display: inline-block;
   background: #ffd000;
-  color: #333;
+  color: #171717;
   padding: 10px 24px;
-  border-radius: 6px;
+  border-radius: 999px;
   font-weight: 600;
   font-size: 12px;
+  letter-spacing: 0.08rem;
   text-decoration: none;
   cursor: pointer;
   border: none;
-  transition: all 0.2s ease;
+  transition: all 0.24s ease;
 }
 
 .series-product-card .review-btn:hover {
@@ -239,12 +301,20 @@
 }
 
 @media (max-width: 768px) {
+  .catalog-page {
+    padding-top: 24px;
+  }
+
+  .catalog-intro {
+    padding: 22px 18px;
+  }
+
   .series-detail-grid {
     grid-template-columns: 1fr;
   }
 
   .series-detail-hero {
-    height: 200px;
+    height: 220px;
   }
 
   .series-detail-head h2 {
@@ -253,23 +323,35 @@
 }
 
 .catalog-card-body {
-  padding: 18px;
+  padding: 18px 16px 20px;
 }
 
 .catalog-card-body h3 {
   font-family: 'Playfair Display', serif;
-  font-size: 24px;
-  margin-bottom: 8px;
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: 10px;
 }
 
 .catalog-card-body p {
-  color: #666;
+  color: #5f5f67;
   margin-bottom: 14px;
-  min-height: 48px;
+  min-height: 72px;
+  font-size: 1rem;
 }
 
 .catalog-card .btn {
   display: inline-block;
+}
+
+@media (max-width: 1200px) {
+  .catalog-card-body h3 {
+    font-size: 1.75rem;
+  }
+
+  .catalog-card-body p {
+    min-height: auto;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -283,8 +365,16 @@
     grid-template-columns: 1fr;
   }
 
-  .catalog-head h1 {
-    font-size: 34px;
+  .catalog-card img {
+    height: 210px;
+  }
+
+  .catalog-card-body h3 {
+    font-size: 1.6rem;
+  }
+
+  .catalog-card-body p {
+    font-size: 0.98rem;
   }
 }
 </style>
@@ -324,10 +414,21 @@
 <main class="catalog-page">
 <div class="container">
 
+<section class="catalog-intro">
+<span class="catalog-intro-kicker">Sevel Europe Selection</span>
+<h1>Choose Your Showcase Series</h1>
+<p>Explore professional ice cream, pastry, and chocolate display lines crafted for performance, elegant presentation, and long-term reliability in daily service.</p>
+<div class="intro-chips">
+<span>Ventilated Cooling</span>
+<span>Modular Layouts</span>
+<span>Premium Display Design</span>
+</div>
+</section>
+
 <section class="catalog-section active" id="ice-cream-section">
 <div class="series-view" id="ice-cream-series">
 <section class="catalog-grid">
-<article class="catalog-card series-card" role="link" tabindex="0" title="Open Aspen Series page" aria-label="Open Aspen Series page" onclick="window.location.href='aspen.html'" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.location.href='aspen.html';}">
+<article class="catalog-card series-card" onclick="showSeries('aspen', 'ice-cream')">
 <img src="images/aspen1.webp" alt="Aspen Series">
 <div class="catalog-card-body">
 <h3>Aspen Series</h3>
@@ -343,7 +444,7 @@
 </div>
 </article>
 
-<article class="catalog-card series-card" role="link" tabindex="0" title="Open Prisma Series page" aria-label="Open Prisma Series page" onclick="window.location.href='prisma.html'" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.location.href='prisma.html';}">
+<article class="catalog-card series-card" onclick="showSeries('prisma', 'ice-cream')">
 <img src="images/prism1.webp" alt="Prisma Series">
 <div class="catalog-card-body">
 <h3>Prisma Series</h3>
@@ -351,7 +452,7 @@
 </div>
 </article>
 
-<article class="catalog-card series-card" role="link" tabindex="0" title="Open Baroque SLM Series page" aria-label="Open Baroque SLM Series page" onclick="window.location.href='baroque-slm.html'" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.location.href='baroque-slm.html';}">
+<article class="catalog-card series-card" onclick="showSeries('baroque-slm', 'ice-cream')">
 <img src="images/baroqueslm1.webp" alt="Baroque SLM Series">
 <div class="catalog-card-body">
 <h3>Baroque SLM Series</h3>
@@ -359,7 +460,7 @@
 </div>
 </article>
 
-<article class="catalog-card series-card" role="link" tabindex="0" title="Open Troy Series page" aria-label="Open Troy Series page" onclick="window.location.href='troy.html'" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.location.href='troy.html';}">
+<article class="catalog-card series-card" onclick="showSeries('troy', 'ice-cream')">
 <img src="images/troysport1.png" alt="Troy Series">
 <div class="catalog-card-body">
 <h3>Troy Series</h3>
@@ -367,7 +468,7 @@
 </div>
 </article>
 
-<article class="catalog-card series-card" role="link" tabindex="0" title="Open MX Series page" aria-label="Open MX Series page" onclick="window.location.href='mx.html'" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.location.href='mx.html';}">
+<article class="catalog-card series-card" onclick="showSeries('mx', 'ice-cream')">
 <img src="images/mx1.webp" alt="MX Series">
 <div class="catalog-card-body">
 <h3>MX Series</h3>
@@ -520,7 +621,7 @@ const seriesImages = {
   "baroque-slm": "images/baroqueslm1.webp",
   troy: "images/troyslide.png",
   mx: "images/mx1.webp",
-  pole: "images/poleslide.png",
+  pole: "images/role251.webp",
   "other-ice-cream": "images/ephesusw901.webp",
   "baroque-vision": "images/baroquevisionnew1.webp",
   teos: "images/teosflat1.webp",
