@@ -135,6 +135,105 @@
   border-radius: 10px;
 }
 
+.tub-quantities {
+  margin-top: 24px;
+  background: #efefef;
+  border-radius: 12px;
+  padding: 28px;
+}
+
+.tub-quantities h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  margin-bottom: 24px;
+}
+
+.tub-layout {
+  display: grid;
+  grid-template-columns: 122px 1fr 230px;
+  gap: 28px;
+  align-items: start;
+}
+
+.tub-size-menu {
+  display: grid;
+  gap: 10px;
+}
+
+.tub-size-btn {
+  border: none;
+  background: #cbcbcd;
+  color: #3a3a3a;
+  border-radius: 6px;
+  padding: 14px 16px;
+  text-align: left;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tub-size-btn:hover {
+  background: #b9b9bc;
+}
+
+.tub-size-btn.active {
+  background: #535356;
+  color: #fff;
+}
+
+.tub-pan-view {
+  display: grid;
+  gap: 26px;
+  padding-top: 2px;
+}
+
+.pan-icon-group {
+  min-height: 74px;
+}
+
+.pan-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pan-icon {
+  width: 26px;
+  height: 58px;
+  border-radius: 6px;
+  background: #535356;
+}
+
+.pan-info {
+  display: grid;
+  gap: 30px;
+  padding-top: 6px;
+}
+
+.pan-info-item {
+  line-height: 1.05;
+}
+
+.pan-info-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 46px;
+  color: #4a4a4a;
+}
+
+.pan-info-sub {
+  display: block;
+  margin-top: 4px;
+  font-size: 28px;
+  color: #6b6b6b;
+}
+
+.pan-info-dim {
+  display: block;
+  margin-top: 2px;
+  color: #7a7a7a;
+  font-size: 24px;
+}
+
 @media (max-width: 960px) {
   .detail-hero {
     grid-template-columns: 1fr;
@@ -150,6 +249,27 @@
 
   .detail-title {
     font-size: 34px;
+  }
+
+  .tub-layout {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .tub-size-menu {
+    grid-template-columns: repeat(auto-fit, minmax(76px, 1fr));
+  }
+
+  .pan-info-title {
+    font-size: 34px;
+  }
+
+  .pan-info-sub {
+    font-size: 22px;
+  }
+
+  .pan-info-dim {
+    font-size: 18px;
   }
 }
 </style>
@@ -212,6 +332,29 @@
 <h2>Model Notes</h2>
 <ul class="feature-list" id="feature-list"></ul>
 </article>
+</section>
+
+<section class="tub-quantities" id="tub-quantities" hidden>
+<h2>Tub Quantities</h2>
+<div class="tub-layout">
+<div class="tub-size-menu" id="tub-size-menu"></div>
+<div class="tub-pan-view">
+<div class="pan-icon-group"><div class="pan-icons" id="small-pan-icons"></div></div>
+<div class="pan-icon-group"><div class="pan-icons" id="big-pan-icons"></div></div>
+</div>
+<div class="pan-info">
+<div class="pan-info-item">
+<div class="pan-info-title" id="small-pan-title"></div>
+<span class="pan-info-sub">5 LT</span>
+<span class="pan-info-dim" id="small-pan-dim"></span>
+</div>
+<div class="pan-info-item">
+<div class="pan-info-title" id="big-pan-title"></div>
+<span class="pan-info-sub">7 LT</span>
+<span class="pan-info-dim" id="big-pan-dim"></span>
+</div>
+</div>
+</div>
 </section>
 
 <section class="gallery-strip" id="gallery-strip"></section>
@@ -996,8 +1139,176 @@ const models = {
   },
 };
 
+const showcasePanFormats = {
+  "aspen-new": { 12: 1280, 16: 1600, 18: 1790, 20: 2000, 24: 2350 },
+  "baroque-slm": { 6: 1225, 7: 1405, 8: 1585, 10: 1980 },
+  "baroque-slm-vision": { 6: 1225, 7: 1405, 8: 1585, 10: 1980 },
+  "conic-baroque-slm": { 6: 1180, 7: 1360, 8: 1540, 10: 1935 },
+  "conic-baroque-slmc": { 6: 1180, 7: 1360, 8: 1540, 10: 1935 },
+  "ephesus-w90": { 12: 1230, 16: 1565, 18: 1740, 24: 2261 },
+  "karia-premium": { 18: 1705, 24: 2226 },
+  mx: { 12: 1230, 16: 1550, 18: 1740, 20: 1960, 24: 2305 },
+  "mx-flat": { 12: 1230, 16: 1550, 18: 1740, 20: 1960, 24: 2305 },
+  prisma: { 12: 1230, 16: 1565, 18: 1735, 24: 2255 },
+  "prisma-vision": { 12: 1200, 18: 1705, 24: 2255, 30: 2690 },
+  "smyrna-new-vision": { 12: 1230, 16: 1565, 18: 1735, 24: 2255, 30: 2690 },
+  "smyrna-premium": { 12: 1230, 16: 1565, 18: 1735, 24: 2255, 30: 2690 },
+  slm: { 6: 1230, 7: 1410, 8: 1590 },
+  "smyrna-new": { 12: 1230, 16: 1565, 18: 1735, 24: 2255 },
+  "smyrna-new-low": { 12: 1230, 16: 1565, 18: 1735, 24: 2255 },
+  "smyrna-new-s45": { 12: 1230, 16: 1565, 18: 1735, 24: 2255 },
+  "smyrnavisionlong": { 12: 1230, 16: 1565, 18: 1735, 24: 2255, 30: 2690 },
+  "troy-sport": { 12: 1230, 16: 1565, 18: 1735, 24: 2255 },
+  "troy-sport-vision": { 12: 1230, 16: 1565, 18: 1735, 24: 2255 },
+  "troy-new": { 12: 1230, 16: 1565, 18: 1735, 24: 2255 },
+};
+
+function parseGFromSpecs(specs) {
+  const values = specs.map(([, value]) => String(value || ""));
+  const lengthsByG = {};
+
+  values.forEach((value) => {
+    const sized = value.matchAll(/(\d+)\s*G\s*[-:]?\s*(\d{3,4})?\s*mm/gi);
+    for (const m of sized) {
+      const g = Number(m[1]);
+      const mm = Number(m[2]);
+      if (!Number.isNaN(g)) {
+        lengthsByG[g] = Number.isNaN(mm) ? null : mm;
+      }
+    }
+  });
+
+  if (Object.keys(lengthsByG).length === 0) {
+    values.forEach((value) => {
+      const onlyG = value.matchAll(/(\d+)\s*G/gi);
+      for (const m of onlyG) {
+        const g = Number(m[1]);
+        if (!Number.isNaN(g) && !(g in lengthsByG)) {
+          lengthsByG[g] = null;
+        }
+      }
+    });
+  }
+
+  if (Object.keys(lengthsByG).length === 0) {
+    values.forEach((value) => {
+      const panMatches = value.matchAll(/(\d+)\s*pans?/gi);
+      for (const m of panMatches) {
+        const g = Number(m[1]);
+        if (!Number.isNaN(g) && !(g in lengthsByG)) {
+          lengthsByG[g] = null;
+        }
+      }
+    });
+  }
+
+  return lengthsByG;
+}
+
+function buildPanProfile(modelKey, model) {
+  const fromMap = showcasePanFormats[modelKey] || {};
+  const fromSpecs = parseGFromSpecs(model.specs || []);
+  const merged = { ...fromSpecs, ...fromMap };
+  const sizes = Object.keys(merged)
+    .map((k) => Number(k))
+    .filter((n) => !Number.isNaN(n))
+    .sort((a, b) => a - b);
+
+  if (sizes.length === 0) {
+    return null;
+  }
+
+  return sizes.map((size) => {
+    const bigPans = Math.max(1, Math.round(size * (2 / 3)));
+    return {
+      size,
+      smallPans: size,
+      bigPans,
+      mm: merged[size],
+    };
+  });
+}
+
+function renderPanIcons(container, count) {
+  container.innerHTML = "";
+  for (let i = 0; i < count; i += 1) {
+    const icon = document.createElement("span");
+    icon.className = "pan-icon";
+    container.appendChild(icon);
+  }
+}
+
+function mmToDisplay(mm) {
+  if (!mm) {
+    return "";
+  }
+  const inch = (mm / 25.4).toFixed(2);
+  return mm + "MM (" + inch + '\")IN';
+}
+
+function renderTubQuantities(modelKey, model) {
+  const section = document.getElementById("tub-quantities");
+  const sizeMenu = document.getElementById("tub-size-menu");
+  const smallIcons = document.getElementById("small-pan-icons");
+  const bigIcons = document.getElementById("big-pan-icons");
+  const smallTitle = document.getElementById("small-pan-title");
+  const bigTitle = document.getElementById("big-pan-title");
+  const smallDim = document.getElementById("small-pan-dim");
+  const bigDim = document.getElementById("big-pan-dim");
+
+  const profile = buildPanProfile(modelKey, model);
+  if (!profile) {
+    section.hidden = true;
+    return;
+  }
+
+  section.hidden = false;
+  sizeMenu.innerHTML = "";
+
+  const paint = (entry, activeBtn) => {
+    document.querySelectorAll(".tub-size-btn").forEach((btn) => btn.classList.remove("active"));
+    if (activeBtn) {
+      activeBtn.classList.add("active");
+    }
+
+    smallTitle.textContent = entry.smallPans;
+    bigTitle.textContent = entry.bigPans;
+    smallDim.textContent = mmToDisplay(entry.mm);
+    bigDim.textContent = mmToDisplay(entry.mm);
+    renderPanIcons(smallIcons, entry.smallPans);
+    renderPanIcons(bigIcons, entry.bigPans);
+  };
+
+  profile.forEach((entry, index) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "tub-size-btn";
+    btn.textContent = entry.size + "G";
+    btn.addEventListener("click", () => paint(entry, btn));
+    sizeMenu.appendChild(btn);
+    if (index === 0) {
+      paint(entry, btn);
+    }
+  });
+}
+
 const query = new URLSearchParams(window.location.search);
-const modelKey = query.get("model") || "aspen-new";
+const requestedModelKey = query.get("model") || "aspen-new";
+
+// Some cards still use legacy slugs; resolve them to existing detail entries.
+const modelAliases = {
+  loft: "teos-high",
+  mx: "mx-flat",
+  prisma: "prisma-vision",
+  "prisma-s45": "prisma-vision",
+  "sevel-troy": "troy-new",
+  slm: "baroque-slm",
+  "troy-pastry": "smyrna-new-vision-pastry",
+};
+
+const modelKey = models[requestedModelKey]
+  ? requestedModelKey
+  : modelAliases[requestedModelKey] || "aspen-new";
 const model = models[modelKey] || models["aspen-new"];
 
 document.getElementById("product-title").textContent = model.name;
@@ -1026,6 +1337,8 @@ model.gallery.forEach((src) => {
   img.alt = model.name + " gallery image";
   gallery.appendChild(img);
 });
+
+renderTubQuantities(requestedModelKey, model);
 </script>
 <script src="js/script.js?v=20260311d"></script>
 </body>
