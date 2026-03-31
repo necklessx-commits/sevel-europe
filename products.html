@@ -668,7 +668,7 @@ function showSeries(series, category) {
   products.forEach(product => {
     const card = document.createElement("div");
     card.className = "series-product-card";
-    card.onclick = () => window.location.href = `product.html?model=${product.model}`;
+    card.onclick = () => window.location.href = `product.html?model=${product.model}#tub-quantities`;
     card.innerHTML = `
       <img src="${product.image}" alt="${product.name}">
       <h3>${product.name}</h3>
