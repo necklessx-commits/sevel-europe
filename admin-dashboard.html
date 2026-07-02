@@ -1085,6 +1085,12 @@ alert('Your session has expired. Please login again.');
 logout({ preventDefault: () => {} });
 }
 }, 60000);
+
+// On load, refresh and attempt to load remote submissions
+window.addEventListener('DOMContentLoaded', function() {
+  refreshDashboardData();
+  loadRemoteSubmissions();
+});
 </script>
 
 <script>
@@ -1306,6 +1312,31 @@ function renderRecentActivity() {
       </div>`
     )
     .join("");
+}
+
+// Load remote submissions from Google Apps Script webhook
+function loadRemoteSubmissions() {
+  try {
+    const webhookUrl = 'https://script.google.com/macros/s/AKfycbwc8dK--OoSAVOcA4KoDBR5QUVu7ktOsi4xAVGYRTxgPSI3olYFq1XxHvFFLOtMldI/exec';
+    const webhookToken = 'x9KpQ7mL2zA8nT5rW3yF6bH1cD4eJ0';
+    fetch(`${webhookUrl}?token=${encodeURIComponent(webhookToken)}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data && Array.isArray(data.items)) {
+          // merge remote items with local, dedupe by id
+          const local = dashboardGetSubmissions();
+          const combined = [...local];
+          data.items.forEach((it) => {
+            if (!combined.find((c) => c.id === it.id)) combined.push(it);
+          });
+          dashboardSetSubmissions(combined);
+          refreshDashboardData();
+        }
+      })
+      .catch((err) => console.warn('Failed to load remote submissions', err));
+  } catch (err) {
+    console.warn('Error fetching remote submissions', err);
+  }
 }
 
 function refreshDashboardData() {

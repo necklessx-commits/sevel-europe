@@ -765,43 +765,59 @@ if (contactForm) {
   contactForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    if (typeof emailjs === "undefined") {
-      alert("Contact service is temporarily unavailable.");
-      return;
+    // Build payload
+    const phoneEl = document.getElementById("phone");
+    const subjectEl = document.getElementById("subject");
+    const messageEl = document.getElementById("message");
+
+    const payload = {
+      name: nameInput ? nameInput.value.trim() : "",
+      email: emailInput ? emailInput.value.trim() : "",
+      phone: phoneEl ? phoneEl.value.trim() : "",
+      subject: subjectEl ? subjectEl.value.trim() : "",
+      message: messageEl ? messageEl.value.trim() : "",
+      status: "Pending",
+      submittedAt: new Date().toISOString(),
+    };
+
+    // Save locally for dashboard fallback
+    saveContactSubmission(payload);
+
+    // Send to remote webhook (Google Apps Script)
+    try {
+      const webhookUrl = 'https://script.google.com/macros/s/AKfycbwc8dK--OoSAVOcA4KoDBR5QUVu7ktOsi4xAVGYRTxgPSI3olYFq1XxHvFFLOtMldI/exec';
+      const webhookToken = 'x9KpQ7mL2zA8nT5rW3yF6bH1cD4eJ0';
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.assign({ token: webhookToken }, payload)),
+      })
+        .then((r) => r.json())
+        .then((res) => {
+          if (!res.ok) console.warn('Webhook error', res);
+        })
+        .catch((err) => console.warn('Webhook fetch failed', err));
+    } catch (err) {
+      console.warn('Webhook send error', err);
     }
 
-    emailjs
-      .sendForm("service_o1ez14y", "template_no66nog", this)
-      .then(() => {
-        const phoneEl = document.getElementById("phone");
-        const subjectEl = document.getElementById("subject");
-        const messageEl = document.getElementById("message");
+    // Keep EmailJS as fallback/send copy if configured
+    if (typeof emailjs !== "undefined") {
+      emailjs.sendForm("service_o1ez14y", "template_no66nog", this).catch(() => {});
+    }
 
-        saveContactSubmission({
-          name: nameInput ? nameInput.value.trim() : "",
-          email: emailInput ? emailInput.value.trim() : "",
-          phone: phoneEl ? phoneEl.value.trim() : "",
-          subject: subjectEl ? subjectEl.value.trim() : "",
-          message: messageEl ? messageEl.value.trim() : "",
-          submittedAt: new Date().toISOString(),
-        });
-
-        const msg = document.getElementById("form-message");
-        if (msg) {
-          msg.classList.add("show");
-          setTimeout(() => {
-            msg.classList.remove("show");
-          }, 4000);
-        }
-        contactForm.reset();
-        if (publicUser) {
-          if (nameInput) nameInput.value = publicUser.name || "";
-          if (emailInput) emailInput.value = publicUser.email || "";
-        }
-      })
-      .catch(() => {
-        alert("Failed to send message.");
-      });
+    const msg = document.getElementById("form-message");
+    if (msg) {
+      msg.classList.add("show");
+      setTimeout(() => {
+        msg.classList.remove("show");
+      }, 4000);
+    }
+    contactForm.reset();
+    if (publicUser) {
+      if (nameInput) nameInput.value = publicUser.name || "";
+      if (emailInput) emailInput.value = publicUser.email || "";
+    }
   });
 }
 
