@@ -76,6 +76,7 @@ const translations = {
     "contact-email": "Email",
     "contact-email-response": "We'll respond within 24 hours",
     "contact-form-title": "Send us a Message",
+    "contact-free-note": "No login required — anyone can contact us for free.",
     "contact-name": "Name *",
     "contact-name-placeholder": "Your Full Name",
     "contact-email-label": "Email *",
@@ -175,6 +176,7 @@ const translations = {
     "contact-email": "Email",
     "contact-email-response": "Odpovieme do 24 hodin",
     "contact-form-title": "Poslite nam spravu",
+    "contact-free-note": "Nie je potrebné sa prihlásiť — ktokoľvek môže kontaktovať zadarmo.",
     "contact-name": "Meno *",
     "contact-name-placeholder": "Vase cele meno",
     "contact-email-label": "Email *",
@@ -274,6 +276,7 @@ const translations = {
     "contact-email": "E-posta",
     "contact-email-response": "24 saat icinde yanitliyoruz",
     "contact-form-title": "Bize Mesaj Gonderin",
+    "contact-free-note": "Giriş yapmaya gerek yok — herkes ücretsiz olarak bizimle iletişime geçebilir.",
     "contact-name": "Ad Soyad *",
     "contact-name-placeholder": "Adiniz Soyadiniz",
     "contact-email-label": "E-posta *",
@@ -539,59 +542,20 @@ function initializeNewsletterForms() {
 // ================= EMAILJS CONTACT FORM =================
 
 const contactForm = document.getElementById("contact-form");
-const isAdminSession =
-  localStorage.getItem("adminToken") && localStorage.getItem("adminRole") === "admin";
 const publicUserRaw = localStorage.getItem("publicUser");
 const publicUser = parseJsonOrNull(publicUserRaw);
-const hasAccount = Boolean(isAdminSession || publicUser);
-
-function showContactAuthMessage(text) {
-  if (!contactForm) return;
-  if (document.getElementById("contact-auth-note")) return;
-
-  const note = document.createElement("p");
-  note.id = "contact-auth-note";
-  note.textContent = text;
-  note.style.marginTop = "14px";
-  note.style.fontSize = "13px";
-  note.style.color = "#666";
-  contactForm.appendChild(note);
-}
 
 if (contactForm) {
   const nameInput = document.getElementById("name");
   const emailInput = document.getElementById("email");
-  const submitBtn = contactForm.querySelector('button[type="submit"], input[type="submit"]');
 
-  if (!hasAccount) {
-    [nameInput, emailInput, document.getElementById("phone"), document.getElementById("subject"), document.getElementById("message")]
-      .filter(Boolean)
-      .forEach((el) => {
-        el.disabled = true;
-      });
-
-    showContactAuthMessage("Please sign in to send us a message.");
-
-    if (submitBtn) {
-      submitBtn.addEventListener("click", function (e) {
-        e.preventDefault();
-        window.location.href = "admin-login.html";
-      });
-    }
-  } else if (publicUser) {
+  if (publicUser) {
     if (nameInput && !nameInput.value) nameInput.value = publicUser.name || "";
     if (emailInput && !emailInput.value) emailInput.value = publicUser.email || "";
-    if (nameInput && nameInput.value) nameInput.readOnly = true;
-    if (emailInput && emailInput.value) emailInput.readOnly = true;
   }
 
   contactForm.addEventListener("submit", function (e) {
     e.preventDefault();
-
-    if (!hasAccount) {
-      window.location.href = "admin-login.html";
-      return;
-    }
 
     if (typeof emailjs === "undefined") {
       alert("Contact service is temporarily unavailable.");
