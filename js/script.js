@@ -634,6 +634,45 @@ function parseJsonOrNull(raw) {
   }
 }
 
+// Submit payload via hidden form targeting an invisible iframe (CORS-free fallback)
+function submitWebhookForm(payload, webhookUrl, webhookToken) {
+  try {
+    const iframeName = "sevelWebhookFrame";
+    let iframe = document.querySelector('iframe[name="' + iframeName + '"]');
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.name = iframeName;
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+    }
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = webhookUrl;
+    form.target = iframeName;
+    form.style.display = 'none';
+
+    const addInput = (name, value) => {
+      const i = document.createElement('input');
+      i.type = 'hidden';
+      i.name = name;
+      i.value = value || '';
+      form.appendChild(i);
+    };
+
+    addInput('token', webhookToken);
+    ['name', 'email', 'phone', 'subject', 'message', 'status', 'submittedAt'].forEach((k) => addInput(k, payload[k] || ''));
+
+    document.body.appendChild(form);
+    form.submit();
+    setTimeout(() => {
+      form.remove();
+    }, 5000);
+  } catch (err) {
+    console.warn('submitWebhookForm failed', err);
+  }
+}
+
 function getStoredArray(key) {
   try {
     const raw = localStorage.getItem(key);
@@ -796,9 +835,20 @@ if (contactForm) {
         .then((res) => {
           if (!res.ok) console.warn('Webhook error', res);
         })
-        .catch((err) => console.warn('Webhook fetch failed', err));
+        .catch((err) => {
+          console.warn('Webhook fetch failed', err);
+          submitWebhookForm(payload, webhookUrl, webhookToken);
+        });
     } catch (err) {
       console.warn('Webhook send error', err);
+      // fallback to hidden-form submission
+      try {
+        const webhookUrl = 'https://script.google.com/macros/s/AKfycbwc8dK--OoSAVOcA4KoDBR5QUVu7ktOsi4xAVGYRTxgPSI3olYFq1XxHvFFLOtMldI/exec';
+        const webhookToken = 'x9KpQ7mL2zA8nT5rW3yF6bH1cD4eJ0';
+        submitWebhookForm(payload, webhookUrl, webhookToken);
+      } catch (e) {
+        console.warn('Webhook fallback failed', e);
+      }
     }
 
     // Keep EmailJS as fallback/send copy if configured
