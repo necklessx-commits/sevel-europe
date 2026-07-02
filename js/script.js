@@ -972,7 +972,7 @@ function initializeUserMenu() {
     localStorage.getItem("adminToken") && localStorage.getItem("adminRole") === "admin";
 
   if (isAdmin && adminUser) {
-    userMenuBtn.textContent = adminUser;
+    userMenuBtn.textContent = "Dashboard";
     userMenuBtn.onclick = openProfileModal;
     return;
   }
