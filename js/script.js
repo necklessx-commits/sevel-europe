@@ -678,14 +678,11 @@ if (contactForm) {
           name: nameInput ? nameInput.value.trim() : "",
           email: emailInput ? emailInput.value.trim() : "",
           phone: phoneEl ? phoneEl.value.trim() : "",
-          try {
-            const currentLang = localStorage.getItem("selectedLang") || "en";
-            applyTranslations(currentLang);
-            langBtn.textContent = currentLang.toUpperCase() + " ▼";
-            console.log('language switcher init', { currentLang });
-          } catch (err) {
-            console.error('language switcher init error', err);
-          }
+          subject: subjectEl ? subjectEl.value.trim() : "",
+          message: messageEl ? messageEl.value.trim() : "",
+          submittedAt: new Date().toISOString(),
+        });
+
         const msg = document.getElementById("form-message");
         if (msg) {
           msg.classList.add("show");
