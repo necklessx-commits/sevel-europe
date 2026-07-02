@@ -103,41 +103,7 @@ const translations = {
   },
   sk: {
     "nav-home": "Domov",
-    // Toggle menu when language button clicked
-    langBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      langMenu.classList.toggle("active");
-    });
-
-    // Attach click handlers to the menu links (if present)
-    langLinks.forEach((link) => {
-      link.addEventListener("click", function (e) {
-        e.preventDefault();
-        const selectedLang = this.getAttribute("data-lang");
-        if (!selectedLang) return;
-        localStorage.setItem("selectedLang", selectedLang);
-        applyTranslations(selectedLang);
-        langBtn.textContent = selectedLang.toUpperCase() + " ▼";
-        langMenu.classList.remove("active");
-      });
     "products-title": "Vitriny uz coskoro",
-    // Close menu when clicking outside
-    document.addEventListener("click", function (e) {
-      if (!langBtn.contains(e.target) && !langMenu.contains(e.target)) {
-        langMenu.classList.remove("active");
-      }
-    });
-
-    // Global handler: also respond to any clicks on elements with `data-lang` attribute
-    document.addEventListener("click", function (e) {
-      const link = e.target.closest && e.target.closest("[data-lang]");
-      if (!link) return;
-      e.preventDefault();
-      const selectedLang = link.getAttribute("data-lang");
-      if (!selectedLang) return;
-      localStorage.setItem("selectedLang", selectedLang);
-      applyTranslations(selectedLang);
       if (langBtn) langBtn.textContent = selectedLang.toUpperCase() + " ▼";
       if (langMenu) langMenu.classList.remove("active");
     });
@@ -425,35 +391,29 @@ function applyTranslations(lang) {
 // ================= LANGUAGE SWITCHER =================
 
 document.addEventListener("DOMContentLoaded", function () {
-  const langBtn = document.getElementById("lang-btn");
-  const langMenu = document.getElementById("lang-menu");
-  const langLinks = document.querySelectorAll("#lang-menu a");
+  try {
+    const langBtn = document.getElementById("lang-btn");
+    const langMenu = document.getElementById("lang-menu");
+    const langLinks = document.querySelectorAll("#lang-menu a");
 
-  if (!langBtn || !langMenu) return;
+    if (!langBtn || !langMenu) {
+      console.warn('Language elements missing:', { langBtn: !!langBtn, langMenu: !!langMenu });
+      return;
+    }
 
-  const currentLang = localStorage.getItem("selectedLang") || "en";
-  applyTranslations(currentLang);
-  langBtn.textContent = currentLang.toUpperCase() + " ▼";
+    const currentLang = localStorage.getItem("selectedLang") || "en";
+    applyTranslations(currentLang);
+    langBtn.textContent = currentLang.toUpperCase() + " ▼";
+    console.log('language switcher init', { currentLang });
 
-  langBtn.onclick = function (e) {
-    e.preventDefault();
-    langMenu.classList.toggle("active");
-  };
-
-  langLinks.forEach((link) => {
-    link.onclick = function (e) {
-      e.preventDefault();
-
-      const selectedLang = this.getAttribute("data-lang");
-
-    // Use event listeners instead of assigning onclick so other scripts can't overwrite.
+    // Toggle menu
     langBtn.addEventListener("click", function (e) {
       e.preventDefault();
       e.stopPropagation();
       langMenu.classList.toggle("active");
     });
 
-    // Attach click handlers to the menu links (if present)
+    // Clicking a language link
     langLinks.forEach((link) => {
       link.addEventListener("click", function (e) {
         e.preventDefault();
@@ -465,7 +425,29 @@ document.addEventListener("DOMContentLoaded", function () {
         langMenu.classList.remove("active");
       });
     });
-  });
+
+    // Close menu when clicking outside
+    document.addEventListener("click", function (e) {
+      if (!langBtn.contains(e.target) && !langMenu.contains(e.target)) {
+        langMenu.classList.remove("active");
+      }
+    });
+
+    // Global handler: support clicks on any element with `data-lang` (robustness)
+    document.addEventListener("click", function (e) {
+      const link = e.target.closest && e.target.closest("[data-lang]");
+      if (!link) return;
+      e.preventDefault();
+      const selectedLang = link.getAttribute("data-lang");
+      if (!selectedLang) return;
+      localStorage.setItem("selectedLang", selectedLang);
+      applyTranslations(selectedLang);
+      if (langBtn) langBtn.textContent = selectedLang.toUpperCase() + " ▼";
+      if (langMenu) langMenu.classList.remove("active");
+    });
+  } catch (err) {
+    console.error('language switcher init error', err);
+  }
 });
 
 // ================= SHARED STORAGE =================
@@ -632,10 +614,14 @@ if (contactForm) {
           name: nameInput ? nameInput.value.trim() : "",
           email: emailInput ? emailInput.value.trim() : "",
           phone: phoneEl ? phoneEl.value.trim() : "",
-          subject: subjectEl ? subjectEl.value.trim() : "",
-          message: messageEl ? messageEl.value.trim() : "",
-        });
-
+          try {
+            const currentLang = localStorage.getItem("selectedLang") || "en";
+            applyTranslations(currentLang);
+            langBtn.textContent = currentLang.toUpperCase() + " ▼";
+            console.log('language switcher init', { currentLang });
+          } catch (err) {
+            console.error('language switcher init error', err);
+          }
         const msg = document.getElementById("form-message");
         if (msg) {
           msg.classList.add("show");
