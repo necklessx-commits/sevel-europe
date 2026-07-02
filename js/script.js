@@ -103,83 +103,44 @@ const translations = {
   },
   sk: {
     "nav-home": "Domov",
-    "nav-showcases": "Vitriny",
-    "nav-gallery": "Galéria",
-    "nav-contact": "Kontakt",
-    "hero-title": "Prémiové vitríny na zmrzlinu pre Európu",
-    "hero-desc":
-      "Objavte idealne vystavne riesenie pre vasu gelateriu alebo zmrzlinaren. Sevel Europe prinasa eleganciu, funkcnost a modernu chladiacu technologiu.",
-    "hero-btn": "Pozriet vitriny",
-    "feature-quality": "Premium kvalita",
-    "feature-quality-desc":
-      "Navrhnute s pokrocilym chladenim a kvalitnymi materialmi. Kazda vitrina je spolahliva a odolna.",
-    "feature-design": "Elegantny dizajn",
-    "feature-design-desc":
-      "Stylovy a moderny vzhlad, ktory zlepsuje vzhlad vasej predajne.",
-    "feature-support": "Odborna podpora",
-    "feature-support-desc":
-      "Priama podpora v Europe, osobne poradenstvo a instalacne sluzby.",
-    "about-title": "O Sevel Europe",
-    "about-desc1":
-      "Uz viac ako desatrocie je Sevel Europe doveryhodnym partnerom pre podnikatelov v oblasti gelata a zmrzliny v celej Europe.",
-    "about-desc2":
-      "Nasa misia je jednoducha: ponukat inovativne a kvalitne vystavne riesenia, ktore pomahaju vasmu podnikaniu rast.",
-    "benefits-title": "Preco Sevel Europe?",
-    "benefit-cooling": "Pokrocile chladenie",
-    "benefit-cooling-desc":
-      "Energeticky efektivne chladenie, ktore udrziava idealnu teplotu.",
-    "benefit-durability": "Odolnost a spolahlivost",
-    "benefit-durability-desc":
-      "Vyrobene pre kazdodenne pouzitie s industrialnymi komponentmi.",
-    "benefit-lighting": "LED osvetlenie",
-    "benefit-lighting-desc":
-      "Profesionalne LED osvetlenie, ktore krasne prezentuje vase produkty.",
-    "benefit-delivery": "Rychle dorucenie",
-    "benefit-delivery-desc":
-      "Efektivna logistika po celej Europe s rychlym a spolahlivym dorucenim.",
-    "cta-title": "Ste pripraveny posunut biznis vyssie?",
-    "cta-desc": "Pridajte sa k stovkam uspesnych gelaterii v Europe.",
-    "cta-btn": "Kontaktujte nas dnes",
+    // Toggle menu when language button clicked
+    langBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      langMenu.classList.toggle("active");
+    });
+
+    // Attach click handlers to the menu links (if present)
+    langLinks.forEach((link) => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        const selectedLang = this.getAttribute("data-lang");
+        if (!selectedLang) return;
+        localStorage.setItem("selectedLang", selectedLang);
+        applyTranslations(selectedLang);
+        langBtn.textContent = selectedLang.toUpperCase() + " ▼";
+        langMenu.classList.remove("active");
+      });
     "products-title": "Vitriny uz coskoro",
-    "products-desc": "Nasz katalog vitrini na zmrzlinu sa momentalne pripravuje.<br>",
-    "products-check": "Skontrolujte to znova coskoro.",
-    "products-btn": "Spat na domov",
-    "gallery-title": "Galeria vitrini",
-    "gallery-desc": "Nase vitriny instalovane po celej Europe.",
-    "gallery-location1": "Passau, Nemecko 🇩🇪",
-    "gallery-location2": "Stupava, Slovensko 🇸🇰",
-    "gallery-location3": "Ljubljana, Slovinsko 🇸🇮",
-    "gallery-location9": "Kutna Hora, Ceska republika 🇨🇿",
-    "gallery-location10": "Pula, Chorvatsko 🇭🇷",
-    "gallery-location11": "Ostrava, Ceska republika 🇨🇿",
-    "gallery-location12": "Holic, Slovensko 🇸🇰",
-    "gallery-location13": "Cheb, Ceska republika 🇨🇿",
-    "gallery-location14": "Enns, Rakusko 🇦🇹",
-    "gallery-location15": "Roznava, Slovensko 🇸🇰",
-    "gallery-location16": "Budapest, Madarsko 🇭🇺",
-    "gallery-location17": "Jindrichuv Hradec, Ceska republika 🇨🇿",
-    "gallery-location18": "Trnava, Slovensko 🇸🇰",
-    "gallery-location19": "Slovenska Lupca, Slovensko 🇸🇰",
-    "gallery-location20": "Sliac, Slovensko 🇸🇰",
-    "gallery-desc4": "Premium vitrina na zmrzlinu",
-    "gallery-desc5": "Elegantny gelato pult",
-    "gallery-desc6": "Profesionalna vitrina Sevel",
-    "gallery-desc7": "Luxusna vitrina na zmrzlinu",
-    "gallery-desc8": "Moderny interier gelaterie",
-    "contact-hero": "Kontaktujte nas",
-    "contact-hero-desc":
-      "Mate otazky o nasich vitriny na zmrzlinu? Nasa team je tu pre vas. Kontaktujte nas pre konzultaciu alebo cenovu ponuku.",
-    "contact-info": "Kontaktne informacie",
-    "contact-phone": "Telefon",
-    "contact-phone-time": "Dostupne pondelok - piatok, 9:00 - 18:00 CET",
-    "contact-location": "Lokalita",
-    "contact-email": "Email",
-    "contact-email-response": "Odpovieme do 24 hodin",
-    "contact-form-title": "Poslite nam spravu",
-    "contact-free-note": "Nie je potrebné sa prihlásiť — ktokoľvek môže kontaktovať zadarmo.",
-    "contact-name": "Meno *",
-    "contact-name-placeholder": "Vase cele meno",
-    "contact-email-label": "Email *",
+    // Close menu when clicking outside
+    document.addEventListener("click", function (e) {
+      if (!langBtn.contains(e.target) && !langMenu.contains(e.target)) {
+        langMenu.classList.remove("active");
+      }
+    });
+
+    // Global handler: also respond to any clicks on elements with `data-lang` attribute
+    document.addEventListener("click", function (e) {
+      const link = e.target.closest && e.target.closest("[data-lang]");
+      if (!link) return;
+      e.preventDefault();
+      const selectedLang = link.getAttribute("data-lang");
+      if (!selectedLang) return;
+      localStorage.setItem("selectedLang", selectedLang);
+      applyTranslations(selectedLang);
+      if (langBtn) langBtn.textContent = selectedLang.toUpperCase() + " ▼";
+      if (langMenu) langMenu.classList.remove("active");
+    });
     "contact-email-placeholder": "vas@email.com",
     "contact-phone-label": "Telefon",
     "contact-phone-placeholder": "+421...",
@@ -301,6 +262,95 @@ const translations = {
     "footer-newsletter-desc": "Yeni vitrinler hakkinda guncellemeler alin.",
     "footer-copyright": "© 2026 Sevel Europe s.r.o. Tum haklari saklidir | Designed by Merd",
   },
+  sq: {
+    "nav-home": "Kryefaqja",
+    "nav-showcases": "Vitrinat",
+    "nav-gallery": "Galeria",
+    "nav-contact": "Kontakti",
+    "hero-title": "Vitrina Premium për Akullore në Europë",
+    "hero-desc": "Zbuloni zgjidhjen ideale të ekspozimit për gelato, akullore ose ëmbëlsira të ngrira. Sevel Europe sjell elegancë, funksionalitet dhe teknologji të përparuar ftohjeje për biznesin tuaj.",
+    "hero-btn": "Shikoni Vitrinat",
+    "feature-quality": "Cilësi Premium",
+    "feature-quality-desc": "Projektuar me sisteme të avancuara ftohjeje dhe materiale premium. Çdo vitrinë është e ndërtuar për të zgjatur dhe performuar pa defekte.",
+    "feature-design": "Dizajn Elegant",
+    "feature-design-desc": "Estetika moderne dhe e stilizuar që përmirëson pamjen e dyqanit tuaj.",
+    "feature-support": "Mbështetje Ekspertësh",
+    "feature-support-desc": "Mbështetje direkte në të gjithë Europën me këshillim personal dhe instalim.",
+    "about-title": "Rreth Sevel Europe",
+    "about-desc1": "Për më shumë se një dekadë, Sevel Europe ka qenë partneri i besueshëm për sipërmarrësit e akulloreve dhe gelatos në Europë.",
+    "about-desc2": "Misioni ynë është i thjeshtë: të ofrojmë zgjidhje inovative dhe me cilësi të lartë që ndihmojnë biznesin tuaj të ketë sukses.",
+    "benefits-title": "Pse Sevel Europe?",
+    "benefit-cooling": "Ftohje e Avancuar",
+    "benefit-cooling-desc": "Sisteme ftohjeje energjitikisht efikase që ruajnë temperaturën ideale.",
+    "benefit-durability": "Qëndrueshmëri & Besueshmëri",
+    "benefit-durability-desc": "Të ndërtuara për përdorim të përditshëm me komponentë industrisë.",
+    "benefit-lighting": "Ndriçim LED",
+    "benefit-lighting-desc": "Ndriçim profesional LED që tregon produktet tuaja bukur.",
+    "benefit-delivery": "Dorëzim i Shpejtë",
+    "benefit-delivery-desc": "Logjistikë efikase në të gjithë Europën me dorëzim të shpejtë dhe të besueshëm.",
+    "cta-title": "Gati për të përmirësuar biznesin tuaj?",
+    "cta-desc": "Bashkohuni me qindra dyqane suksesi të gelatos në Europë.",
+    "cta-btn": "Kontaktoni Sot",
+    "products-title": "Vitrinat Vijnë Së Shpejti",
+    "products-desc": "Katalogu ynë i vitrines për akullore po përgatitet aktualisht.<br>",
+    "products-check": "Ju lutemi kontrolloni përsëri së shpejti.",
+    "products-btn": "Kthehu te Kryefaqja",
+    "gallery-title": "Galeria e Vitrinave",
+    "gallery-desc": "Vitrinat tona të ekspozimit të akullores të instaluara nëpër Europë.",
+    "gallery-location1": "Passau, Gjermani 🇩🇪",
+    "gallery-location2": "Stupava, Sllovaki 🇸🇰",
+    "gallery-location3": "Ljubljana, Slloveni 🇸🇮",
+    "gallery-location9": "Kutná Hora, Çeki 🇨🇿",
+    "gallery-location10": "Pula, Kroaci 🇭🇷",
+    "gallery-location11": "Ostrava, Çeki 🇨🇿",
+    "gallery-location12": "Holič, Sllovaki 🇸🇰",
+    "gallery-location13": "Cheb, Çeki 🇨🇿",
+    "gallery-location14": "Enns, Austri 🇦🇹",
+    "gallery-location15": "Rožňava, Sllovaki 🇸🇰",
+    "gallery-location16": "Budapest, Hungari 🇭🇺",
+    "gallery-location17": "Jindřichův Hradec, Çeki 🇨🇿",
+    "gallery-location18": "Trnava, Sllovaki 🇸🇰",
+    "gallery-location19": "Slovenská Ľupča, Sllovaki 🇸🇰",
+    "gallery-location20": "Sliac, Sllovaki 🇸🇰",
+    "gallery-desc4": "Vitrinë Premium për Akullore",
+    "gallery-desc5": "Banak Gelato Elegant",
+    "gallery-desc6": "Vitrina Profesionale Sevel",
+    "gallery-desc7": "Vitrinë Luksoze për Akullore",
+    "gallery-desc8": "Interier Modern i Dyqanit të Gelatos",
+    "contact-hero": "Na Kontaktoni",
+    "contact-hero-desc": "Keni pyetje rreth vitrines sonë? Ekipi ynë është këtu për t'ju ndihmuar. Kontaktoni për konsultë ose ofertë.",
+    "contact-info": "Informacion Kontakti",
+    "contact-phone": "Telefon",
+    "contact-phone-time": "Në dispozicion E Hënë - E Premte, 9:00 - 18:00 CET",
+    "contact-location": "Vendndodhja",
+    "contact-email": "Email",
+    "contact-email-response": "Do t'ju përgjigjemi brenda 24 orëve",
+    "contact-form-title": "Dërgoni një Mesazh",
+    "contact-free-note": "Nuk kërkohet hyrje — të gjithë mund të na kontaktojnë pa pagesë.",
+    "contact-name": "Emri *",
+    "contact-name-placeholder": "Emri Juaj i Plotë",
+    "contact-email-label": "Email *",
+    "contact-email-placeholder": "email@juaj.com",
+    "contact-phone-label": "Telefon",
+    "contact-phone-placeholder": "+421...",
+    "contact-subject": "Subjekti *",
+    "contact-subject-placeholder": "Për çfarë bëhet fjalë?",
+    "contact-message": "Mesazhi *",
+    "contact-message-placeholder": "Na tregoni më shumë mbi kërkesën tuaj...",
+    "contact-submit": "Dërgo Mesazh",
+    "contact-success": "Mesazhi u dërgua me sukses!",
+    "footer-info-title": "Informacion",
+    "footer-about": "Rreth Nesh",
+    "footer-products": "Produktet Tona",
+    "footer-why": "Pse Sevel?",
+    "footer-contact-title": "Kontakt",
+    "footer-address": "Bratislavská 5236/49",
+    "footer-city": "917 02 Trnava",
+    "footer-country": "Sllovaki",
+    "footer-newsletter": "Qëndroni të informuar",
+    "footer-newsletter-desc": "Merrni njoftime rreth vitrines së re.",
+    "footer-copyright": "© 2026 Sevel Europe s.r.o. Të gjitha të drejtat e rezervuara | Designed by Merd",
+  },
 };
 
 const galleryFlagSvgByCountry = {
@@ -395,17 +445,26 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault();
 
       const selectedLang = this.getAttribute("data-lang");
-      localStorage.setItem("selectedLang", selectedLang);
-      applyTranslations(selectedLang);
-      langBtn.textContent = selectedLang.toUpperCase() + " ▼";
-      langMenu.classList.remove("active");
-    };
-  });
 
-  document.addEventListener("click", function (e) {
-    if (!langBtn.contains(e.target) && !langMenu.contains(e.target)) {
-      langMenu.classList.remove("active");
-    }
+    // Use event listeners instead of assigning onclick so other scripts can't overwrite.
+    langBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      langMenu.classList.toggle("active");
+    });
+
+    // Attach click handlers to the menu links (if present)
+    langLinks.forEach((link) => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        const selectedLang = this.getAttribute("data-lang");
+        if (!selectedLang) return;
+        localStorage.setItem("selectedLang", selectedLang);
+        applyTranslations(selectedLang);
+        langBtn.textContent = selectedLang.toUpperCase() + " ▼";
+        langMenu.classList.remove("active");
+      });
+    });
   });
 });
 
