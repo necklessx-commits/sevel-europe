@@ -1,6 +1,6 @@
 // ================= TRANSLATION =================
 
-console.log('script.js loaded (2026-07-02)');
+console.log('script.js loaded (2026-07-03)');
 
 const translations = {
   en: {
@@ -191,6 +191,109 @@ const translations = {
     "footer-newsletter": "Buďte informovaní",
     "footer-newsletter-desc": "Získajte novinky o nových vitrínach.",
     "footer-copyright": "© 2026 Sevel Europe s.r.o. Všetky práva vyhradené | Designed by Merd",
+  },
+  si: {
+    "nav-home": "Domov",
+    "nav-showcases": "Razstavni pult",
+    "nav-gallery": "Galerija",
+    "nav-contact": "Kontakt",
+    "hero-title": "Premium vitrine za sladoled za Evropo",
+    "hero-desc":
+      "Odkrijte popolno rešitev za predstavitev gelata, sladoleda ali zamrznjenih slaščic. Sevel Europe prinaša eleganco, funkcionalnost in vrhunsko hlajenje vašemu poslu.",
+    "hero-btn": "Raziskujte vitrine",
+    "feature-quality": "Prvovrstna kakovost",
+    "feature-quality-desc":
+      "Zasnovano z naprednimi hladilnimi sistemi in vrhunskimi materiali. Vsaka vitrina je zgrajena za dolgotrajno in zanesljivo delovanje.",
+    "feature-design": "Eleganten dizajn",
+    "feature-design-desc": "Sodobna estetika, ki izboljša videz vaše trgovine.",
+    "feature-support": "Strokovna podpora",
+    "feature-support-desc":
+      "Neposredna podpora po vsej Evropi z osebnim svetovanjem in namestitvijo.",
+    "about-title": "O Sevel Europe",
+    "about-desc1":
+      "Več kot desetletje je Sevel Europe zanesljiv partner za podjetnike s sladoledom in gelatom v Evropi.",
+    "about-desc2":
+      "Naše poslanstvo je preprosto: ponujati inovativne, kakovostne rešitve za predstavitev, ki pomagajo vašemu podjetju uspeti.",
+    "benefits-title": "Zakaj Sevel Europe?",
+    "benefit-cooling": "Napredno hlajenje",
+    "benefit-cooling-desc":
+      "Energijsko učinkoviti hladilni sistemi, ki ohranjajo idealno temperaturo.",
+    "benefit-durability": "Vzdržljivost in zanesljivost",
+    "benefit-durability-desc":
+      "Zgrajeno za vsakodnevno uporabo s komercialnimi komponentami.",
+    "benefit-lighting": "LED osvetlitev",
+    "benefit-lighting-desc":
+      "Profesionalna LED-osvetlitev, ki vaše izdelke predstavi na najboljši način.",
+    "benefit-delivery": "Hitro dostavljanje",
+    "benefit-delivery-desc":
+      "Učinkovita logistika po Evropi z hitrimi in zanesljivimi dobavami.",
+    "cta-title": "Ste pripravljeni nadgraditi svoje podjetje?",
+    "cta-desc": "Pridružite se stotinam uspešnih gelato trgovin po Evropi.",
+    "cta-btn": "Stopite v stik danes",
+    "products-title": "Vitrine kmalu",
+    "products-desc": "Naš katalog vitrin za sladoled se trenutno pripravlja.<br>",
+    "products-check": "Prosimo, preverite kmalu.",
+    "products-btn": "Nazaj domov",
+    "gallery-title": "Galerija vitrin",
+    "gallery-desc": "Naše razstavne vitrine za sladoled nameščene po Evropi.",
+    "gallery-location1": "Passau, Nemčija 🇩🇪",
+    "gallery-location2": "Stupava, Slovaška 🇸🇰",
+    "gallery-location3": "Ljubljana, Slovenija 🇸🇮",
+    "gallery-location9": "Kutná Hora, Češka 🇨🇿",
+    "gallery-location10": "Pula, Hrvaška 🇭🇷",
+    "gallery-location11": "Ostrava, Češka 🇨🇿",
+    "gallery-location12": "Holič, Slovaška 🇸🇰",
+    "gallery-location13": "Cheb, Češka 🇨🇿",
+    "gallery-location14": "Enns, Avstrija 🇦🇹",
+    "gallery-location15": "Rožňava, Slovaška 🇸🇰",
+    "gallery-location16": "Dunaj, Madžarska 🇭🇺",
+    "gallery-location17": "Jindřichův Hradec, Češka 🇨🇿",
+    "gallery-location18": "Trnava, Slovaška 🇸🇰",
+    "gallery-location19": "Slovenská Ľupča, Slovaška 🇸🇰",
+    "gallery-location20": "Sliač, Slovaška 🇸🇰",
+    "gallery-desc4": "Premium vitrina za sladoled",
+    "gallery-desc5": "Eleganten gelato pult",
+    "gallery-desc6": "Sevel profesionalna vitrina",
+    "gallery-desc7": "Luksuzna vitrina za sladoled",
+    "gallery-desc8": "Moderen gelato interier",
+    "contact-hero": "Kontaktirajte nas",
+    "contact-hero-desc":
+      "Imate vprašanja o naših vitrinah? Naša ekipa je tukaj, da pomaga.",
+    "contact-info": "Kontaktni podatki",
+    "contact-phone": "Telefon",
+    "contact-phone-time": "Na voljo od ponedeljka do petka, od 9:00 do 18:00 CET",
+    "contact-location": "Lokacija",
+    "contact-email": "E-pošta",
+    "contact-email-response": "Odgovorili bomo v 24 urah",
+    "contact-form-title": "Pošljite nam sporočilo",
+    "contact-free-note":
+      "Prijava ni potrebna — vsi nas lahko kontaktirajo brezplačno.",
+    "contact-name": "Ime *",
+    "contact-name-placeholder": "Vaše polno ime",
+    "contact-email-label": "E-pošta *",
+    "contact-email-placeholder": "email@vas.si",
+    "contact-phone-label": "Telefon",
+    "contact-phone-placeholder": "+421...",
+    "contact-subject": "Zadeva *",
+    "contact-subject-placeholder": "O čem je to?",
+    "contact-message": "Sporočilo *",
+    "contact-message-placeholder":
+      "Povejte nam več o svojem povpraševanju...",
+    "contact-submit": "Pošlji sporočilo",
+    "contact-success": "Sporočilo je bilo uspešno poslano!",
+    "footer-info-title": "Informacije",
+    "footer-about": "O nas",
+    "footer-products": "Naši izdelki",
+    "footer-why": "Zakaj Sevel?",
+    "footer-contact-title": "Kontakt",
+    "footer-address": "Bratislavska 5236/49",
+    "footer-city": "917 02 Trnava",
+    "footer-country": "Slovaška",
+    "footer-newsletter": "Ostanite obveščeni",
+    "footer-newsletter-desc":
+      "Prejmite posodobitve o novih vitrinah.",
+    "footer-copyright":
+      "© 2026 Sevel Europe s.r.o. Vse pravice pridržane | Designed by Merd",
   },
   tr: {
     "nav-home": "Ana Sayfa",
