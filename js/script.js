@@ -1,5 +1,7 @@
 // ================= TRANSLATION =================
 
+console.log('script.js loaded (2026-07-02)');
+
 const translations = {
   en: {
     "nav-home": "Home",
