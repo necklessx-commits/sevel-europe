@@ -1288,3 +1288,106 @@ function logout() {
 
   window.location.href = "index.html";
 }
+
+// ================= PUBLIC TESTIMONIALS RENDER =================
+function parseJsonArray(key) {
+  try {
+    const raw = localStorage.getItem(key);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function escapeHtml(str) {
+  return String(str || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function renderPublicTestimonials() {
+  const container = document.getElementById("testimonialsListPublic");
+  if (!container) return;
+  const items = parseJsonArray("sevelTestimonials").slice().sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+  if (!items.length) {
+    container.innerHTML = '<p style="text-align:center;color:var(--muted);">No testimonials yet.</p>';
+    return;
+  }
+  container.innerHTML = items.slice(0, 6).map(item => {
+    const stars = '★'.repeat(Math.max(1, Math.min(5, Number(item.rating || 5))));
+    const text = escapeHtml(item.text || '');
+    return `
+      <article class="testimonial-card">
+        <p class="testimonial-text">"${text}"</p>
+        <div class="testimonial-meta">
+          <div>
+            <strong>${escapeHtml(item.name || 'Customer')}</strong>
+            <div class="testimonial-role">${escapeHtml(item.role || '')}</div>
+          </div>
+          <div class="testimonial-stars">${stars}</div>
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+
+document.addEventListener('DOMContentLoaded', renderPublicTestimonials);
+
+function savePublicTestimonial(e) {
+  e.preventDefault();
+  const nameEl = document.getElementById('pubName');
+  const roleEl = document.getElementById('pubRole');
+  const ratingEl = document.getElementById('pubRating');
+  const textEl = document.getElementById('pubText');
+  const msgEl = document.getElementById('testimonial-message');
+  if (!nameEl || !textEl || !ratingEl) return;
+  const name = nameEl.value.trim();
+  const role = roleEl ? roleEl.value.trim() : '';
+  const rating = Number(ratingEl.value || 5);
+  const text = textEl.value.trim();
+  if (!name || !text) {
+    if (msgEl) {
+      msgEl.textContent = 'Please fill in required fields.';
+      msgEl.classList.add('show');
+      msgEl.style.background = '#fff3cd';
+    } else alert('Please fill in required fields.');
+    return;
+  }
+
+  const id = 't_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7);
+  const entry = { id, name, role, rating, text, createdAt: new Date().toISOString() };
+  try {
+    const raw = localStorage.getItem('sevelTestimonials');
+    const arr = raw ? JSON.parse(raw) : [];
+    if (!Array.isArray(arr)) arr = [];
+    arr.push(entry);
+    localStorage.setItem('sevelTestimonials', JSON.stringify(arr));
+    if (msgEl) {
+      msgEl.textContent = '✓ Thank you — your review was submitted.';
+      msgEl.classList.add('show');
+      msgEl.style.background = 'linear-gradient(90deg, rgba(240,193,69,0.12), rgba(240,193,69,0.06))';
+    }
+    setTimeout(() => {
+      window.location.href = 'index.html';
+    }, 900);
+  } catch (err) {
+    console.warn('Failed to save testimonial', err);
+    if (msgEl) {
+      msgEl.textContent = 'Failed to submit. Please try again later.';
+      msgEl.classList.add('show');
+      msgEl.style.background = '#f8d7da';
+    }
+  }
+}
+
+function initializePublicTestimonialForm() {
+  const form = document.getElementById('testimonialPublicForm');
+  if (!form) return;
+  form.addEventListener('submit', savePublicTestimonial);
+}
+
+document.addEventListener('DOMContentLoaded', initializePublicTestimonialForm);

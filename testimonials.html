@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Leave a testimonial for Sevel Europe.">
+<meta name="theme-color" content="#d8aa2a">
+<title>Testimonials - Sevel Europe</title>
+<meta property="og:title" content="Testimonials - Sevel Europe">
+<meta property="og:description" content="Share your experience with Sevel Europe.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/sevel.png">
+<link rel="stylesheet" href="css/style.css?v=20260311e">
+<style>
+.testimonials-hero{ background: linear-gradient(135deg,#151515 0%,#2c2c2c 65%,#3a3a3a 100%); color:#fff; padding:80px 10%; text-align:center; }
+.testimonials-hero h1{ font-family:'Playfair Display', serif; font-size:42px; margin-bottom:6px; }
+.testimonials-wrap{ max-width:1080px; margin:40px auto; padding:28px; }
+.testimonial-form{ background:#fff; border:1px solid #ececec; border-radius:12px; padding:24px; box-shadow:0 10px 24px rgba(0,0,0,0.06); }
+.form-row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media (max-width:760px){ .form-row{ grid-template-columns:1fr; } }
+.form-message{ display:none; text-align:center; padding:12px 16px; margin-bottom:12px; border-radius:8px; }
+.form-message.show{ display:block; }
+.btn-primary{ background:var(--accent); color:#111; border:none; padding:12px 18px; border-radius:8px; font-weight:700; cursor:pointer }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <img src="images/sevel.png" class="logo" alt="Sevel Europe">
+    <nav>
+      <a href="index.html" data-i18n="nav-home">Home</a>
+      <a href="products.html" data-i18n="nav-showcases">Showcases</a>
+      <a href="gallery.html" data-i18n="nav-gallery">Gallery</a>
+      <a href="contact.html" data-i18n="nav-contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="testimonials-hero">
+  <h1>REVIEW</h1>
+  <p style="color:#ddd; max-width:820px; margin:0 auto;">Tell other customers about your Sevel showcase. Your review will appear on our homepage after submission.</p>
+</section>
+
+<main class="testimonials-wrap">
+  <div class="testimonial-form">
+    <div id="testimonial-message" class="form-message"></div>
+    <form id="testimonialPublicForm">
+      <div class="form-row">
+        <div>
+          <label for="pubName">Your Name *</label>
+          <input id="pubName" name="name" type="text" required placeholder="Full name" />
+        </div>
+        <div>
+          <label for="pubRole">Role / Company</label>
+          <input id="pubRole" name="role" type="text" placeholder="e.g., Owner, Gelato Bar" />
+        </div>
+      </div>
+
+      <div style="margin-top:12px;">
+        <label for="pubRating">Rating</label>
+        <select id="pubRating" name="rating">
+          <option value="5">⭐⭐⭐⭐⭐ 5</option>
+          <option value="4">⭐⭐⭐⭐ 4</option>
+          <option value="3">⭐⭐⭐ 3</option>
+          <option value="2">⭐⭐ 2</option>
+          <option value="1">⭐ 1</option>
+        </select>
+      </div>
+
+      <div style="margin-top:12px;">
+        <label for="pubText">Your Review *</label>
+        <textarea id="pubText" name="text" required placeholder="Share what you liked..." rows="6"></textarea>
+      </div>
+
+      <div style="margin-top:16px; text-align:right;">
+        <button type="submit" class="btn-primary">Submit Review</button>
+      </div>
+    </form>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div style="text-align:center;padding:28px;color:#777;">Thank you for sharing your experience.</div>
+  </div>
+  <div class="footer-bottom">
+    <p style="text-align:center;">© 2026 Sevel Europe s.r.o. All Rights Reserved</p>
+  </div>
+</footer>
+
+<script src="js/script.js?v=20260703"></script>
+</body>
+</html>
