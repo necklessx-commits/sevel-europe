@@ -314,8 +314,8 @@
 <h1 class="detail-title" id="product-title"></h1>
 <p class="detail-subtitle" id="product-subtitle"></p>
 <div class="detail-actions">
-<a href="contact.html" class="btn">Get Offer</a>
-<a href="products.html" class="btn btn-outline">Back to Showcases</a>
+<a href="contact.html" class="btn" data-i18n="product-get-offer">Get Offer</a>
+<a href="products.html" class="btn btn-outline" data-i18n="product-back-showcases">Back to Showcases</a>
 </div>
 </div>
 <div class="detail-main-image">
@@ -325,18 +325,18 @@
 
 <section class="detail-grid">
 <article class="spec-card">
-<h2>Technical Specifications</h2>
+<h2 data-i18n="product-tech-specs">Technical Specifications</h2>
 <table class="spec-table" id="spec-table"></table>
 </article>
 
 <article class="spec-card">
-<h2>Model Notes</h2>
+<h2 data-i18n="product-model-notes">Model Notes</h2>
 <ul class="feature-list" id="feature-list"></ul>
 </article>
 </section>
 
 <section class="tub-quantities" id="tub-quantities" hidden>
-<h2>Tub Quantities</h2>
+<h2 data-i18n="product-tub-quantities">Tub Quantities</h2>
 <div class="tub-layout">
 <div class="tub-size-menu" id="tub-size-menu"></div>
 <div class="tub-pan-view">
@@ -1312,10 +1312,21 @@ const modelKey = models[requestedModelKey]
   : modelAliases[requestedModelKey] || "aspen-new";
 const model = models[modelKey] || models["aspen-new"];
 
-document.getElementById("product-title").textContent = model.name;
-document.getElementById("product-subtitle").textContent = model.subtitle;
+// Get current language and translated product data
+const currentLang = localStorage.getItem("selectedLang") || "en";
+const nameKey = "product-" + modelKey;
+const descKey = "product-" + modelKey + "-desc";
+const translatedName = (typeof translations !== 'undefined' && translations[currentLang]) 
+  ? (translations[currentLang][nameKey] || model.name)
+  : model.name;
+const translatedDesc = (typeof translations !== 'undefined' && translations[currentLang])
+  ? (translations[currentLang][descKey] || model.subtitle)
+  : model.subtitle;
+
+document.getElementById("product-title").textContent = translatedName;
+document.getElementById("product-subtitle").textContent = translatedDesc;
 document.getElementById("product-main-image").src = model.image;
-document.getElementById("product-main-image").alt = model.name;
+document.getElementById("product-main-image").alt = translatedName;
 
 const specTable = document.getElementById("spec-table");
 model.specs.forEach(([label, value]) => {
@@ -1335,7 +1346,7 @@ const gallery = document.getElementById("gallery-strip");
 model.gallery.forEach((src) => {
   const img = document.createElement("img");
   img.src = src;
-  img.alt = model.name + " gallery image";
+  img.alt = translatedName + " gallery image";
   gallery.appendChild(img);
 });
 
